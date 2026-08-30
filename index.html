@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="cream">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Wedding of Shahid & Iqra | Islamic Wedding Invitation</title>
+  
+  <!-- OpenGraph Metadata for WhatsApp & Social Preview -->
+  <meta property="og:title" content="You're Cordially Invited | Shahid & Iqra's Wedding Celebration">
+  <meta property="og:description" content="In the name of Allah, Most Gracious, Most Merciful. Shahid Shaikh (S/o Amiruddin Shaikh) & Iqra Shaikh (D/o Mustafa Shaikh) invite you to celebrate their wedding on 25th & 27th November 2026.">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80">
+  <meta property="og:type" content="website">
+  
+  <!-- Google Fonts for Luxury Typography & Urdu Nastaliq/Amiri -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Amiri:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@400;500;600;700;900&family=Great+Vibes&family=Montserrat:wght@300;400;500;600;700;800&family=Noto+Nastaliq+Urdu:wght@400;700&family=Noto+Sans+Devanagari:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Pinyon+Script&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/animations.css">
+</head>
+<body class="card-closed-state">
+
+  <!-- Rotating Islamic Arabesque Geometric Watermark Background -->
+  <div class="islamic-arabesque-bg"></div>
+
+  <!-- Floating Golden Dust Particle Canvas -->
+  <canvas id="particles-canvas"></canvas>
+  
+  <!-- Canvas for Petal Shower Burst & Golden Seal Spark Burst -->
+  <canvas id="petals-canvas"></canvas>
+
+  <!-- Ambient Audio Playlist Selector Pill -->
+  <div class="audio-control-container" id="audioContainer">
+    <button class="audio-btn" id="audioToggleBtn" title="Audio Player & Playlist" aria-label="Audio Player & Playlist">
+      <div class="audio-wave">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <i class="fa-solid fa-volume-high" id="audioIcon"></i>
+      <span class="audio-label" id="audioLabel">Oud & Nay Melody</span>
+      <i class="fa-solid fa-chevron-up playlist-arrow"></i>
+    </button>
+    
+    <!-- Audio Playlist Menu -->
+    <div class="audio-playlist-menu" id="audioPlaylistMenu">
+      <div class="playlist-header">Select Ambient Melody</div>
+      <div class="track-option active" data-track="oud">
+        <i class="fa-solid fa-music"></i> Gentle Arabic Oud & Nay
+      </div>
+      <div class="track-option" data-track="nasheed">
+        <i class="fa-solid fa-hands-praying"></i> Soft Harmony Nasheed
+      </div>
+      <div class="track-option" data-track="acoustic">
+        <i class="fa-solid fa-guitar"></i> Pure Meditative Strings
+      </div>
+      <div class="track-option mute-option" data-track="mute">
+        <i class="fa-solid fa-volume-xmark"></i> Mute Audio
+      </div>
+    </div>
+  </div>
+
+  <!-- FLOATING VIRTUAL FLOWER SHOWER BUTTON ("MABROOK!") -->
+  <div class="mabrook-floating-btn" id="mabrookBtn" title="Send Blessings & Shower Petals">
+    <div class="mabrook-inner">
+      <i class="fa-solid fa-spa flower-icon"></i>
+      <span class="mabrook-text" data-i18n="mabrook_btn">Mabrook! 🌸</span>
+    </div>
+  </div>
+
+  <!-- NAVIGATION BAR (Revealed upon card open) -->
+  <nav class="luxury-navbar" id="navbar">
+    <div class="nav-brand">S & I</div>
+    <div class="nav-links">
+      <a href="#hero" data-i18n="nav_home">Home</a>
+      <a href="#couple" data-i18n="nav_couple">The Couple</a>
+      <a href="#events" data-i18n="nav_ceremonies">Ceremonies</a>
+      <a href="#timeline" data-i18n="nav_itinerary">Itinerary</a>
+      <a href="#blessings" data-i18n="nav_blessings">Blessings</a>
+      <a href="#guestbook" data-i18n="nav_duas">Duas</a>
+    </div>
+    
+    <!-- Multi-Language Selector Dropdown -->
+    <div class="lang-selector-wrap">
+      <button class="lang-btn" id="langBtn">
+        <i class="fa-solid fa-globe"></i>
+        <span id="currentLangLabel">English</span>
+        <i class="fa-solid fa-chevron-down lang-arrow"></i>
+      </button>
+      <div class="lang-dropdown" id="langDropdown">
+        <div class="lang-item active" data-lang="en">🇬🇧 English</div>
+        <div class="lang-item" data-lang="ur">🇵🇰 اردو (Urdu)</div>
+        <div class="lang-item" data-lang="hi">🇮🇳 हिंदी (Hindi)</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ================================================================= -->
+  <!-- 1. GRAND 3D GATEFOLD WEDDING CARD HERO                            -->
+  <!-- ================================================================= -->
+  <header class="hero-section" id="hero">
+    
+    <!-- Personalized VIP Guest Tag (if ?to=GuestName in URL) -->
+    <div class="vip-guest-banner" id="vipGuestBanner" style="display: none;">
+      <i class="fa-solid fa-envelope-open-text"></i> <span id="vipGuestName">Specially Invited</span>
+    </div>
+
+    <!-- OUTSIDE SACRED BISMILLAH HEADER BANNER (Placed outside the card) -->
+    <div class="outside-bismillah-header">
+      <div class="bismillah-calligraphy-art">بِسْمِ ٱللّٰهِ ٱلرَّحْمٰنِ ٱلرَّحِيْمِ</div>
+      <p class="bismillah-trans-sub" data-i18n="bismillah_trans">"In the name of Allah, the Most Gracious, the Most Merciful"</p>
+    </div>
+
+    <!-- The Master Gatefold Card -->
+    <div class="grand-gatefold-card closed" id="gatefoldCard">
+      
+      <!-- ======================================= -->
+      <!-- A. THE 3D DOORS THAT FOLD OVER THE CARD -->
+      <!-- ======================================= -->
+      
+      <!-- LEFT DOOR FLAP (Swings to the Left) -->
+      <div class="card-door door-left" id="doorLeft">
+        <div class="door-inner-art">
+          <!-- Botanical Watercolor Corner Artwork -->
+          <div class="botanical-art-corner top-left">
+            <svg viewBox="0 0 120 120" class="floral-svg-art">
+              <path d="M0,0 Q60,15 75,75 Q30,45 0,0" fill="#8b2635" opacity="0.85"/>
+              <path d="M0,0 Q15,60 75,75 Q45,30 0,0" fill="#c59b3f" opacity="0.9"/>
+              <circle cx="35" cy="35" r="6" fill="#721c29"/>
+              <circle cx="55" cy="20" r="4.5" fill="#e8c878"/>
+              <circle cx="20" cy="55" r="4.5" fill="#b0706b"/>
+            </svg>
+          </div>
+          <div class="botanical-art-corner bottom-left">
+            <svg viewBox="0 0 120 120" class="floral-svg-art" style="transform: rotate(-90deg);">
+              <path d="M0,0 Q60,15 75,75 Q30,45 0,0" fill="#8b2635" opacity="0.85"/>
+              <path d="M0,0 Q15,60 75,75 Q45,30 0,0" fill="#c59b3f" opacity="0.9"/>
+              <circle cx="35" cy="35" r="6" fill="#721c29"/>
+            </svg>
+          </div>
+
+          <div class="door-frame-border">
+            <span class="door-role-tag">The Bride</span>
+            <h2 class="door-calligraphy-name">Iqra</h2>
+            <p class="door-lineage-sub">D/o Mr. Mustafa Shaikh</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT DOOR FLAP (Swings to the Right) -->
+      <div class="card-door door-right" id="doorRight">
+        <div class="door-inner-art">
+          <!-- Botanical Watercolor Corner Artwork -->
+          <div class="botanical-art-corner top-right">
+            <svg viewBox="0 0 120 120" class="floral-svg-art" style="transform: rotate(90deg);">
+              <path d="M0,0 Q60,15 75,75 Q30,45 0,0" fill="#8b2635" opacity="0.85"/>
+              <path d="M0,0 Q15,60 75,75 Q45,30 0,0" fill="#c59b3f" opacity="0.9"/>
+              <circle cx="35" cy="35" r="6" fill="#721c29"/>
+              <circle cx="55" cy="20" r="4.5" fill="#e8c878"/>
+              <circle cx="20" cy="55" r="4.5" fill="#b0706b"/>
+            </svg>
+          </div>
+          <div class="botanical-art-corner bottom-right">
+            <svg viewBox="0 0 120 120" class="floral-svg-art" style="transform: rotate(180deg);">
+              <path d="M0,0 Q60,15 75,75 Q30,45 0,0" fill="#8b2635" opacity="0.85"/>
+              <path d="M0,0 Q15,60 75,75 Q45,30 0,0" fill="#c59b3f" opacity="0.9"/>
+              <circle cx="35" cy="35" r="6" fill="#721c29"/>
+            </svg>
+          </div>
+
+          <div class="door-frame-border">
+            <span class="door-role-tag">The Groom</span>
+            <h2 class="door-calligraphy-name">Shahid</h2>
+            <p class="door-lineage-sub">S/o Mr. Amiruddin Shaikh</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CENTRAL GOLDEN ROYAL WAX SEAL (Tap for Sparkle Burst Animation & Door Swing) -->
+      <div class="card-central-seal" id="cardSeal" title="Tap Seal to Open">
+        <div class="seal-ring-spin"></div>
+        <div class="seal-disc">
+          <i class="fa-solid fa-crown seal-crown"></i>
+          <span class="seal-text">S & I</span>
+        </div>
+        <div class="seal-sparkle-burst-container" id="sealSparkleBurst"></div>
+      </div>
+
+
+      <!-- ======================================= -->
+      <!-- B. THE ROYAL INVITATION INSIDE CONTENT   -->
+      <!-- ======================================= -->
+      <div class="card-inside-content">
+        <div class="foil-shimmer-layer"></div>
+
+        <!-- Quranic Verse -->
+        <div class="ayah-quote-box">
+          <div class="ayah-mark">❝</div>
+          <p class="ayah-arabic-text">
+            وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً
+          </p>
+          <p class="ayah-english-text" data-i18n="quran_ayah">
+            "And among His signs is that He created for you mates from among yourselves, that you may dwell in tranquility with them; and He has put love and mercy between your hearts."
+          </p>
+          <span class="ayah-surah-ref">— Surah Ar-Rum (30:21)</span>
+        </div>
+
+        <!-- Couple Names Section (Rich Burgundy Script from Reference Image) -->
+        <div class="invitation-names-block">
+          <p class="names-intro-greeting" data-i18n="cordial_invite">Together with their families, cordially invite you to celebrate</p>
+          <h1 class="script-groom-name" data-i18n="groom_name">Shahid Shaikh</h1>
+          <div class="script-ampersand-gold">&</div>
+          <h1 class="script-bride-name" data-i18n="bride_name">Iqra Shaikh</h1>
+          <div class="script-heart-line">── <i class="fa-solid fa-heart"></i> ──</div>
+          <p class="script-covenant-subtitle" data-i18n="covenant_sub">In a sacred covenant of love, faith & togetherness</p>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div class="hero-countdown-box">
+          <h3 class="countdown-title-text"><i class="fa-solid fa-moon"></i> <span data-i18n="countdown_title">COUNTDOWN TO THE WEDDING (25th NOV)</span> <i class="fa-solid fa-star"></i></h3>
+          <div class="timer-flex-grid" id="countdownTimer">
+            <div class="time-slot">
+              <span class="slot-num" id="days">00</span>
+              <span class="slot-lbl" data-i18n="time_days">DAYS</span>
+            </div>
+            <div class="slot-dot">:</div>
+            <div class="time-slot">
+              <span class="slot-num" id="hours">00</span>
+              <span class="slot-lbl" data-i18n="time_hours">HOURS</span>
+            </div>
+            <div class="slot-dot">:</div>
+            <div class="time-slot">
+              <span class="slot-num" id="minutes">00</span>
+              <span class="slot-lbl" data-i18n="time_mins">MINUTES</span>
+            </div>
+            <div class="slot-dot">:</div>
+            <div class="time-slot">
+              <span class="slot-num" id="seconds">00</span>
+              <span class="slot-lbl" data-i18n="time_secs">SECONDS</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions Inside Card -->
+        <div class="hero-action-buttons">
+          <a href="#events" class="btn-primary-gold"><i class="fa-solid fa-calendar-check"></i> <span data-i18n="btn_view_events">View Ceremonies & Venues</span></a>
+          <button class="btn-secondary-outline" id="addToCalGlobalBtn"><i class="fa-solid fa-calendar-plus"></i> <span data-i18n="btn_save_cal">Save to Calendar</span></button>
+          <button class="btn-secondary-outline btn-print-card" id="downloadCardBtn"><i class="fa-solid fa-download"></i> <span data-i18n="btn_download_card">Download / Print Card</span></button>
+        </div>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ================================================================= -->
+  <!-- 2. SUBSEQUENT CEREMONIES & DETAILS (Hidden until card opens)      -->
+  <!-- ================================================================= -->
+  <div class="below-card-sections" id="belowCardSections">
+
+    <!-- THE COUPLE & FAMILIES SECTION -->
+    <section class="section couple-section" id="couple">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="sub-badge" data-i18n="badge_gratitude">With Joyous Gratitude</span>
+          <h2 class="section-heading" data-i18n="heading_couple">The Bride & Groom</h2>
+          <div class="gold-ornament-divider">✦ ✤ ✦</div>
+        </div>
+
+        <div class="couple-cards-grid">
+          <!-- GROOM CARD (SHAHID SHAIKH) -->
+          <div class="person-card" data-aos="fade-right">
+            <div class="monogram-crest-frame">
+              <div class="monogram-inner">
+                <span class="monogram-letter">S</span>
+                <span class="monogram-sub">شاهد</span>
+              </div>
+            </div>
+            <div class="person-info">
+              <h3 class="person-name" data-i18n="groom_full">Shahid Shaikh</h3>
+              <p class="person-role" data-i18n="groom_role">The Groom</p>
+              <div class="family-lineage">
+                <p class="lineage-title" data-i18n="son_of">Son of</p>
+                <p class="parents-names" data-i18n="groom_parents">Mr. Amiruddin Shaikh & Family</p>
+              </div>
+              <p class="person-bio" data-i18n="groom_quote">
+                "May Allah bless our steps together, guide our hearts, and grant us a home filled with peace, Taqwa, and everlasting joy."
+              </p>
+            </div>
+          </div>
+
+          <!-- SACRED UNION EMBLEM -->
+          <div class="union-emblem" data-aos="zoom-in">
+            <div class="emblem-inner">
+              <i class="fa-solid fa-infinity emblem-icon"></i>
+              <span>BARAKALLAH</span>
+            </div>
+          </div>
+
+          <!-- BRIDE CARD (IQRA SHAIKH) -->
+          <div class="person-card" data-aos="fade-left">
+            <div class="monogram-crest-frame">
+              <div class="monogram-inner">
+                <span class="monogram-letter">I</span>
+                <span class="monogram-sub">إقراء</span>
+              </div>
+            </div>
+            <div class="person-info">
+              <h3 class="person-name" data-i18n="bride_full">Iqra Shaikh</h3>
+              <p class="person-role" data-i18n="bride_role">The Bride</p>
+              <div class="family-lineage">
+                <p class="lineage-title" data-i18n="daughter_of">Daughter of</p>
+                <p class="parents-names" data-i18n="bride_parents">Mr. Mustafa Shaikh & Family</p>
+              </div>
+              <p class="person-bio" data-i18n="bride_quote">
+                "Finding your counterpart in faith and heart is Allah's greatest blessing. Truly blessed to begin this sacred chapter of our lives."
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- FAMILY WELCOME MESSAGE -->
+        <div class="family-message-card">
+          <i class="fa-solid fa-heart-pulse family-heart-icon"></i>
+          <h4 data-i18n="families_title">A Warm Note from the Families</h4>
+          <p data-i18n="families_msg">
+            "We request the honour of your graceful presence and pious Duas on this auspicious celebration. Your companionship will make our joy complete as our families unite under the divine grace of Almighty Allah."
+          </p>
+          <div class="signature-names">
+            <span>Mr. Amiruddin Shaikh & Family</span>
+            <span class="gold-sep">•</span>
+            <span>Mr. Mustafa Shaikh & Family</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CEREMONIES & EVENTS SECTION (Shaadi 25th Nov & Walima 27th) -->
+    <section class="section events-section" id="events">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="sub-badge" data-i18n="badge_schedule">Schedule of Blessings</span>
+          <h2 class="section-heading" data-i18n="heading_ceremonies">Wedding Ceremonies</h2>
+          <div class="gold-ornament-divider">✦ ✤ ✦</div>
+          <p class="section-desc" data-i18n="desc_ceremonies">Join us in each sacred chapter of our celebrations</p>
+        </div>
+
+        <div class="events-grid two-events-grid">
+
+          <!-- EVENT 1: SHAADI & NIKKAH (25th NOV - MUMBRA) -->
+          <div class="event-card featured-event" data-aos="fade-up">
+            <div class="event-badge gold-badge"><i class="fa-solid fa-crown"></i> <span data-i18n="badge_shaadi">The Main Shaadi (25th Nov)</span></div>
+            <div class="event-header">
+              <div class="event-icon-box"><i class="fa-solid fa-hands-praying"></i></div>
+              <h3 class="event-name" data-i18n="title_shaadi">Wedding Ceremony & Barat</h3>
+              <p class="event-tagline" data-i18n="sub_shaadi">The Sacred Nikkah Covenant & Grand Barat Banquet</p>
+            </div>
+            <div class="event-details">
+              <div class="detail-row">
+                <i class="fa-regular fa-calendar-days"></i>
+                <div>
+                  <strong data-i18n="date_shaadi">Wednesday, 25th November 2026</strong>
+                  <span>15th Jumada al-Awwal 1448 AH</span>
+                </div>
+              </div>
+              <div class="detail-row">
+                <i class="fa-regular fa-clock"></i>
+                <div>
+                  <strong data-i18n="time_shaadi">Nikkah: 05:30 PM (Maghrib)</strong>
+                  <span data-i18n="dinner_shaadi">Barat Reception & Dinner at 07:30 PM</span>
+                </div>
+              </div>
+              <div class="detail-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <strong>Kinjal Wedding Lawn</strong>
+                  <span>Babaji Patil Wadi, Opp. MEK Company, Opp. Sanjay Nagar, Mumbra, Thane, Maharashtra 400612</span>
+                </div>
+              </div>
+            </div>
+            <div class="event-actions">
+              <a href="https://www.google.com/maps/dir/Mumbra,+Thane,+Maharashtra/Kinjal+Wedding+Lawn,+Babaji+patil+wadi,+opp.+MEK+company,+opp.+sanjay+nagar,+Sanjay+Nagar,+Mumbra,+Thane,+Maharashtra+400612/@19.1782764,73.0199606,17z" target="_blank" rel="noopener" class="event-btn map-btn">
+                <i class="fa-solid fa-map-location-dot"></i> <span data-i18n="btn_maps">Open in Google Maps</span>
+              </a>
+              <button class="event-btn cal-btn" onclick="addToCalendar('nikkah')">
+                <i class="fa-solid fa-calendar-plus"></i> <span data-i18n="btn_add_cal">Add to Calendar</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- EVENT 2: DAWAT-E-WALIMA (27th NOV - KURLA, MUMBAI) -->
+          <div class="event-card featured-event" data-aos="fade-up" data-aos-delay="150">
+            <div class="event-badge gold-badge"><i class="fa-solid fa-star"></i> <span data-i18n="badge_walima">Sunnah Walima (27th Nov)</span></div>
+            <div class="event-header">
+              <div class="event-icon-box"><i class="fa-solid fa-utensils"></i></div>
+              <h3 class="event-name" data-i18n="title_walima">Dawat-e-Walima</h3>
+              <p class="event-tagline" data-i18n="sub_walima">The Grand Feast Hosted by Shahid's Family</p>
+            </div>
+            <div class="event-details">
+              <div class="detail-row">
+                <i class="fa-regular fa-calendar-days"></i>
+                <div>
+                  <strong data-i18n="date_walima">Friday, 27th November 2026</strong>
+                  <span>17th Jumada al-Awwal 1448 AH</span>
+                </div>
+              </div>
+              <div class="detail-row">
+                <i class="fa-regular fa-clock"></i>
+                <div>
+                  <strong data-i18n="time_walima">08:00 PM Onwards</strong>
+                  <span data-i18n="dinner_walima">Shahi Dastarkhwan Served at 09:00 PM</span>
+                </div>
+              </div>
+              <div class="detail-row">
+                <i class="fa-solid fa-location-dot"></i>
+                <div>
+                  <strong>Goawala Compound</strong>
+                  <span>Lal Bahadur Shastri Marg, Near Sahara Hotel, Friends Colony, Kurla West, Mumbai 400070</span>
+                </div>
+              </div>
+            </div>
+            <div class="event-actions">
+              <a href="https://www.google.com/maps?daddr=Goawala+compound,+Lal+Bahadur+Shastri+Marg,+near+sahara+hotel,+Friends+Colony,+Kurla+West,+Kurla,+Mumbai,+Maharashtra+400070" target="_blank" rel="noopener" class="event-btn map-btn">
+                <i class="fa-solid fa-map-location-dot"></i> <span data-i18n="btn_maps">Open in Google Maps</span>
+              </a>
+              <button class="event-btn cal-btn" onclick="addToCalendar('walima')">
+                <i class="fa-solid fa-calendar-plus"></i> <span data-i18n="btn_add_cal">Add to Calendar</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- DETAILED ITINERARY TIMELINE -->
+    <section class="section timeline-section" id="timeline">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="sub-badge" data-i18n="badge_highlights">Event Schedule</span>
+          <h2 class="section-heading" data-i18n="heading_itinerary">Detailed Itinerary</h2>
+          <div class="gold-ornament-divider">✦ ✤ ✦</div>
+        </div>
+
+        <div class="vertical-timeline">
+          
+          <div class="timeline-item left" data-aos="fade-right">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-time"><i class="fa-regular fa-clock"></i> 25th Nov • 07:30 PM</span>
+              <h3 data-i18n="itin_shaadi_title">Grand Shaadi & Barat Reception</h3>
+              <p data-i18n="itin_shaadi_desc">Lavish traditional wedding feast and celebratory reception at Kinjal Wedding Lawn, Mumbra (Thane).</p>
+            </div>
+          </div>
+
+          <div class="timeline-item right" data-aos="fade-left">
+            <div class="timeline-dot"></div>
+            <div class="timeline-card">
+              <span class="timeline-time"><i class="fa-regular fa-clock"></i> 27th Nov • 08:00 PM</span>
+              <h3 data-i18n="itin_walima_title">Dawat-e-Walima Banquet</h3>
+              <p data-i18n="itin_walima_desc">Sunnah Walima banquet hosted by Mr. Amiruddin Shaikh & Family at Goawala Compound, Kurla West (Mumbai).</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SACRED BLESSINGS (TOKENS OF BARAKAH) -->
+    <section class="section blessings-section" id="blessings">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="sub-badge" data-i18n="badge_wisdom">Words of Wisdom & Faith</span>
+          <h2 class="section-heading" data-i18n="heading_tokens">Tokens of Barakah</h2>
+          <div class="gold-ornament-divider">✦ ✤ ✦</div>
+          <p class="section-desc" data-i18n="desc_tokens">Guiding verses and prophetic wisdom for a blessed married life</p>
+        </div>
+
+        <div class="blessings-grid">
+          <div class="blessing-card" data-aos="fade-up">
+            <div class="blessing-arabic-heading">المَوَدَّةُ وَالرَّحْمَةُ</div>
+            <h3 class="blessing-title" data-i18n="token_1_title">Love & Mercy</h3>
+            <p class="blessing-text" data-i18n="token_1_desc">
+              "And He placed between you affection and mercy. In that are signs for people who reflect."
+            </p>
+          </div>
+
+          <div class="blessing-card" data-aos="fade-up" data-aos-delay="100">
+            <div class="blessing-arabic-heading">النِّكَاحُ مِنْ سُنَّتِي</div>
+            <h3 class="blessing-title" data-i18n="token_2_title">The Sunnah of Marriage</h3>
+            <p class="blessing-text" data-i18n="token_2_desc">
+              "Marriage is part of my Sunnah, and whoever follows my Sunnah has fulfilled half of his faith."
+            </p>
+          </div>
+
+          <div class="blessing-card" data-aos="fade-up" data-aos-delay="200">
+            <div class="blessing-arabic-heading">قُرَّةَ أَعْيُنٍ</div>
+            <h3 class="blessing-title" data-i18n="token_3_title">Comfort of the Eyes</h3>
+            <p class="blessing-text" data-i18n="token_3_desc">
+              "Our Lord! Grant unto us in our spouses and offspring the comfort of our eyes, and make us leaders of the righteous."
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ETIQUETTE & GUEST GUIDE -->
+    <section class="section etiquette-section">
+      <div class="container">
+        <div class="etiquette-box">
+          <div class="etiquette-header">
+            <i class="fa-solid fa-mosque"></i>
+            <h3 data-i18n="heading_etiquette">Wedding Etiquette & Guest Guide</h3>
+          </div>
+          <div class="etiquette-grid">
+            <div class="etiquette-item">
+              <i class="fa-solid fa-camera-rotate"></i>
+              <h4 data-i18n="etiq_photo_title">Photography Etiquette</h4>
+              <p data-i18n="etiq_photo_desc">Please kindly respect the privacy of family members and refrain from filming during solemn moments.</p>
+            </div>
+            <div class="etiquette-item">
+              <i class="fa-solid fa-hands-holding-child"></i>
+              <h4 data-i18n="etiq_kids_title">Little Angels</h4>
+              <p data-i18n="etiq_kids_desc">Children are a blessing and welcome to join. Please ensure they remain accompanied by parents.</p>
+            </div>
+            <div class="etiquette-item">
+              <i class="fa-solid fa-gift"></i>
+              <h4 data-i18n="etiq_gift_title">No Box Gifts (Sunnah Wishes)</h4>
+              <p data-i18n="etiq_gift_desc">Your pious Duas and gracious presence are the greatest gifts we could ever ask for. (Salam & Duas appreciated).</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DIGITAL DUA & GUESTBOOK WALL -->
+    <section class="section guestbook-section" id="guestbook">
+      <div class="container">
+        <div class="section-title-wrapper">
+          <span class="sub-badge" data-i18n="badge_barakah">Words of Barakah</span>
+          <h2 class="section-heading" data-i18n="heading_duas">Digital Dua & Guestbook</h2>
+          <div class="gold-ornament-divider">✦ ✤ ✦</div>
+          <p class="section-desc" data-i18n="desc_duas">Blessings, prayers, and heartfelt words sent by loved ones</p>
+        </div>
+
+        <div class="guestbook-feed" id="guestbookFeed"></div>
+
+        <!-- Inline Dua Form -->
+        <div class="dua-form-card">
+          <h4><i class="fa-solid fa-hands-praying"></i> <span data-i18n="title_leave_dua">Leave a Dua for Shahid & Iqra</span></h4>
+          <form id="duaForm" class="inline-dua-form">
+            <div class="form-grid">
+              <div class="form-group">
+                <label for="duaSenderName" data-i18n="lbl_your_name">Your Name *</label>
+                <input type="text" id="duaSenderName" placeholder="e.g. Uncle Farhan & Family" required>
+              </div>
+              <div class="form-group">
+                <label for="duaTextMsg" data-i18n="lbl_your_dua">Your Dua / Blessing *</label>
+                <input type="text" id="duaTextMsg" placeholder="May Allah bless Shahid & Iqra with endless joy & peace..." required>
+              </div>
+            </div>
+            <button type="submit" class="btn-primary-gold" style="margin-top: 12px; width: 100%; justify-content: center;">
+              <i class="fa-solid fa-paper-plane"></i> <span data-i18n="btn_post_dua">Post Your Dua</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHARE & SOCIAL SECTION -->
+    <section class="section share-section">
+      <div class="container text-center">
+        <div class="share-card">
+          <i class="fa-solid fa-share-nodes share-main-icon"></i>
+          <h3 data-i18n="title_share">Share This Invitation With Family</h3>
+          <p data-i18n="desc_share">Spread the joyful news with friends & relatives via WhatsApp or social channels</p>
+          
+          <div class="share-buttons">
+            <button class="share-btn whatsapp" id="shareWhatsAppBtn">
+              <i class="fa-brands fa-whatsapp"></i> <span data-i18n="btn_whatsapp_share">Share on WhatsApp</span>
+            </button>
+            <button class="share-btn copy" id="copyLinkBtn">
+              <i class="fa-solid fa-link"></i> <span id="copyLinkText" data-i18n="btn_copy_link">Copy Link</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="luxury-footer">
+      <div class="container text-center">
+        <div class="footer-bismillah">جَزَاكُمُ اللَّهُ خَيْرًا</div>
+        <p class="footer-thanks" data-i18n="footer_thanks">Jazakumullahu Khairan for your pious Duas, gracious blessings & unconditional love.</p>
+        <div class="footer-couple-name">Shahid & Iqra</div>
+        <p class="footer-copyright" data-i18n="footer_copyright">May Allah bless all our families with endless peace and harmony • November 2026</p>
+      </div>
+    </footer>
+
+  </div>
+
+  <!-- SCRIPTS -->
+  <script src="js/particles.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
