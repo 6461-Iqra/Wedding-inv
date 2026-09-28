@@ -12,30 +12,16 @@
  * 8. Digital Dua Wall
  */
 
-// Target Wedding Date: 25th November 2026 17:30:00
-const WEDDING_DATE = new Date('2026-11-25T17:30:00').getTime();
-
-// Pre-seeded Islamic Duas & Blessings
-const INITIAL_DUAS = [
-  {
-    name: "Dr. Farhan Shaikh & Family",
-    arabic: "بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ",
-    message: "May Allah bless Shahid & Iqra with immense barakah, happiness, and peace in their married life. Warmest Mubarak to Amiruddin Uncle and Mustafa Uncle!",
-    date: "August 28, 2026"
-  },
-  {
-    name: "Uncle Mansoor & Aunt Shenaz",
-    arabic: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّيَّاتِنَا قُرَّةَ أَعْيُنٍ",
-    message: "Heartiest congratulations to the Shaikh families on this blessed occasion! May your union be full of love, Taqwa, and joy.",
-    date: "August 29, 2026"
-  },
-  {
-    name: "Hamza & Family (Mumbai)",
-    arabic: "اللَّهُمَّ بَارِكْ لَهُمْ فِيمَا رَزَقْتَهُمْ",
-    message: "Mabrook to dearest Shahid and Iqra! Excited to join the celebrations in Mumbra on the 25th and Kurla on the 27th Insha'Allah.",
-    date: "August 30, 2026"
-  }
+// Wedding Festivities Events Schedule (November 23, 24, 25, 27, 2026 - IST)
+const WEDDING_EVENTS = [
+  { id: 'mehndi', name: 'Mayun & Mehndi Ceremony', date: '2026-11-23T19:00:00+05:30', titleKey: 'title_mehndi', title: 'MAYUN & MEHNDI (23rd NOV)' },
+  { id: 'haldi', name: 'Haldi & Ubtan Ceremony', date: '2026-11-24T16:00:00+05:30', titleKey: 'title_haldi', title: 'HALDI CEREMONY (24th NOV)' },
+  { id: 'nikkah', name: 'Sacred Nikkah & Barat', date: '2026-11-25T17:30:00+05:30', titleKey: 'title_shaadi', title: 'SACRED NIKKAH (25th NOV)' },
+  { id: 'walima', name: 'Grand Wedding Reception (Walima)', date: '2026-11-27T20:00:00+05:30', titleKey: 'title_walima', title: 'GRAND WEDDING (27th NOV)' }
 ];
+
+// Default start event is Mayun & Mehndi on 23rd Nov 2026 19:00:00 IST
+const WEDDING_DATE = new Date(WEDDING_EVENTS[0].date).getTime();
 
 // Multilingual Dictionary
 const TRANSLATIONS = {
@@ -49,14 +35,15 @@ const TRANSLATIONS = {
     env_together: "TOGETHER WITH THEIR FAMILIES",
     env_sentence: "Cordially invite you to celebrate their wedding",
     month_nov: "NOVEMBER",
-    tap_open_hint: "Tap the royal envelope to open invitation",
+    tap_open_hint: "Tap Seal to Open Invitation",
     bismillah_trans: '"In the name of Allah, the Most Gracious, the Most Merciful"',
     quran_ayah: '"And among His signs is that He created for you mates from among yourselves, that you may dwell in tranquility with them; and He has put love and mercy between your hearts."',
-    cordial_invite: "Together with their families, cordially invite you to celebrate",
-    groom_name: "Shahid Shaikh",
-    bride_name: "Iqra Shaikh",
+    groom_name: "Shaikh Shahid",
+    bride_name: "Shaikh Iqra",
+    groom_urdu: "شیخ شاہد",
+    bride_urdu: "شیخ اقراء",
     covenant_sub: "In a sacred covenant of love, faith & togetherness",
-    countdown_title: "COUNTDOWN TO THE WEDDING (25th NOV)",
+    countdown_title: "LIVE COUNTDOWN TO WEDDING (25th NOV 2026)",
     time_days: "DAYS",
     time_hours: "HOURS",
     time_mins: "MINUTES",
@@ -80,27 +67,50 @@ const TRANSLATIONS = {
     families_msg: '"We request the honour of your graceful presence and pious Duas on this auspicious celebration. Your companionship will make our joy complete as our families unite under the divine grace of Almighty Allah."',
     badge_schedule: "Schedule of Blessings",
     heading_ceremonies: "Wedding Ceremonies",
-    desc_ceremonies: "Join us in each sacred chapter of our celebrations",
-    badge_shaadi: "The Main Shaadi (25th Nov)",
+    desc_ceremonies: "Join us in each sacred chapter of our celebrations with live GPS locations",
+    
+    // Ceremony 1: Mehndi
+    badge_mehndi: "Mayun & Mehndi (23rd Nov)",
+    title_mehndi: "Mayun & Mehndi Ceremony",
+    sub_mehndi: "An evening of vibrant henna, auspicious duas & festive melodies",
+    date_mehndi: "Monday, 23rd November 2026",
+    time_mehndi: "07:00 PM Onwards",
+    itin_mehndi_title: "Mayun & Mehndi Ceremony",
+    itin_mehndi_desc: "Henna rituals, traditional Geet, and celebratory dinner at Shaikh Courtyard, Mumbra.",
+
+    // Ceremony 2: Haldi
+    badge_haldi: "Haldi Ceremony (24th Nov)",
+    title_haldi: "Auspicious Haldi & Ubtan",
+    sub_haldi: "Blessing the couple with warmth, affection & radiant yellow hues",
+    date_haldi: "Tuesday, 24th November 2026",
+    time_haldi: "04:00 PM (Asr) Onwards",
+    itin_haldi_title: "Auspicious Haldi & Ubtan",
+    itin_haldi_desc: "Sacred turmeric rituals surrounded by loved ones at Shaikh Villa Lawn, Kurla West.",
+
+    // Ceremony 3: Nikkah
+    badge_shaadi: "Sacred Nikkah (25th Nov)",
     title_shaadi: "Wedding Ceremony & Barat",
     sub_shaadi: "The Sacred Nikkah Covenant & Grand Barat Banquet",
     date_shaadi: "Wednesday, 25th November 2026",
     time_shaadi: "Nikkah: 05:30 PM (Maghrib)",
     dinner_shaadi: "Barat Reception & Dinner at 07:30 PM",
-    badge_walima: "Sunnah Walima (27th Nov)",
-    title_walima: "Dawat-e-Walima",
-    sub_walima: "The Grand Feast Hosted by Shahid's Family",
+    itin_shaadi_title: "Grand Shaadi, Nikkah & Barat",
+    itin_shaadi_desc: "Solemn Nikkah covenant at Maghrib followed by Barat reception at Kinjal Wedding Lawn, Mumbra.",
+
+    // Ceremony 4: Walima
+    badge_walima: "Grand Wedding (27th Nov)",
+    title_walima: "Grand Wedding Reception & Walima",
+    sub_walima: "The Grand Sunnah Feast Hosted by Shahid's Family",
     date_walima: "Friday, 27th November 2026",
     time_walima: "08:00 PM Onwards",
     dinner_walima: "Shahi Dastarkhwan Served at 09:00 PM",
-    btn_maps: "Open in Google Maps",
+    itin_walima_title: "Grand Wedding Reception & Walima",
+    itin_walima_desc: "Sunnah Walima banquet and Shahi Dastarkhwan at Gazebo Marriage Hall, Goawala Compound, Kurla West (Mumbai).",
+
+    btn_maps: "Live GPS Directions",
     btn_add_cal: "Add to Calendar",
     badge_highlights: "Event Schedule",
     heading_itinerary: "Detailed Itinerary",
-    itin_shaadi_title: "Grand Shaadi & Barat Reception",
-    itin_shaadi_desc: "Lavish traditional wedding feast and celebratory reception at Kinjal Wedding Lawn, Mumbra (Thane).",
-    itin_walima_title: "Dawat-e-Walima Banquet",
-    itin_walima_desc: "Sunnah Walima banquet hosted by Mr. Amiruddin Shaikh & Family at Goawala Compound, Kurla West (Mumbai).",
     badge_wisdom: "Words of Wisdom & Faith",
     heading_tokens: "Tokens of Barakah",
     desc_tokens: "Guiding verses and prophetic wisdom for a blessed married life",
@@ -131,6 +141,9 @@ const TRANSLATIONS = {
     btn_copy_link: "Copy Link",
     footer_thanks: "Jazakumullahu Khairan for your pious Duas, gracious blessings & unconditional love.",
     footer_copyright: "May Allah bless all our families with endless peace and harmony • November 2026",
+    techies_tag: "CRAFTED WITH CODE & LOVE",
+    techies_heading: "Designed & Developed by the Techies Couple",
+    techies_sub: "Full-Stack Passion • Infinite Barakah • Forever Together",
     mabrook_btn: "Mabrook! 🌸"
   },
   ur: {
@@ -143,14 +156,16 @@ const TRANSLATIONS = {
     env_together: "اہل خانہ کے ہمراہ",
     env_sentence: "آپ کو شادی کی مبارک تقریب میں شرکت کی دلی دعوت دیتے ہیں",
     month_nov: "نومبر",
-    tap_open_hint: "دعوت نامہ کھولنے کے لیے شاہی لفافے پر کلک کریں",
+    tap_open_hint: "کھولنے کے لیے مہر پر کلک کریں",
     bismillah_trans: '"شروع اللہ کے نام سے جو بڑا مہربان نہایت رحم والا ہے"',
     quran_ayah: '"اور اُس کی نشانیوں میں سے ہے کہ اُس نے تمہارے لیے تمہاری ہی جنس سے جوڑے بنائے تاکہ تم اُن سے سکون پاؤ، اور تمہارے درمیان محبت اور رحمت پیدا کردی۔"',
     cordial_invite: "دونوں خاندان آپ کو اس بابرکت تقریب میں شرکت کی صمیمِ قلب سے دعوت دیتے ہیں",
-    groom_name: "شاہد شیخ",
-    bride_name: "اقراء شیخ",
+    groom_name: "شیخ شاہد",
+    bride_name: "شیخ اقراء",
+    groom_urdu: "شیخ شاہد",
+    bride_urdu: "شیخ اقراء",
     covenant_sub: "محبت، ایمان اور اخلاص کے مقدس بندھن میں",
-    countdown_title: "شادی کی مبارک تقریب (25 نومبر)",
+    countdown_title: "شادی مبارک کی لائیو الٹی گنتی (25 نومبر 2026)",
     time_days: "دن",
     time_hours: "گھنٹے",
     time_mins: "منٹ",
@@ -175,26 +190,45 @@ const TRANSLATIONS = {
     badge_schedule: "مبارک اوقات",
     heading_ceremonies: "شادی کی تقریبات",
     desc_ceremonies: "ہماری مسرتوں میں شرکت فرما کر شکریہ کا موقع عنایت فرمائیں",
-    badge_shaadi: "شادی و بارات (25 نومبر)",
+
+    badge_mehndi: "مایوں اور مہندی (23 نومبر)",
+    title_mehndi: "تقریبِ مایوں و مہندی",
+    sub_mehndi: "حنا بندی اور روایتی دعائیہ محفل",
+    date_mehndi: "پیر، 23 نومبر 2026",
+    time_mehndi: "شام 07:00 بجے سے",
+    itin_mehndi_title: "تقریبِ مایوں و مہندی",
+    itin_mehndi_desc: "حنا بندی، روایتی گیت اور خاندانی ضیافت، شیخ صحن، ممبرا۔",
+
+    badge_haldi: "رسمِ ہلدی و ابٹن (24 نومبر)",
+    title_haldi: "رسمِ ہلدی و ابٹن",
+    sub_haldi: "محبت، شفقت اور مسرت کی پرنور رسم",
+    date_haldi: "منگل، 24 نومبر 2026",
+    time_haldi: "شام 04:00 بجے سے",
+    itin_haldi_title: "رسمِ ہلدی و ابٹن",
+    itin_haldi_desc: "عزیز و اقارب کے ہمراہ ہلدی اور ابٹن کی بابرکت رسم، کرلا ویسٹ۔",
+
+    badge_shaadi: "عقدِ نکاح و بارات (25 نومبر)",
     title_shaadi: "مبارک تقریبِ عقد و بارات",
     sub_shaadi: "مقدس نکاح اور پروقار دعوتِ طعام",
     date_shaadi: "بدھ، 25 نومبر 2026",
     time_shaadi: "نکاح: بعد نمازِ مغرب 05:30 بجے",
     dinner_shaadi: "استقبالیہ و طعام: 07:30 بجے شام",
+    itin_shaadi_title: "شادی، نکاح و بارات استقبالیہ",
+    itin_shaadi_desc: "کنجل ویڈنگ لان، ممبرا (تھانے) میں پروقار تقریب اور ضیافت۔",
+
     badge_walima: "سنتِ ولیمہ (27 نومبر)",
     title_walima: "دعوتِ ولیمہ",
     sub_walima: "دولہا کے خاندان کی جانب سے پروقار ضیافت",
     date_walima: "جمعہ، 27 نومبر 2026",
     time_walima: "رات 08:00 بجے سے",
     dinner_walima: "شاہی دسترخوان: رات 09:00 بجے",
-    btn_maps: "گوگل میپس میں دیکھیں",
+    itin_walima_title: "شاندار دعوتِ ولیمہ ضیافت",
+    itin_walima_desc: "گیزیبو میرج ہال (گووالا کمپاؤنڈ)، کرلا ویسٹ (ممبئی) میں سنتِ ولیمہ کی پرشکوہ دعوت۔",
+
+    btn_maps: "لائیو جی پی ایس رہنمائی",
     btn_add_cal: "کیلنڈر میں شامل کریں",
     badge_highlights: "پروگرام کی جھلکیاں",
     heading_itinerary: "مکمل پروگرام",
-    itin_shaadi_title: "شادی و بارات استقبالیہ",
-    itin_shaadi_desc: "کنجل ویڈنگ لان، ممبرا (تھانے) میں پروقار تقریب اور ضیافت۔",
-    itin_walima_title: "دعوتِ ولیمہ ضیافت",
-    itin_walima_desc: "گووالا کمپاؤنڈ، کرلا ویسٹ (ممبئی) میں سنتِ ولیمہ کی پرشکوہ دعوت۔",
     badge_wisdom: "فرامینِ ربانی و سنتِ نبوی",
     heading_tokens: "برکت کے انمول کلمات",
     desc_tokens: "کامیاب ازدواجی زندگی کے سنہرے اصول",
@@ -225,6 +259,9 @@ const TRANSLATIONS = {
     btn_copy_link: "لنک کاپی کریں",
     footer_thanks: "آپ کی تشریف آوری، مخلصانہ محبت اور پرنور دعاؤں کا تہہ دل سے شکریہ۔",
     footer_copyright: "اللہ تعالیٰ ہمارے تمام خاندانوں کو امن، محبت اور برکت عطا فرمائے • نومبر 2026",
+    techies_tag: "محبت اور کوڈنگ سے تیار کردہ",
+    techies_heading: "ٹیکی جوڑے (شاہد اور اقراء) کی جانب سے ڈیزائن اور ڈیولپ کردہ",
+    techies_sub: "ٹیکنالوجی کا شوق • لامتناہی برکت • ہمیشہ کے لیے ایک ساتھ",
     mabrook_btn: "مبارک باد! 🌸"
   },
   hi: {
@@ -237,14 +274,16 @@ const TRANSLATIONS = {
     env_together: "सपरिवार सादर आमंत्रित",
     env_sentence: "आपको अपने विवाह समारोह में शामिल होने के लिए सादर आमंत्रित करते हैं",
     month_nov: "नवंबर",
-    tap_open_hint: "निमंत्रण पत्र खोलने के लिए शाही लिफाफे पर टैप करें",
+    tap_open_hint: "खोलने के लिए सील पर टैप करें",
     bismillah_trans: '"अल्लाह के नाम से, जो परम कृपालु और दयावान है"',
     quran_ayah: '"और उसकी निशानियों में से है कि उसने तुम्हारे लिए तुम्हीं में से जोड़े बनाए ताकि तुम्हें सुकून मिले, और दिलों में प्यार व रहमत पैदा की।"',
     cordial_invite: "दोनों परिवार आपको इस पावन उत्सव में सस्नेह आमंत्रित करते हैं",
-    groom_name: "शाहिद शेख",
-    bride_name: "इक़रा शेख",
+    groom_name: "शेख़ शाहिद",
+    bride_name: "शेख़ इक़रा",
+    groom_urdu: "شیخ شاہد",
+    bride_urdu: "شیخ اقراء",
     covenant_sub: "प्रेम, विश्वास और पवित्र वैवाहिक बंधन में",
-    countdown_title: "विवाह समारोह की उलटी गिनती (25 नवंबर)",
+    countdown_title: "शुभ विवाह की लाइव उलटी गिनती (25 नवंबर 2026)",
     time_days: "दिन",
     time_hours: "घंटे",
     time_mins: "मिनट",
@@ -269,26 +308,45 @@ const TRANSLATIONS = {
     badge_schedule: "शुभ कार्यक्रम",
     heading_ceremonies: "विवाह समारोह",
     desc_ceremonies: "हमारे इस पावन उत्सव के हर पल में शामिल होकर हमें अनुग्रहित करें",
-    badge_shaadi: "शादी व बारात (25 नवंबर)",
+
+    badge_mehndi: "मायूं व मेहंदी (23 नवंबर)",
+    title_mehndi: "मायूं एवं मेहंदी समारोह",
+    sub_mehndi: "रंगारंग मेहंदी व मांगलिक गीतों की शाम",
+    date_mehndi: "सोमवार, 23 नवंबर 2026",
+    time_mehndi: "शाम 07:00 बजे से",
+    itin_mehndi_title: "मायूं एवं मेहंदी समारोह",
+    itin_mehndi_desc: "पारंपरिक मेहंदी रस्म व पारिवारिक दावत, शेख प्रांगण, मुंब्रा।",
+
+    badge_haldi: "हल्दी समारोह (24 नवंबर)",
+    title_haldi: "हल्दी एवं उबटन रस्म",
+    sub_haldi: "हल्दी के पावन रंगों और खुशियों के साथ",
+    date_haldi: "मंगलवार, 24 नवंबर 2026",
+    time_haldi: "शाम 04:00 बजे से",
+    itin_haldi_title: "हल्दी एवं उबटन रस्म",
+    itin_haldi_desc: "प्रियजनों के संग हल्दी व उबटन की शुभ रस्म, कुर्ला वेस्ट।",
+
+    badge_shaadi: "पवित्र निकाह (25 नवंबर)",
     title_shaadi: "निकाह व बारात समारोह",
     sub_shaadi: "पवित्र निकाह एवं भव्य दावत",
     date_shaadi: "बुधवार, 25 नवंबर 2026",
     time_shaadi: "निकाह: शाम 05:30 बजे",
     dinner_shaadi: "स्वागत एवं शाही भोज: शाम 07:30 बजे",
-    badge_walima: "दावत-ए-वलीमा (27 नवंबर)",
+    itin_shaadi_title: "शादी, निकाह एवं बारात स्वागत",
+    itin_shaadi_desc: "किंजल वेडिंग लॉन, मुंब्रा (ठाणे) में भव्य निकाह व दावत।",
+
+    badge_walima: "भव्य विवाह प्रीतिभोज (27 नवंबर)",
     title_walima: "दावत-ए-वलीमा",
     sub_walima: "वर पक्ष की ओर से भव्य प्रीतिभोज",
     date_walima: "शुक्रवार, 27 नवंबर 2026",
     time_walima: "रात्रि 08:00 बजे से",
     dinner_walima: "शाही दावत: रात्रि 09:00 बजे",
-    btn_maps: "गूगल मैप्स पर देखें",
+    itin_walima_title: "दावत-ए-वलीमा प्रीतिभोज",
+    itin_walima_desc: "गज़ीबो मैरिज हॉल (गोवावाला कंपाउंड), कुर्ला वेस्ट (मुंबई) में वलीमा की शानदार दावत।",
+
+    btn_maps: "लाइव जीपीएस दिशा-निर्देश",
     btn_add_cal: "कैलेंडर में जोड़ें",
     badge_highlights: "कार्यक्रम सूची",
     heading_itinerary: "विस्तृत कार्यक्रम",
-    itin_shaadi_title: "शादी एवं बारात स्वागत",
-    itin_shaadi_desc: "किंजल वेडिंग लॉन, मुंब्रा (ठाणे) में भव्य निकाह व दावत।",
-    itin_walima_title: "दावत-ए-वलीमा प्रीतिभोज",
-    itin_walima_desc: "गोवावाला कंपाउंड, कुर्ला वेस्ट (मुंबई) में वलीमा की शानदार दावत।",
     badge_wisdom: "पवित्र वचन व ज्ञान",
     heading_tokens: "बरकत के संदेश",
     desc_tokens: "सुखी दांपत्य जीवन के लिए प्रेरणादायक वचन",
@@ -307,7 +365,7 @@ const TRANSLATIONS = {
     etiq_gift_desc: "आपकी नेक दुआएं और उपस्थिति ही हमारे लिए सबसे बड़ा उपहार है।",
     heading_queries: "मार्गदर्शन व संपर्क के लिए",
     badge_barakah: "दुआओं का संगम",
-    heading_duas: "डिजिटल दुआ व गेस्टबुक",
+    heading_duas: "डिजिटल दुआ व गेستबुक",
     desc_duas: "प्रियजनों की ओर से भेजी गई शुभकामनाएं व आशीर्वाद",
     title_leave_dua: "शाहिद व इक़रा के लिए अपनी दुआ भेजें",
     lbl_your_name: "आपका नाम *",
@@ -319,6 +377,9 @@ const TRANSLATIONS = {
     btn_copy_link: "लिंक कॉपी करें",
     footer_thanks: "आपकी उपस्थिति, असीम स्नेह और पवित्र दुआओं के लिए हार्दिक धन्यवाद।",
     footer_copyright: "अल्लाह हमारे सभी परिवारों को सुख, शांति और समृद्धि प्रदान करे • नवंबर 2026",
+    techies_tag: "कोड और स्नेह से निर्मित",
+    techies_heading: "टेकीज़ कपल (शाहिद एवं इक़रा) द्वारा सस्नेह डिज़ाइन व डेवलप किया गया",
+    techies_sub: "समर्पण व तकनीक • असीम बरकत • सदा के लिए संग",
     mabrook_btn: "मुबारकबाद! 🌸"
   }
 };
@@ -326,6 +387,7 @@ const TRANSLATIONS = {
 document.addEventListener('DOMContentLoaded', () => {
   initVIPGuest();
   initGatefoldOpening();
+  initMobileNav();
   init3DTilt();
   initPetalShower();
   initAudioPlaylist();
@@ -383,9 +445,14 @@ function initGatefoldOpening() {
       }
     };
 
-    const handleOpen = () => {
+    const tapPrompt = document.getElementById('cardTapPrompt');
+
+    const handleOpen = (e) => {
       if (gatefoldCard.classList.contains('open')) {
         return;
+      }
+      if (e) {
+        e.stopPropagation();
       }
 
       // Step 1: Trigger Wax Seal Stamping and Golden Sparks
@@ -395,13 +462,21 @@ function initGatefoldOpening() {
         playCelebrationChime();
       }
 
-      // Step 2: Smoothly swing open the doors and unlock scroll
+      if (tapPrompt) {
+        tapPrompt.style.opacity = '0';
+        setTimeout(() => {
+          tapPrompt.style.display = 'none';
+        }, 300);
+      }
+
+      // Step 2: Smoothly swing open the doors, hide tap prompt, unlock scroll
       setTimeout(() => {
         gatefoldCard.classList.remove('closed');
         gatefoldCard.classList.add('open');
 
         document.body.classList.remove('card-closed-state');
         document.body.classList.add('card-opened-state');
+        window.scrollTo(0, 0);
         
         playAmbientTrack('oud');
       }, 320);
@@ -410,7 +485,75 @@ function initGatefoldOpening() {
     if (cardSeal) cardSeal.addEventListener('click', handleOpen);
     if (doorLeft) doorLeft.addEventListener('click', handleOpen);
     if (doorRight) doorRight.addEventListener('click', handleOpen);
+    if (tapPrompt) tapPrompt.addEventListener('click', handleOpen);
+    
+    // Also allow tapping anywhere on closed card flap to open
+    gatefoldCard.addEventListener('click', (e) => {
+      if (!gatefoldCard.classList.contains('open')) {
+        handleOpen(e);
+      }
+    });
   }
+}
+
+/* ==========================================================================
+   1.1 MOBILE NAVIGATION DRAWER & LINKS
+   ========================================================================== */
+function initMobileNav() {
+  const toggleBtn = document.getElementById('mobileNavToggle');
+  const drawer = document.getElementById('mobileNavDrawer');
+  const backdrop = document.getElementById('mobileDrawerBackdrop');
+  const closeBtn = document.getElementById('mobileDrawerClose');
+  const drawerLinks = document.querySelectorAll('.mobile-drawer-link');
+  const langChips = document.querySelectorAll('.mobile-lang-chip');
+
+  if (!toggleBtn || !drawer) return;
+
+  const openDrawer = () => {
+    drawer.classList.add('active');
+    backdrop?.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeDrawer = () => {
+    drawer.classList.remove('active');
+    backdrop?.classList.remove('active');
+    if (!document.body.classList.contains('card-closed-state')) {
+      document.body.style.overflow = '';
+    }
+  };
+
+  toggleBtn.addEventListener('click', openDrawer);
+  closeBtn?.addEventListener('click', closeDrawer);
+  backdrop?.addEventListener('click', closeDrawer);
+
+  drawerLinks.forEach(link => {
+    link.addEventListener('click', () => {
+      closeDrawer();
+    });
+  });
+
+  langChips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      const lang = chip.dataset.lang;
+      setLanguage(lang);
+      langChips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      
+      const desktopItems = document.querySelectorAll('.lang-item');
+      desktopItems.forEach(item => {
+        if (item.dataset.lang === lang) item.classList.add('active');
+        else item.classList.remove('active');
+      });
+
+      const currentLangLabel = document.getElementById('currentLangLabel');
+      if (currentLangLabel) {
+        if (lang === 'en') currentLangLabel.innerText = "English";
+        else if (lang === 'ur') currentLangLabel.innerText = "اردو";
+        else currentLangLabel.innerText = "हिंदी";
+      }
+    });
+  });
 }
 
 /* ==========================================================================
@@ -462,6 +605,8 @@ function init3DTilt() {
    3. VIRTUAL ROSE PETAL SHOWER & CELEBRATION CHIME ENGINE
    ========================================================================== */
 let petalCanvas, petalCtx, petals = [], petalAnimId = null;
+let ambientPetalTimer = null;
+let ambientBlessingTimer = null;
 
 function initPetalShower() {
   petalCanvas = document.getElementById('petals-canvas');
@@ -477,25 +622,129 @@ function initPetalShower() {
 
   const mabrookBtn = document.getElementById('mabrookBtn');
   if (mabrookBtn) {
-    mabrookBtn.addEventListener('click', triggerMabrookShower);
+    mabrookBtn.addEventListener('click', (e) => {
+      triggerMabrookShower();
+      spawnFloatingBadge('Mabrook! 🌸', mabrookBtn);
+    });
   }
+
+  // Start continuous ongoing ambient rose petals (every 2-3 seconds automatically)
+  startAmbientPetalDrift();
+}
+
+function startAmbientPetalDrift() {
+  if (ambientPetalTimer) return;
+
+  // 1. Ongoing ambient royal rose petals, blossom balls & gold stardust drift every 2.4 seconds
+  ambientPetalTimer = setInterval(() => {
+    if (document.hidden || petals.length > 70) return;
+
+    // Spawn gentle mix of both authentic rose petals, glowing blossom balls, and golden stardust
+    const count = 2 + Math.floor(Math.random() * 2);
+    for (let i = 0; i < count; i++) {
+      const r = Math.random();
+      let pType;
+      if (r < 0.22) {
+        pType = 'sparkle';
+      } else if (r < 0.60) {
+        pType = 'petal'; // Real organic rose petal
+      } else {
+        pType = 'ball';  // Luminous 3D pink blossom ball from user screenshot
+      }
+
+      const isBlush = Math.random() < 0.52;
+      petals.push({
+        type: pType,
+        x: Math.random() * (petalCanvas.width || window.innerWidth),
+        y: -18 - Math.random() * 30,
+        size: pType === 'sparkle' ? (6 + Math.random() * 6) : (pType === 'ball' ? (14 + Math.random() * 11) : (16 + Math.random() * 13)),
+        speedY: pType === 'sparkle' ? (0.8 + Math.random() * 0.9) : (pType === 'ball' ? (1.0 + Math.random() * 1.2) : (1.1 + Math.random() * 1.4)),
+        speedX: -1.2 + Math.random() * 2.4,
+        swayPhase: Math.random() * Math.PI * 2,
+        rotation: Math.random() * 360,
+        rotSpeed: -1.6 + Math.random() * 3.2,
+        isBlush: isBlush,
+        color: pType === 'sparkle' ? '#ffd700' : (isBlush ? '#e27387' : '#9c1c28'),
+        color2: pType === 'sparkle' ? '#fff3a8' : (isBlush ? '#f8bbd0' : '#c2273b'),
+        colorLight: isBlush ? '#ffe4e9' : '#ef9a9a',
+        colorDark: isBlush ? '#ad1457' : '#6a0a14',
+        colorEdge: pType === 'sparkle' ? '#ffffff' : (isBlush ? '#ffb6c1' : 'rgba(232, 200, 120, 0.7)'),
+        opacity: pType === 'sparkle' ? 0.95 : (0.88 + Math.random() * 0.1),
+        twinklePhase: Math.random() * Math.PI * 2
+      });
+    }
+
+    if (!petalAnimId) {
+      animatePetals();
+    }
+  }, 2400);
+
+  // 2. Gentle floating blessing badge rising from the button every 4.8 seconds
+  startFloatingBlessingTags();
+}
+
+function startFloatingBlessingTags() {
+  if (ambientBlessingTimer) return;
+  const BLESSINGS = ['Mabrook! 🌸', 'BarakAllah! ✨', 'Ameen! 🤲', 'Shahid & Iqra 💖', 'Mubarak! 🎉'];
+  let bIdx = 0;
+
+  ambientBlessingTimer = setInterval(() => {
+    if (document.hidden) return;
+    const mabrookBtn = document.getElementById('mabrookBtn');
+    if (!mabrookBtn) return;
+
+    spawnFloatingBadge(BLESSINGS[bIdx % BLESSINGS.length], mabrookBtn);
+    bIdx++;
+  }, 4800);
+}
+
+function spawnFloatingBadge(text, targetEl) {
+  try {
+    const badge = document.createElement('div');
+    badge.className = 'ambient-floating-badge';
+    badge.innerText = text;
+
+    const rect = targetEl.getBoundingClientRect();
+    badge.style.left = `${rect.left + rect.width / 2}px`;
+    badge.style.top = `${rect.top - 10}px`;
+
+    document.body.appendChild(badge);
+    setTimeout(() => {
+      badge.remove();
+    }, 2800);
+  } catch (err) {}
 }
 
 function triggerMabrookShower() {
   playCelebrationChime();
   
-  // Spawn 65 falling petals
+  // Grand festive burst shower with both realistic rose petals, 3D blossom balls & golden stars
   for (let i = 0; i < 65; i++) {
+    const r = Math.random();
+    let pType;
+    if (r < 0.24) pType = 'sparkle';
+    else if (r < 0.62) pType = 'petal';
+    else pType = 'ball';
+
+    const isBlush = Math.random() < 0.52;
     petals.push({
-      x: Math.random() * petalCanvas.width,
+      type: pType,
+      x: Math.random() * (petalCanvas.width || window.innerWidth),
       y: -20 - Math.random() * 200,
-      size: 14 + Math.random() * 16,
-      speedY: 2.5 + Math.random() * 3.5,
-      speedX: -1.5 + Math.random() * 3,
+      size: pType === 'sparkle' ? (7 + Math.random() * 8) : (pType === 'ball' ? (15 + Math.random() * 12) : (18 + Math.random() * 14)),
+      speedY: 2.2 + Math.random() * 3.4,
+      speedX: -2.0 + Math.random() * 4.0,
+      swayPhase: Math.random() * Math.PI * 2,
       rotation: Math.random() * 360,
-      rotSpeed: -2 + Math.random() * 4,
-      color: Math.random() > 0.4 ? '#e63946' : (Math.random() > 0.5 ? '#f4a261' : '#e76f51'),
-      opacity: 0.95
+      rotSpeed: -2.6 + Math.random() * 5.2,
+      isBlush: isBlush,
+      color: pType === 'sparkle' ? '#ffd700' : (isBlush ? '#e27387' : '#9c1c28'),
+      color2: pType === 'sparkle' ? '#fff3a8' : (isBlush ? '#f8bbd0' : '#c2273b'),
+      colorLight: isBlush ? '#ffe4e9' : '#ef9a9a',
+      colorDark: isBlush ? '#ad1457' : '#6a0a14',
+      colorEdge: pType === 'sparkle' ? '#ffffff' : (isBlush ? '#ffb6c1' : 'rgba(232, 200, 120, 0.7)'),
+      opacity: 0.95,
+      twinklePhase: Math.random() * Math.PI * 2
     });
   }
 
@@ -510,24 +759,79 @@ function animatePetals() {
   for (let i = petals.length - 1; i >= 0; i--) {
     const p = petals[i];
     p.y += p.speedY;
-    p.x += Math.sin(p.y * 0.02) * p.speedX;
+    p.x += Math.sin(p.y * 0.015 + (p.swayPhase || 0)) * p.speedX;
     p.rotation += p.rotSpeed;
+    if (p.twinklePhase !== undefined) p.twinklePhase += 0.08;
 
     petalCtx.save();
     petalCtx.translate(p.x, p.y);
     petalCtx.rotate((p.rotation * Math.PI) / 180);
-    petalCtx.fillStyle = p.color;
-    petalCtx.globalAlpha = p.opacity;
 
-    // Draw realistic petal curve
-    petalCtx.beginPath();
-    petalCtx.moveTo(0, 0);
-    petalCtx.bezierCurveTo(-p.size / 2, -p.size / 2, -p.size / 2, p.size / 2, 0, p.size);
-    petalCtx.bezierCurveTo(p.size / 2, p.size / 2, p.size / 2, -p.size / 2, 0, 0);
-    petalCtx.fill();
+    if (p.type === 'sparkle') {
+      // 1. Royal 4-Point Golden Diamond Sparkle Star (✦)
+      const tw = Math.sin(p.twinklePhase || 0);
+      const alpha = Math.max(0.25, p.opacity * (0.7 + 0.3 * tw));
+      petalCtx.globalAlpha = alpha;
+      petalCtx.fillStyle = p.color;
+      petalCtx.shadowColor = '#ffd700';
+      petalCtx.shadowBlur = 7;
+      const s = p.size;
+      petalCtx.beginPath();
+      petalCtx.moveTo(0, -s);
+      petalCtx.quadraticCurveTo(0, 0, s * 0.7, 0);
+      petalCtx.quadraticCurveTo(0, 0, 0, s);
+      petalCtx.quadraticCurveTo(0, 0, -s * 0.7, 0);
+      petalCtx.quadraticCurveTo(0, 0, 0, -s);
+      petalCtx.fill();
+    } else if (p.type === 'ball') {
+      // 2. Luminous 3D Blossom Ball / Pearl Orb (user's screenshot)
+      petalCtx.globalAlpha = p.opacity;
+      const bw = p.size * 0.65;
+      const bh = p.size;
+      const grad = petalCtx.createRadialGradient(-bw * 0.25, -bh * 0.25, 1, 0, 0, bh * 0.85);
+      grad.addColorStop(0, '#ffebee');
+      grad.addColorStop(0.3, p.color2 || '#f4a4b2');
+      grad.addColorStop(0.75, p.color || '#e27387');
+      grad.addColorStop(1, p.colorDark || '#880e4f');
+      petalCtx.fillStyle = grad;
+      petalCtx.beginPath();
+      petalCtx.moveTo(0, -bh * 0.55);
+      petalCtx.bezierCurveTo(bw * 1.1, -bh * 0.35, bw * 0.9, bh * 0.35, 0, bh * 0.55);
+      petalCtx.bezierCurveTo(-bw * 0.9, bh * 0.35, -bw * 1.1, -bh * 0.35, 0, -bh * 0.55);
+      petalCtx.fill();
+    } else {
+      // 3. Authentic Curled Natural Rose Petal (with soft top notch, curved lobes, and delicate vein)
+      petalCtx.globalAlpha = p.opacity;
+      const pw = p.size * 0.8;
+      const ph = p.size * 1.12;
+
+      const petalGrad = petalCtx.createLinearGradient(0, -ph * 0.5, 0, ph * 0.55);
+      petalGrad.addColorStop(0, p.colorLight || '#ffcdd2');
+      petalGrad.addColorStop(0.28, p.color || '#c2185b');
+      petalGrad.addColorStop(0.85, p.colorDark || '#700914');
+      petalGrad.addColorStop(1, '#3e040a');
+      petalCtx.fillStyle = petalGrad;
+
+      petalCtx.beginPath();
+      petalCtx.moveTo(0, -ph * 0.38);
+      petalCtx.bezierCurveTo(pw * 0.6, -ph * 0.6, pw * 1.25, -ph * 0.12, pw * 0.82, ph * 0.22);
+      petalCtx.bezierCurveTo(pw * 0.45, ph * 0.44, pw * 0.18, ph * 0.54, 0, ph * 0.58);
+      petalCtx.bezierCurveTo(-pw * 0.18, ph * 0.54, -pw * 0.45, ph * 0.44, -pw * 0.82, ph * 0.22);
+      petalCtx.bezierCurveTo(-pw * 1.25, -ph * 0.12, -pw * 0.6, -ph * 0.6, 0, -ph * 0.38);
+      petalCtx.fill();
+
+      // Soft natural central vein highlight
+      petalCtx.strokeStyle = 'rgba(255, 235, 240, 0.32)';
+      petalCtx.lineWidth = 1;
+      petalCtx.beginPath();
+      petalCtx.moveTo(0, ph * 0.5);
+      petalCtx.quadraticCurveTo(pw * 0.08, 0, 0, -ph * 0.22);
+      petalCtx.stroke();
+    }
+
     petalCtx.restore();
 
-    if (p.y > petalCanvas.height + 50) {
+    if (p.y > petalCanvas.height + 60) {
       petals.splice(i, 1);
     }
   }
@@ -543,64 +847,133 @@ function animatePetals() {
 /* ==========================================================================
    4. AMBIENT AUDIO PLAYLIST SYNTHESIZER
    ========================================================================== */
-let audioCtx = null;
-let masterGain = null;
-let currentTrack = null;
-let activeOscillators = [];
+let isMusicPlaying = false;
+let currentTrackName = 'oud';
 
 function initAudioPlaylist() {
   const toggleBtn = document.getElementById('audioToggleBtn');
+  const menuBtn = document.getElementById('audioMenuBtn');
   const playlistMenu = document.getElementById('audioPlaylistMenu');
   const trackOptions = document.querySelectorAll('.track-option');
+  const bgAudio = document.getElementById('weddingBgAudio');
 
-  if (toggleBtn && playlistMenu) {
+  const TRACKS = {
+    oud: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Oud_music_by_Andy_R._Jordan_1V2_long.mp3',
+    nasheed: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Oud_music_by_Andy_R._Jordan_2v2.mp3',
+    acoustic: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Oud_music_by_Andy_R._Jordan_1V2_short.mp3'
+  };
+
+  function playMusic(track) {
+    if (track) currentTrackName = track;
+    const selectedTrack = track || currentTrackName || 'oud';
+
+    if (bgAudio) {
+      if (TRACKS[selectedTrack] && bgAudio.src !== TRACKS[selectedTrack]) {
+        bgAudio.src = TRACKS[selectedTrack];
+      }
+      bgAudio.volume = 0.55;
+      const promise = bgAudio.play();
+      if (promise !== undefined) {
+        promise.then(() => {
+          isMusicPlaying = true;
+          updateAudioPill(true, selectedTrack);
+        }).catch(() => {
+          // If browser blocks HTML5 audio or CORS/offline, fallback to melodic synthesizer
+          playSynthTrack(selectedTrack);
+          isMusicPlaying = true;
+          updateAudioPill(true, selectedTrack);
+        });
+      }
+    } else {
+      playSynthTrack(selectedTrack);
+      isMusicPlaying = true;
+      updateAudioPill(true, selectedTrack);
+    }
+  }
+
+  function pauseMusic() {
+    if (bgAudio) {
+      try { bgAudio.pause(); } catch(e){}
+    }
+    stopSynthTrack();
+    isMusicPlaying = false;
+    updateAudioPill(false, 'mute');
+  }
+
+  function toggleMusic() {
+    if (isMusicPlaying) {
+      pauseMusic();
+    } else {
+      playMusic(currentTrackName);
+    }
+  }
+
+  // 1. Direct 1-Tap on the Pill toggles Play / Pause directly!
+  if (toggleBtn) {
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      playlistMenu.classList.toggle('active');
-    });
-
-    document.addEventListener('click', () => {
-      playlistMenu.classList.remove('active');
-    });
-
-    trackOptions.forEach(opt => {
-      opt.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const track = opt.dataset.track;
-        trackOptions.forEach(o => o.classList.remove('active'));
-        opt.classList.add('active');
-        playlistMenu.classList.remove('active');
-
-        if (track === 'mute') {
-          stopAmbientTrack();
-        } else {
-          playAmbientTrack(track);
-        }
-      });
+      toggleMusic();
     });
   }
+
+  // 2. Click on the Arrow button opens the melody menu
+  if (menuBtn) {
+    menuBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (playlistMenu) playlistMenu.classList.toggle('active');
+    });
+  }
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (playlistMenu && !playlistMenu.contains(e.target) && e.target !== menuBtn) {
+      playlistMenu.classList.remove('active');
+    }
+  });
+
+  // 3. Track selection in menu
+  trackOptions.forEach(opt => {
+    opt.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const track = opt.dataset.track;
+      trackOptions.forEach(o => o.classList.remove('active'));
+      opt.classList.add('active');
+      if (playlistMenu) playlistMenu.classList.remove('active');
+
+      if (track === 'mute') {
+        pauseMusic();
+      } else {
+        stopSynthTrack();
+        playMusic(track);
+      }
+    });
+  });
+
+  // Make globally available
+  window.playAmbientTrack = playMusic;
+  window.stopAmbientTrack = pauseMusic;
 }
 
-function playAmbientTrack(type) {
+function playSynthTrack(type) {
   try {
     const AudioContext = window.AudioContext || window.webkitAudioContext;
     if (!audioCtx) audioCtx = new AudioContext();
     if (audioCtx.state === 'suspended') audioCtx.resume();
 
-    stopAmbientTrack();
+    stopSynthTrack();
 
     masterGain = audioCtx.createGain();
     masterGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-    masterGain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 2.5);
+    masterGain.gain.exponentialRampToValueAtTime(0.08, audioCtx.currentTime + 1.5);
     masterGain.connect(audioCtx.destination);
 
     let frequencies = [];
     if (type === 'oud') {
-      frequencies = [146.83, 220.00, 293.66, 349.23, 440.00]; // Arabic Bayati Maqam chords
+      frequencies = [146.83, 220.00, 293.66, 349.23, 440.00];
     } else if (type === 'nasheed') {
-      frequencies = [174.61, 261.63, 329.63, 392.00, 523.25]; // Uplifting Spiritual Harmony
+      frequencies = [174.61, 261.63, 329.63, 392.00, 523.25];
     } else {
-      frequencies = [130.81, 196.00, 261.63, 329.63, 392.00]; // Soft Meditative Strings
+      frequencies = [130.81, 196.00, 261.63, 329.63, 392.00];
     }
 
     activeOscillators = frequencies.map((freq, index) => {
@@ -617,31 +990,28 @@ function playAmbientTrack(type) {
       lfo.connect(osc.frequency);
       lfo.start();
 
-      oscGain.gain.value = 0.14 / frequencies.length;
+      oscGain.gain.value = 0.12 / frequencies.length;
       osc.connect(oscGain);
       oscGain.connect(masterGain);
       osc.start();
       return osc;
     });
-
-    currentTrack = type;
-    updateAudioPill(true, type);
   } catch (e) {
-    console.log("Audio waiting for interaction:", e);
+    console.log("Synth audio waiting:", e);
   }
 }
 
-function stopAmbientTrack() {
+function stopSynthTrack() {
   if (masterGain && audioCtx) {
-    masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.4);
+    try {
+      masterGain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 0.3);
+    } catch(e){}
     setTimeout(() => {
       activeOscillators.forEach(osc => {
         try { osc.stop(); } catch(e){}
       });
       activeOscillators = [];
-      currentTrack = null;
-      updateAudioPill(false, 'mute');
-    }, 450);
+    }, 350);
   }
 }
 
@@ -649,17 +1019,22 @@ function updateAudioPill(isPlaying, track) {
   const toggleBtn = document.getElementById('audioToggleBtn');
   const label = document.getElementById('audioLabel');
   const icon = document.getElementById('audioIcon');
+  const wave = document.getElementById('audioWave');
 
   if (isPlaying) {
     toggleBtn?.classList.remove('muted');
+    toggleBtn?.classList.add('playing');
+    if (wave) wave.classList.add('active');
     if (icon) icon.className = 'fa-solid fa-volume-high';
     if (label) {
-      if (track === 'oud') label.innerText = "Oud & Nay";
-      else if (track === 'nasheed') label.innerText = "Nasheed";
-      else label.innerText = "Acoustic";
+      if (track === 'nasheed') label.innerText = "Nasheed";
+      else if (track === 'acoustic') label.innerText = "Acoustic";
+      else label.innerText = "Oud & Nay";
     }
   } else {
     toggleBtn?.classList.add('muted');
+    toggleBtn?.classList.remove('playing');
+    if (wave) wave.classList.remove('active');
     if (icon) icon.className = 'fa-solid fa-volume-xmark';
     if (label) label.innerText = "Muted";
   }
@@ -735,6 +1110,27 @@ function setLanguage(lang) {
       el.innerText = dict[key];
     }
   });
+
+  // Sync mobile drawer chips
+  const langChips = document.querySelectorAll('.mobile-lang-chip');
+  langChips.forEach(chip => {
+    if (chip.dataset.lang === lang) chip.classList.add('active');
+    else chip.classList.remove('active');
+  });
+
+  // Sync desktop dropdown items
+  const desktopItems = document.querySelectorAll('.lang-item');
+  desktopItems.forEach(item => {
+    if (item.dataset.lang === lang) item.classList.add('active');
+    else item.classList.remove('active');
+  });
+
+  const currentLangLabel = document.getElementById('currentLangLabel');
+  if (currentLangLabel) {
+    if (lang === 'en') currentLangLabel.innerText = "English";
+    else if (lang === 'ur') currentLangLabel.innerText = "اردو";
+    else currentLangLabel.innerText = "हिंदी";
+  }
 }
 
 /* ==========================================================================
@@ -750,19 +1146,24 @@ function initPrintCard() {
 }
 
 /* ==========================================================================
-   7. COUNTDOWN TIMER (November 25, 2026)
+   7. LIVE REAL-TIME COUNTDOWN TIMER (Live Counting to 25th Nov 2026 - IST)
    ========================================================================== */
 function initCountdown() {
   const daysEl = document.getElementById('days');
   const hoursEl = document.getElementById('hours');
   const minsEl = document.getElementById('minutes');
   const secsEl = document.getElementById('seconds');
+  const targetTitleEl = document.getElementById('countdownTargetEvent');
+
+  // Indian Standard Time (IST): Sacred Nikkah & Wedding on 25 November 2026, 17:30 IST (+05:30)
+  const targetDateIST = new Date("2026-11-25T17:30:00+05:30").getTime();
 
   function updateTimer() {
     const now = new Date().getTime();
-    const distance = WEDDING_DATE - now;
+    const distance = targetDateIST - now;
 
     if (distance <= 0) {
+      if (targetTitleEl) targetTitleEl.innerText = "ALHAMDULILLAH! THE SACRED WEDDING HAS ARRIVED";
       if (daysEl) daysEl.innerText = "00";
       if (hoursEl) hoursEl.innerText = "00";
       if (minsEl) minsEl.innerText = "00";
@@ -771,8 +1172,8 @@ function initCountdown() {
     }
 
     const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60));
-    const minutes = Math.floor((distance % (1000 * 60)) / (1000 * 60));
+    const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
     if (daysEl) daysEl.innerText = String(days).padStart(2, '0');
@@ -786,21 +1187,35 @@ function initCountdown() {
 }
 
 /* ==========================================================================
-   8. CALENDAR INTEGRATION (November 25 & 27, 2026)
+   8. CALENDAR INTEGRATION (All 4 Events: 23, 24, 25 & 27 Nov 2026)
    ========================================================================== */
 window.addToCalendar = function(eventType) {
   const events = {
+    mehndi: {
+      title: "Mayun & Mehndi: Shahid & Iqra (23rd Nov)",
+      description: "Celebrating the auspicious Mayun & Mehndi henna ceremony of Shahid Shaikh & Iqra Shaikh.",
+      location: "Shaikh Residence & Courtyard, Sanjay Nagar, Mumbra, Thane, Maharashtra 400612",
+      start: "20261123T190000",
+      end: "20261123T233000"
+    },
+    haldi: {
+      title: "Haldi & Ubtan Ceremony: Shahid & Iqra (24th Nov)",
+      description: "Auspicious Haldi & Ubtan ceremony blessing Shahid Shaikh & Iqra Shaikh.",
+      location: "Shaikh Villa Lawn, Friends Colony, Near Sahara Hotel, Kurla West, Mumbai 400070",
+      start: "20261124T160000",
+      end: "20261124T200000"
+    },
     nikkah: {
-      title: "Wedding Ceremony of Shahid & Iqra (25th Nov)",
-      description: "Celebrating the sacred Wedding & Nikkah of Shahid Shaikh & Iqra Shaikh.",
-      location: "Kinjal Wedding Lawn, Babaji Patil Wadi, Sanjay Nagar, Mumbra, Thane, Maharashtra 400612",
+      title: "Wedding Ceremony & Nikkah: Shahid & Iqra (25th Nov)",
+      description: "Sacred Nikkah covenant at Maghrib & Barat banquet of Shahid Shaikh & Iqra Shaikh.",
+      location: "Kinjal Wedding Lawn, Babaji Patil Wadi, Opp. MEK Company, Sanjay Nagar, Mumbra, Thane, Maharashtra 400612",
       start: "20261125T173000",
-      end: "20261125T230000"
+      end: "20261125T233000"
     },
     walima: {
-      title: "Dawat-e-Walima: Shahid & Iqra (27th Nov)",
-      description: "Sunnah Walima feast hosted by Mr. Amiruddin Shaikh & Family.",
-      location: "Goawala Compound, LBS Marg, Near Sahara Hotel, Kurla West, Mumbai 400070",
+      title: "Grand Wedding Reception (Dawat-e-Walima): Shahid & Iqra (27th Nov)",
+      description: "Sunnah Walima banquet hosted by Mr. Amiruddin Shaikh & Family at Gazebo Marriage Hall.",
+      location: "Gazebo Marriage Hall, Goawala Compound, LBS Marg, Near Sahara Hotel, Friends Colony, Kurla West, Kurla, Mumbai 400070",
       start: "20261127T200000",
       end: "20261127T235900"
     }
@@ -815,67 +1230,500 @@ window.addToCalendar = function(eventType) {
 const globalCalBtn = document.getElementById('addToCalGlobalBtn');
 if (globalCalBtn) {
   globalCalBtn.addEventListener('click', () => {
-    window.addToCalendar('nikkah');
+    const now = new Date().getTime();
+    const nextEv = WEDDING_EVENTS.find(ev => new Date(ev.date).getTime() > now) || WEDDING_EVENTS[0];
+    window.addToCalendar(nextEv.id);
   });
 }
 
 /* ==========================================================================
    9. DIGITAL DUA GUESTBOOK & SUBMISSION
    ========================================================================== */
-function initGuestbook() {
-  const feed = document.getElementById('guestbookFeed');
-  const duaForm = document.getElementById('duaForm');
+let currentGuestbookFilter = 'all';
+let currentGuestbookSearch = '';
 
-  if (feed) {
-    const storedDuas = JSON.parse(localStorage.getItem('wedding_duas') || '[]');
-    const allDuas = [...storedDuas, ...INITIAL_DUAS];
-    feed.innerHTML = '';
-    allDuas.forEach(item => {
-      feed.appendChild(createDuaElement(item));
+function initGuestbook() {
+  const duaForm = document.getElementById('duaForm');
+  const relationInput = document.getElementById('duaRelationSide');
+  const msgInput = document.getElementById('duaTextMsg');
+  const toast = document.getElementById('ameenToast');
+  const searchInput = document.getElementById('guestbookSearchInput');
+  const searchClearBtn = document.getElementById('searchClearBtn');
+  const filterTabs = document.querySelectorAll('#guestbookFilterTabs .feed-filter-chip');
+
+  // Search input live search
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      currentGuestbookSearch = e.target.value.trim().toLowerCase();
+      if (searchClearBtn) {
+        searchClearBtn.style.display = currentGuestbookSearch ? 'flex' : 'none';
+      }
+      renderGuestbook();
     });
   }
 
+  // Clear search button
+  if (searchClearBtn) {
+    searchClearBtn.addEventListener('click', () => {
+      if (searchInput) searchInput.value = '';
+      currentGuestbookSearch = '';
+      searchClearBtn.style.display = 'none';
+      renderGuestbook();
+    });
+  }
+
+  // Filter tabs (All, Groom, Bride, Friends)
+  filterTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      filterTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      currentGuestbookFilter = tab.dataset.filter || 'all';
+      renderGuestbook();
+    });
+  });
+
+  // Clear all / Reset guestbook button
+  const clearFeedBtn = document.getElementById('clearAllDuasBtn');
+  if (clearFeedBtn) {
+    clearFeedBtn.addEventListener('click', () => {
+      if (confirm('Are you sure you want to clear all test messages from the guestbook? Real family blessings can be posted below.')) {
+        localStorage.removeItem('wedding_duas');
+        renderGuestbook();
+      }
+    });
+  }
+
+  // Trigger test verification email button for Shahid & Iqra
+  const testMailBtn = document.getElementById('btnTestMailTrigger');
+  if (testMailBtn) {
+    testMailBtn.addEventListener('click', () => {
+      const origText = testMailBtn.innerHTML;
+      testMailBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending Test Notice...';
+      
+      const testSubject = "💌 Test Activation Notice — Shahid & Iqra Wedding Invitation";
+      
+      // Dispatch Form 1 (Iqra)
+      const nf1 = document.getElementById('nativeMailForm');
+      if (nf1) {
+        const sub1 = document.getElementById('nativeMailSubject');
+        const g1 = document.getElementById('nativeMailGuest');
+        const s1 = document.getElementById('nativeMailSide');
+        const m1 = document.getElementById('nativeMailMsg');
+        const d1 = document.getElementById('nativeMailDate');
+        if (sub1) sub1.value = testSubject;
+        if (g1) g1.value = "Shaikh Shahid & Shaikh Iqra";
+        if (s1) s1.value = "Wedding Couple Test Verification";
+        if (m1) m1.value = "Assalamu Alaikum! This is a test email verification for your wedding invitation guestbook. Please ensure this sender is marked as Not Spam.";
+        if (d1) d1.value = new Date().toLocaleDateString('en-US');
+        try { nf1.submit(); } catch(e){}
+      }
+
+      // Dispatch Form 2 (Shahid)
+      const nf2 = document.getElementById('nativeMailFormShahid');
+      if (nf2) {
+        const sub2 = document.getElementById('nativeMailSubjectShahid');
+        const g2 = document.getElementById('nativeMailGuestShahid');
+        const s2 = document.getElementById('nativeMailSideShahid');
+        const m2 = document.getElementById('nativeMailMsgShahid');
+        const d2 = document.getElementById('nativeMailDateShahid');
+        if (sub2) sub2.value = testSubject;
+        if (g2) g2.value = "Shaikh Shahid & Shaikh Iqra";
+        if (s2) s2.value = "Wedding Couple Test Verification";
+        if (m2) m2.value = "Assalamu Alaikum! This is a test email verification for your wedding invitation guestbook. Please ensure this sender is marked as Not Spam.";
+        if (d2) d2.value = new Date().toLocaleDateString('en-US');
+        setTimeout(() => { try { nf2.submit(); } catch(e){} }, 300);
+      }
+
+      // Also trigger background fetch
+      try {
+        fetch('https://formsubmit.co/ajax/sk.iqra1710@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: testSubject,
+            _cc: 'shaikshahid570@gmail.com',
+            email: 'blessings@shahid-iqra-wedding.com',
+            _template: 'table',
+            Status: 'Test Activation Verification',
+            Notice: 'Please activate FormSubmit by clicking Activate Form in your email.'
+          })
+        }).catch(() => {});
+
+        fetch('https://formsubmit.co/ajax/shaikshahid570@gmail.com', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+          body: JSON.stringify({
+            _subject: testSubject,
+            _cc: 'sk.iqra1710@gmail.com',
+            email: 'blessings@shahid-iqra-wedding.com',
+            _template: 'table',
+            Status: 'Test Activation Verification',
+            Notice: 'Please activate FormSubmit by clicking Activate Form in your email.'
+          })
+        }).catch(() => {});
+      } catch(e) {}
+
+      setTimeout(() => {
+        testMailBtn.innerHTML = '<i class="fa-solid fa-check"></i> Verification Sent!';
+        alert("Verification notification dispatched to sk.iqra1710@gmail.com and shaikshahid570@gmail.com!\n\nIMPORTANT FIRST-TIME STEP:\nFormSubmit sends a one-time activation email. Please check your Gmail Inbox AND Spam/Promotions folder for an email from 'FormSubmit' with subject 'Action Required: Activate your FormSubmit endpoint' and click 'Activate Form'. Once activated, all future wedding blessings will arrive in your inboxes instantly!");
+        setTimeout(() => { testMailBtn.innerHTML = origText; }, 4000);
+      }, 1000);
+    });
+  }
+
+  renderGuestbook();
+
+  // Form submit with Celebration Petal Shower & Ameen confirmation
   if (duaForm) {
     duaForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const sender = document.getElementById('duaSenderName').value.trim();
-      const msg = document.getElementById('duaTextMsg').value.trim();
+      const senderInput = document.getElementById('duaSenderName');
+      const sender = senderInput ? senderInput.value.trim() : '';
+      const side = relationInput ? relationInput.value : 'groom';
+      const msg = msgInput ? msgInput.value.trim() : '';
 
       if (sender && msg) {
-        addDuaToFeed({
-          name: sender,
-          arabic: "مَا شَاءَ اللَّهُ تَبَارَكَ اللَّهُ",
-          message: msg,
-          date: "Just now"
+        const currentDate = new Date().toLocaleDateString('en-US', {
+          month: 'long',
+          day: 'numeric',
+          year: 'numeric'
         });
+
+        addDuaToFeed({
+          id: 'dua_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+          name: sender,
+          side: side,
+          message: msg,
+          date: currentDate
+        });
+
+        // Send instant notification email to sk.iqra1710@gmail.com & shaikshahid570@gmail.com
+        const sideTitle = side === 'groom' ? "Groom's Family / Friends (Shaikh Shahid)" : (side === 'bride' ? "Bride's Family / Friends (Shaikh Iqra)" : "Mutual Friends & Both Families");
+        const mailSubject = `💌 New Wedding Blessing from ${sender} (${side === 'groom' ? "Groom's Side" : side === 'bride' ? "Bride's Side" : "Mutual Friends"}) — Shahid & Iqra Wedding`;
+        
+        // 1. Submit native hidden form to Iqra (CC Shahid)
+        const nativeForm = document.getElementById('nativeMailForm');
+        if (nativeForm) {
+          const subEl = document.getElementById('nativeMailSubject');
+          const guestEl = document.getElementById('nativeMailGuest');
+          const sideEl = document.getElementById('nativeMailSide');
+          const msgEl = document.getElementById('nativeMailMsg');
+          const dateEl = document.getElementById('nativeMailDate');
+          if (subEl) subEl.value = mailSubject;
+          if (guestEl) guestEl.value = sender;
+          if (sideEl) sideEl.value = sideTitle;
+          if (msgEl) msgEl.value = msg;
+          if (dateEl) dateEl.value = currentDate;
+          try {
+            nativeForm.submit();
+          } catch (e) {}
+        }
+
+        // 2. Submit native hidden form to Shahid (CC Iqra)
+        const nativeFormShahid = document.getElementById('nativeMailFormShahid');
+        if (nativeFormShahid) {
+          const subElS = document.getElementById('nativeMailSubjectShahid');
+          const guestElS = document.getElementById('nativeMailGuestShahid');
+          const sideElS = document.getElementById('nativeMailSideShahid');
+          const msgElS = document.getElementById('nativeMailMsgShahid');
+          const dateElS = document.getElementById('nativeMailDateShahid');
+          if (subElS) subElS.value = mailSubject;
+          if (guestElS) guestElS.value = sender;
+          if (sideElS) sideElS.value = sideTitle;
+          if (msgElS) msgElS.value = msg;
+          if (dateElS) dateElS.value = currentDate;
+          try {
+            setTimeout(() => {
+              nativeFormShahid.submit();
+            }, 300);
+          } catch (e) {}
+        }
+
+        // 3. Complementary background fetch
+        try {
+          fetch('https://formsubmit.co/ajax/sk.iqra1710@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              _subject: mailSubject,
+              _cc: 'shaikshahid570@gmail.com',
+              email: 'blessings@shahid-iqra-wedding.com',
+              _template: 'table',
+              Guest_Name: sender,
+              Invited_With: sideTitle,
+              Dua_and_Blessing: msg,
+              Submission_Date: currentDate,
+              Wedding: 'Shaikh Shahid & Shaikh Iqra — 25th November 2026'
+            })
+          }).catch(() => {});
+
+          fetch('https://formsubmit.co/ajax/shaikshahid570@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              _subject: mailSubject,
+              _cc: 'sk.iqra1710@gmail.com',
+              email: 'blessings@shahid-iqra-wedding.com',
+              _template: 'table',
+              Guest_Name: sender,
+              Invited_With: sideTitle,
+              Dua_and_Blessing: msg,
+              Submission_Date: currentDate,
+              Wedding: 'Shaikh Shahid & Shaikh Iqra — 25th November 2026'
+            })
+          }).catch(() => {});
+        } catch (err) {}
+
+        // Trigger celebratory rose petal shower and chime audio!
+        if (typeof triggerMabrookShower === 'function') {
+          triggerMabrookShower();
+        }
+
+        // Show Ameen Celebration Toast
+        if (toast) {
+          toast.classList.add('show');
+          setTimeout(() => {
+            toast.classList.remove('show');
+          }, 4500);
+        }
+
         duaForm.reset();
-        alert("JazakAllah Khair! Your Dua has been posted to the guestbook.");
+        if (relationInput) relationInput.value = 'groom';
+
+        // Visual confirmation button feedback
+        const submitBtn = duaForm.querySelector('button[type="submit"]');
+        if (submitBtn) {
+          const origHTML = submitBtn.innerHTML;
+          submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Ameen! Dua Posted Live 🤲';
+          submitBtn.style.background = 'linear-gradient(135deg, #1b5e20, #2e7d32)';
+          submitBtn.style.borderColor = '#4caf50';
+          setTimeout(() => {
+            submitBtn.innerHTML = origHTML;
+            submitBtn.style.background = '';
+            submitBtn.style.borderColor = '';
+          }, 4000);
+        }
       }
     });
   }
 }
 
+function renderGuestbook() {
+  const feed = document.getElementById('guestbookFeed');
+  const wrapper = document.getElementById('guestbookFeedWrapper');
+  const controlsBar = document.getElementById('guestbookControlsBar');
+  const scrollHint = document.getElementById('guestbookScrollHint');
+  const countEl = document.getElementById('totalDuaCount');
+  if (!feed) return;
+
+  let storedDuas = JSON.parse(localStorage.getItem('wedding_duas') || '[]');
+
+  // Purge test/gibberish submissions (including "Iq", "bfn", "iqra", "gbu", "test", etc.)
+  storedDuas = storedDuas.filter(item => {
+    const m = (item.message || '').trim().toLowerCase();
+    const n = (item.name || '').trim().toLowerCase();
+    const cleanM = m.replace(/[^a-z0-9]/g, '');
+    const cleanN = n.replace(/[^a-z0-9]/g, '');
+
+    if (cleanM === 'bfn' || cleanM === 'gbu' || cleanM === 'test' || cleanM === 'testing' || cleanM === 'asdf' || cleanM === 'xyz') {
+      return false;
+    }
+    if (cleanM.includes('bfn') || cleanM.includes('gbu')) {
+      return false;
+    }
+    if ((cleanN === 'iq' || cleanN === 'iqra') && (cleanM.length <= 6 || cleanM.includes('bfn') || cleanM.includes('gbu'))) {
+      return false;
+    }
+    if (cleanM.length < 3) {
+      return false;
+    }
+    return true;
+  });
+
+  // Assign persistent IDs to any legacy items lacking one
+  storedDuas.forEach((d, idx) => {
+    if (!d.id) d.id = 'dua_leg_' + idx + '_' + (d.name || '').replace(/\s+/g, '');
+  });
+
+  localStorage.setItem('wedding_duas', JSON.stringify(storedDuas));
+
+  if (countEl) {
+    countEl.innerText = storedDuas.length;
+  }
+
+  feed.innerHTML = '';
+
+  // If no prayers exist at all
+  if (storedDuas.length === 0) {
+    if (controlsBar) controlsBar.style.display = 'none';
+    if (scrollHint) scrollHint.style.display = 'none';
+    if (wrapper) wrapper.classList.remove('has-scroll');
+
+    feed.innerHTML = `
+      <div class="empty-guestbook-state" id="emptyGuestbookNotice">
+        <div class="empty-dua-icon"><i class="fa-solid fa-hands-praying"></i></div>
+        <h4>Digital Dua &amp; Guestbook Wall</h4>
+        <p>No prayers posted yet. Be the first from the family to send your heartfelt prayers and blessings for Shahid &amp; Iqra below — your message will appear here live!</p>
+      </div>
+    `;
+    return;
+  }
+
+  // Show search and filter controls bar when blessings exist
+  if (controlsBar) {
+    controlsBar.style.display = 'flex';
+  }
+
+  // Filter duas by active side filter and search query
+  const filteredDuas = storedDuas.filter(item => {
+    // 1. Side filter
+    if (currentGuestbookFilter !== 'all' && item.side !== currentGuestbookFilter) {
+      return false;
+    }
+    // 2. Search query (matches name, message, or side)
+    if (currentGuestbookSearch) {
+      const name = (item.name || '').toLowerCase();
+      const msg = (item.message || '').toLowerCase();
+      const side = (item.side || '').toLowerCase();
+      if (!name.includes(currentGuestbookSearch) && !msg.includes(currentGuestbookSearch) && !side.includes(currentGuestbookSearch)) {
+        return false;
+      }
+    }
+    return true;
+  });
+
+  // Handle empty search results gracefully
+  if (filteredDuas.length === 0) {
+    if (wrapper) wrapper.classList.remove('has-scroll');
+    if (scrollHint) scrollHint.style.display = 'none';
+
+    feed.innerHTML = `
+      <div class="empty-search-state">
+        <i class="fa-solid fa-filter-circle-xmark"></i>
+        <p>No prayers found matching "<strong>${escapeHtml(currentGuestbookSearch || currentGuestbookFilter)}</strong>".</p>
+        <button type="button" class="btn-clear-filter" id="resetFilterSearchBtn">Show All Prayers</button>
+      </div>
+    `;
+
+    const resetBtn = document.getElementById('resetFilterSearchBtn');
+    if (resetBtn) {
+      resetBtn.addEventListener('click', () => {
+        currentGuestbookSearch = '';
+        currentGuestbookFilter = 'all';
+        const searchInput = document.getElementById('guestbookSearchInput');
+        const clearBtn = document.getElementById('searchClearBtn');
+        if (searchInput) searchInput.value = '';
+        if (clearBtn) clearBtn.style.display = 'none';
+        const filterTabs = document.querySelectorAll('#guestbookFilterTabs .feed-filter-chip');
+        filterTabs.forEach((c, idx) => {
+          if (idx === 0) c.classList.add('active');
+          else c.classList.remove('active');
+        });
+        renderGuestbook();
+      });
+    }
+    return;
+  }
+
+  // Enable scroll after 1-2 rows (more than 2 cards)
+  if (wrapper) {
+    if (filteredDuas.length > 2) {
+      wrapper.classList.add('has-scroll');
+      if (scrollHint) scrollHint.style.display = 'flex';
+    } else {
+      wrapper.classList.remove('has-scroll');
+      if (scrollHint) scrollHint.style.display = 'none';
+    }
+  }
+
+  filteredDuas.forEach(item => {
+    feed.appendChild(createDuaElement(item));
+  });
+}
+
 function createDuaElement(item) {
   const card = document.createElement('div');
   card.className = 'dua-card';
+  card.dataset.id = item.id;
+
+  let sideBadgeHtml = '';
+  if (item.side === 'groom') {
+    sideBadgeHtml = '<span class="dua-side-badge groom"><i class="fa-solid fa-crown"></i> Groom\'s Side</span>';
+  } else if (item.side === 'bride') {
+    sideBadgeHtml = '<span class="dua-side-badge bride"><i class="fa-solid fa-heart"></i> Bride\'s Side</span>';
+  } else if (item.side === 'friends') {
+    sideBadgeHtml = '<span class="dua-side-badge friends"><i class="fa-solid fa-hand-holding-heart"></i> Family Friends</span>';
+  }
+
   card.innerHTML = `
-    <div class="dua-sender">${escapeHtml(item.name)}</div>
+    <div class="dua-header-flex">
+      <div class="dua-sender">${escapeHtml(item.name)}</div>
+      <div class="dua-actions-wrap">
+        ${sideBadgeHtml}
+        <button type="button" class="dua-delete-btn" title="Delete this prayer" aria-label="Delete prayer">
+          <i class="fa-solid fa-trash-can"></i>
+        </button>
+      </div>
+    </div>
     <div class="dua-date">${item.date || 'Recent'}</div>
-    ${item.arabic ? `<div class="dua-arabic-badge">${item.arabic}</div>` : ''}
     <p class="dua-text">"${escapeHtml(item.message)}"</p>
   `;
+
+  const delBtn = card.querySelector('.dua-delete-btn');
+  if (delBtn) {
+    delBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      deleteDuaById(item.id);
+    });
+  }
+
   return card;
 }
 
-function addDuaToFeed(duaObj) {
-  const feed = document.getElementById('guestbookFeed');
-  if (!feed) return;
+function deleteDuaById(id) {
+  let storedDuas = JSON.parse(localStorage.getItem('wedding_duas') || '[]');
+  storedDuas = storedDuas.filter(item => item.id !== id);
+  localStorage.setItem('wedding_duas', JSON.stringify(storedDuas));
+  renderGuestbook();
+}
 
+function addDuaToFeed(duaObj) {
   const storedDuas = JSON.parse(localStorage.getItem('wedding_duas') || '[]');
   storedDuas.unshift(duaObj);
   localStorage.setItem('wedding_duas', JSON.stringify(storedDuas));
 
-  feed.prepend(createDuaElement(duaObj));
+  // Reset search and filter so the user's newly posted Dua is immediately visible at the top
+  currentGuestbookFilter = 'all';
+  currentGuestbookSearch = '';
+  const searchInput = document.getElementById('guestbookSearchInput');
+  const clearBtn = document.getElementById('searchClearBtn');
+  if (searchInput) searchInput.value = '';
+  if (clearBtn) clearBtn.style.display = 'none';
+
+  const filterTabs = document.querySelectorAll('#guestbookFilterTabs .feed-filter-chip');
+  filterTabs.forEach((c, idx) => {
+    if (idx === 0) c.classList.add('active');
+    else c.classList.remove('active');
+  });
+
+  renderGuestbook();
+
+  // Scroll to top of feed wrapper and highlight new card
+  const feed = document.getElementById('guestbookFeed');
+  const firstCard = feed ? feed.querySelector('.dua-card') : null;
+  const wrapper = document.getElementById('guestbookFeedWrapper');
+  if (wrapper) {
+    wrapper.scrollTop = 0;
+  }
+  if (firstCard) {
+    firstCard.classList.add('dua-card-enter');
+  }
 }
 
 function escapeHtml(str) {
@@ -884,31 +1732,99 @@ function escapeHtml(str) {
 }
 
 /* ==========================================================================
-   10. SOCIAL SHARING & COPY LINK
+   10. SOCIAL SHARING & COPY LINK (CORNER BUTTON & NAVBAR)
    ========================================================================== */
 function initShareTools() {
-  const whatsappShareBtn = document.getElementById('shareWhatsAppBtn');
-  const copyBtn = document.getElementById('copyLinkBtn');
-  const copyText = document.getElementById('copyLinkText');
+  const cornerShareBtn = document.getElementById('cornerShareBtn');
+  const cornerSharePopover = document.getElementById('cornerSharePopover');
+  const popoverWhatsAppBtn = document.getElementById('popoverWhatsAppBtn');
+  const popoverCopyBtn = document.getElementById('popoverCopyBtn');
+  const popoverCopyText = document.getElementById('popoverCopyText');
+  const navShareBtn = document.getElementById('navShareBtn');
+  const mobileDrawerShareBtn = document.getElementById('mobileDrawerShareBtn');
 
-  if (whatsappShareBtn) {
-    whatsappShareBtn.addEventListener('click', () => {
-      const shareUrl = window.location.href;
-      const msg = `🌙 *Bismillahir Rahmanir Raheem*%0A%0AWe cordially invite you to celebrate the wedding union of *Shahid Shaikh* (S/o Amiruddin Shaikh) & *Iqra Shaikh* (D/o Mustafa Shaikh).%0A%0A📍 *Shaadi (25 Nov):* Kinjal Wedding Lawn, Mumbra%0A📍 *Walima (27 Nov):* Goawala Compound, Kurla%0A%0AView the invitation here: ${encodeURIComponent(shareUrl)}`;
-      window.open(`https://api.whatsapp.com/send?text=${msg}`, '_blank');
+  const shareUrl = window.location.href;
+  const shareTitle = "Shahid & Iqra's Wedding Celebration Invitation";
+  const whatsappMsg = `🌙 *Bismillahir Rahmanir Raheem*%0A%0AWe cordially invite you to celebrate the wedding festivities of *Shahid Shaikh* (S/o Amiruddin Shaikh) & *Iqra Shaikh* (D/o Mustafa Shaikh):%0A%0A🌿 *Mayun & Mehndi:* Mon, 23 Nov 2026 (07:00 PM)%0A🌼 *Haldi Ceremony:* Tue, 24 Nov 2026 (04:00 PM)%0A💍 *Sacred Nikkah:* Wed, 25 Nov 2026 (05:30 PM) • Kinjal Wedding Lawn, Mumbra%0A👑 *Grand Wedding Reception (Walima):* Fri, 27 Nov 2026 (08:00 PM) • Gazebo Marriage Hall, Kurla West%0A%0A📍 View Digital Invitation Card & RSVP:%0A${encodeURIComponent(shareUrl)}`;
+
+  function openWhatsApp() {
+    window.open(`https://api.whatsapp.com/send?text=${whatsappMsg}`, '_blank');
+    if (cornerSharePopover) cornerSharePopover.classList.remove('active');
+  }
+
+  function copyInviteLink() {
+    navigator.clipboard.writeText(shareUrl).then(() => {
+      if (popoverCopyText) {
+        const orig = popoverCopyText.innerText;
+        popoverCopyText.innerText = "Link Copied! ✓";
+        setTimeout(() => {
+          popoverCopyText.innerText = orig;
+          if (cornerSharePopover) cornerSharePopover.classList.remove('active');
+        }, 2200);
+      }
     });
   }
 
-  if (copyBtn) {
-    copyBtn.addEventListener('click', () => {
-      navigator.clipboard.writeText(window.location.href).then(() => {
-        if (copyText) {
-          copyText.innerText = "Link Copied!";
-          setTimeout(() => {
-            copyText.innerText = "Copy Link";
-          }, 2500);
-        }
+  function handleShareClick(e) {
+    if (e) e.stopPropagation();
+    if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+      navigator.share({
+        title: shareTitle,
+        text: `🌙 Bismillahir Rahmanir Raheem — Shahid & Iqra's Wedding Celebration (Nov 2026)`,
+        url: shareUrl
+      }).catch(() => {
+        if (cornerSharePopover) cornerSharePopover.classList.toggle('active');
       });
+    } else {
+      if (cornerSharePopover) cornerSharePopover.classList.toggle('active');
+    }
+  }
+
+  if (cornerShareBtn) {
+    cornerShareBtn.addEventListener('click', handleShareClick);
+  }
+
+  if (navShareBtn) {
+    navShareBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
+        navigator.share({
+          title: shareTitle,
+          text: `🌙 Bismillahir Rahmanir Raheem — Shahid & Iqra's Wedding Celebration`,
+          url: shareUrl
+        }).catch(() => openWhatsApp());
+      } else {
+        openWhatsApp();
+      }
     });
   }
+
+  if (mobileDrawerShareBtn) {
+    mobileDrawerShareBtn.addEventListener('click', () => {
+      const drawer = document.getElementById('mobileNavDrawer');
+      if (drawer) drawer.classList.remove('open');
+      openWhatsApp();
+    });
+  }
+
+  if (popoverWhatsAppBtn) {
+    popoverWhatsAppBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openWhatsApp();
+    });
+  }
+
+  if (popoverCopyBtn) {
+    popoverCopyBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      copyInviteLink();
+    });
+  }
+
+  // Dismiss popover when clicking anywhere outside
+  document.addEventListener('click', (e) => {
+    if (cornerSharePopover && !cornerSharePopover.contains(e.target) && e.target !== cornerShareBtn && !cornerShareBtn.contains(e.target)) {
+      cornerSharePopover.classList.remove('active');
+    }
+  });
 }
