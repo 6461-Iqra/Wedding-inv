@@ -764,6 +764,9 @@ body.card-opened-state {
 }
 
 body.card-opened-state .outside-bismillah-header {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
   display: none !important;
 }
 
@@ -772,10 +775,10 @@ body.card-opened-state .hero-section {
   top: auto;
   left: auto;
   width: 100%;
-  height: auto;
-  min-height: auto;
-  max-height: none;
-  padding: 30px 15px 70px;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: 0;
+  margin: 0;
   overflow: visible;
   background: transparent;
   z-index: 3;
@@ -783,18 +786,19 @@ body.card-opened-state .hero-section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  box-sizing: border-box;
 }
 
 body.card-opened-state .grand-gatefold-card.open {
   position: relative;
   top: auto;
   left: auto;
-  width: min(1040px, 94vw);
-  height: auto;
-  min-height: 720px;
-  border-radius: var(--radius-arch);
-  border: 2px solid var(--gold-primary);
-  box-shadow: var(--card-shadow);
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  border-radius: 0;
+  border: none;
+  box-shadow: none;
   overflow: visible;
   margin: 0 auto;
 }
@@ -834,23 +838,72 @@ body.card-opened-state .below-card-sections {
 /* Card Inside Content */
 .card-inside-content {
   position: relative;
-  padding: 55px 40px 48px;
+  padding: clamp(85px, 12vh, 110px) clamp(16px, 4vw, 55px) 60px;
   text-align: center;
-  border-radius: var(--radius-arch);
-  background-image: linear-gradient(180deg, rgba(255, 253, 248, 0.90) 0%, rgba(255, 252, 245, 0.85) 45%, rgba(255, 250, 240, 0.92) 100%), url('../images/royal_arch_card_bg.jpg');
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: linear-gradient(180deg, rgba(255, 253, 248, 0.92) 0%, rgba(255, 252, 245, 0.88) 45%, rgba(255, 250, 240, 0.94) 100%), url('../images/royal_arch_card_bg.jpg');
   background-size: cover;
   background-position: center top;
   background-repeat: no-repeat;
   overflow: hidden;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.6s ease 0.3s;
-  box-shadow: inset 0 0 50px rgba(197, 155, 63, 0.18);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.4s;
+  box-shadow: inset 0 0 60px rgba(197, 155, 63, 0.15);
 }
 
 .grand-gatefold-card.open .card-inside-content {
   opacity: 1;
   pointer-events: auto;
+}
+
+/* Sacred Crown Bismillah Inside Card - Crisp High Contrast & Sharp Gold Foil (NO Blur) */
+.card-inside-bismillah {
+  text-align: center;
+  margin-bottom: clamp(20px, 3.2vh, 32px);
+  position: relative;
+  z-index: 5;
+  width: 100%;
+  max-width: 860px;
+  padding: 0 10px;
+  box-sizing: border-box;
+}
+
+.inside-bismillah-art {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: clamp(2.3rem, 6vw, 3.8rem);
+  color: #4a0e17;
+  /* Deep royal burgundy for crisp, vivid contrast on cream */
+  font-weight: 700;
+  line-height: 1.28;
+  margin-bottom: 6px;
+  direction: rtl;
+  /* Sharp gold foil bevel reflection with zero blurry haze */
+  text-shadow:
+    0 1px 0 #dfc07b,
+    0 2px 0 #c59b3f,
+    0 3px 2px rgba(74, 14, 23, 0.28);
+  letter-spacing: 0.5px;
+}
+
+.inside-bismillah-trans {
+  font-family: 'Montserrat', sans-serif;
+  font-size: clamp(0.84rem, 1.8vw, 1rem);
+  color: #52341d;
+  /* Deep warm mahogany / bronze - crisp and clearly legible */
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: 0.8px;
+  margin: 0;
+  line-height: 1.4;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
 }
 
 .foil-shimmer-layer {
@@ -1360,22 +1413,31 @@ body.card-opened-state .below-card-sections {
   transform: scale(1.1);
 }
 
-/* OPENING 3D DOOR ANIMATIONS */
+/* OPENING 3D DOOR ANIMATIONS - Slower, Majestic Royal Swing & Seamless Fade-out */
 .grand-gatefold-card.open .door-left {
-  transform: rotateY(-130deg);
-  box-shadow: 12px 0 40px rgba(0, 0, 0, 0.28);
+  transform: rotateY(-115deg) scale(0.97);
+  opacity: 0;
+  visibility: hidden;
+  box-shadow: none !important;
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease 0.7s, visibility 0.8s ease 1.5s;
   pointer-events: none;
 }
 
 .grand-gatefold-card.open .door-right {
-  transform: rotateY(130deg);
-  box-shadow: -12px 0 40px rgba(0, 0, 0, 0.28);
+  transform: rotateY(115deg) scale(0.97);
+  opacity: 0;
+  visibility: hidden;
+  box-shadow: none !important;
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.8s ease 0.7s, visibility 0.8s ease 1.5s;
   pointer-events: none;
 }
 
 .grand-gatefold-card.open .card-central-seal {
   opacity: 0;
-  transform: translate(-50%, -50%) scale(1.4);
+  visibility: hidden;
+  transform: translate(-50%, -50%) scale(1.35);
+  box-shadow: none !important;
+  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s, visibility 0.6s ease 0.8s;
   pointer-events: none;
 }
 
@@ -1694,36 +1756,18 @@ body.card-opened-state .below-card-sections {
   background: transparent;
   border: none;
   color: var(--text-main);
-  padding: 10px 14px 10px 18px;
+  padding: 10px 22px;
   cursor: pointer;
   font-family: 'Montserrat', sans-serif;
   font-size: 0.88rem;
   font-weight: 700;
   outline: none;
+  border-radius: 50px;
+  transition: all 0.25s ease;
 }
 
-.audio-menu-btn {
-  background: transparent;
-  border: none;
-  border-left: 1px solid rgba(197, 155, 63, 0.3);
-  padding: 10px 14px;
-  cursor: pointer;
-  color: var(--gold-dark);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: color 0.2s, transform 0.2s;
-  outline: none;
-}
-
-.audio-menu-btn:hover {
+.audio-btn:hover {
   color: var(--burgundy-deep);
-  transform: translateY(-1px);
-}
-
-.playlist-arrow {
-  font-size: 0.75rem;
-  transition: transform 0.3s;
 }
 
 .audio-wave {
@@ -2887,6 +2931,16 @@ body.card-opened-state .below-card-sections {
   margin-bottom: 22px;
 }
 
+.dua-bismillah-mini {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.25rem;
+  color: var(--gold-primary);
+  text-shadow: 0 0 10px rgba(197, 155, 63, 0.3);
+  margin-bottom: 4px;
+  direction: rtl;
+  letter-spacing: 0.5px;
+}
+
 .dua-form-header h4 {
   font-family: 'Playfair Display', serif;
   font-size: 1.4rem;
@@ -3119,51 +3173,164 @@ body.card-opened-state .below-card-sections {
   font-style: italic;
 }
 
-/* Ameen Celebration Toast */
-.ameen-toast {
-  position: fixed;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%) translateY(40px);
-  opacity: 0;
-  pointer-events: none;
-  background: rgba(255, 255, 255, 0.96);
-  backdrop-filter: blur(16px);
-  border: 2px solid var(--gold-primary);
-  border-radius: 50px;
-  padding: 12px 24px;
+/* Inline Sent Confirmation & Direct Mail Options (Directly Under Form) */
+.dua-inline-confirmation {
+  margin-top: 22px;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.99), rgba(253, 248, 240, 0.96));
+  border: 1.8px solid var(--gold-primary);
+  border-radius: var(--radius-md);
+  padding: 22px 24px;
+  box-shadow: 0 12px 36px rgba(94, 25, 36, 0.12), 0 0 25px rgba(197, 155, 63, 0.18);
+  animation: inlineFadeInDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes inlineFadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.inline-confirm-bismillah {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+  font-size: 1.25rem;
+  color: var(--gold-primary);
+  text-align: center;
+  direction: rtl;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.inline-confirm-status {
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.inline-confirm-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(46, 125, 50, 0.12);
+  color: #1b5e20;
+  border: 1px solid rgba(46, 125, 50, 0.35);
+  border-radius: 20px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 3px 12px;
+}
+
+.inline-confirm-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.3rem;
+  color: var(--burgundy-deep);
+  text-align: center;
+  margin: 0 0 4px;
+  font-weight: 700;
+}
+
+.inline-confirm-msg {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  text-align: center;
+  margin: 0 0 16px;
+  line-height: 1.5;
+}
+
+.inline-mail-section {
+  background: rgba(197, 155, 63, 0.08);
+  border: 1px solid rgba(197, 155, 63, 0.28);
+  border-radius: var(--radius-sm);
+  padding: 14px 18px;
+}
+
+.inline-mail-prompt {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #8c6d32;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 10px;
   display: flex;
   align-items: center;
-  gap: 14px;
-  box-shadow: 0 12px 35px rgba(94, 25, 36, 0.2), 0 0 20px rgba(197, 155, 63, 0.3);
-  z-index: 9999;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  gap: 6px;
 }
 
-.ameen-toast.show {
-  transform: translateX(-50%) translateY(0);
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.ameen-icon {
-  font-size: 1.6rem;
-}
-
-.ameen-content {
+.inline-mail-buttons {
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.ameen-content strong {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  color: var(--burgundy-deep);
-}
-
-.ameen-content span {
+.inline-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 15px;
+  border-radius: 24px;
   font-size: 0.8rem;
-  color: var(--text-muted);
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+/* Gmail Web 1-Click Button */
+.inline-action-btn.gmail-btn {
+  background: #ea4335;
+  color: #ffffff;
+  border: 1px solid #d33828;
+}
+
+.inline-action-btn.gmail-btn:hover {
+  background: #d33828;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(234, 67, 53, 0.35);
+}
+
+/* Default Mail App Button */
+.inline-action-btn.email-btn {
+  background: linear-gradient(135deg, #c59b3f, #dfc07b);
+  color: #3e040a;
+  border: 1px solid rgba(197, 155, 63, 0.5);
+}
+
+.inline-action-btn.email-btn:hover {
+  background: linear-gradient(135deg, #dfc07b, #c59b3f);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(197, 155, 63, 0.35);
+}
+
+/* WhatsApp Button */
+.inline-action-btn.wa-btn {
+  background: #25d366;
+  color: #ffffff;
+  border: 1px solid #20ba5a;
+}
+
+.inline-action-btn.wa-btn:hover {
+  background: #20ba5a;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 10px rgba(37, 211, 102, 0.35);
+}
+
+/* Copy Dua Button */
+.inline-action-btn.copy-btn {
+  background: rgba(255, 255, 255, 0.95);
+  color: #5e1924;
+  border: 1.2px solid rgba(197, 155, 63, 0.45);
+  font-family: inherit;
+}
+
+.inline-action-btn.copy-btn:hover {
+  background: rgba(197, 155, 63, 0.15);
+  transform: translateY(-1px);
 }
 
 /* Footer */
@@ -3421,8 +3588,18 @@ body.card-opened-state .below-card-sections {
   }
 
   /* Door Typography on Mobile Full Screen */
+  body.card-closed-state .door-left .door-frame-border {
+    padding-right: 32px;
+    padding-left: 10px;
+  }
+
+  body.card-closed-state .door-right .door-frame-border {
+    padding-left: 32px;
+    padding-right: 10px;
+  }
+
   body.card-closed-state .door-role-tag {
-    font-size: clamp(0.68rem, 2.2vw, 0.82rem);
+    font-size: clamp(0.66rem, 2vw, 0.78rem);
     letter-spacing: 2px;
     font-weight: 700;
     margin-bottom: 2px;
@@ -3430,14 +3607,14 @@ body.card-opened-state .below-card-sections {
 
   body.card-closed-state .door-calligraphy-name {
     font-family: 'Great Vibes', 'Alex Brush', cursive;
-    font-size: clamp(2.4rem, 8vw, 3.4rem);
-    line-height: 1.05;
+    font-size: clamp(2rem, 6.5vw, 2.7rem);
+    line-height: 1.1;
   }
 
   body.card-closed-state .door-lineage-sub {
-    font-size: clamp(0.66rem, 2.1vw, 0.82rem);
-    letter-spacing: 0.3px;
-    margin-top: 4px;
+    font-size: clamp(0.62rem, 2vw, 0.76rem);
+    letter-spacing: 0.2px;
+    margin-top: 3px;
     line-height: 1.25;
     text-align: center;
     max-width: 90%;
@@ -3445,17 +3622,17 @@ body.card-opened-state .below-card-sections {
 
   /* Central Seal on Mobile Full Screen */
   body.card-closed-state .card-central-seal {
-    width: clamp(62px, 15vw, 78px);
-    height: clamp(62px, 15vw, 78px);
+    width: clamp(58px, 14vw, 70px);
+    height: clamp(58px, 14vw, 70px);
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
 
   body.card-closed-state .seal-disc {
-    width: clamp(54px, 13.5vw, 70px);
-    height: clamp(54px, 13.5vw, 70px);
-    padding: 6px;
+    width: clamp(50px, 12.5vw, 62px);
+    height: clamp(50px, 12.5vw, 62px);
+    padding: 5px;
   }
 
   body.card-closed-state .seal-monogram-img {
@@ -3464,39 +3641,35 @@ body.card-opened-state .below-card-sections {
     object-fit: contain;
   }
 
-  /* Open State on Mobile — Fade Out Doors Cleanly & Prevent Horizontal Spills */
+  /* Open State on Mobile — Full-Screen Height & Clean Fade */
   .grand-gatefold-card.open {
-    width: 100%;
-    min-height: auto;
-    border-radius: 28px 28px 16px 16px;
-    overflow: hidden !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
   }
 
-  .grand-gatefold-card.open .door-left {
-    transform: rotateY(-105deg) scale(0.92);
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.8s ease, opacity 0.4s ease 0.25s, visibility 0.4s ease 0.65s;
-    pointer-events: none;
-  }
-
+  .grand-gatefold-card.open .door-left,
   .grand-gatefold-card.open .door-right {
-    transform: rotateY(105deg) scale(0.92);
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 0.8s ease, opacity 0.4s ease 0.25s, visibility 0.4s ease 0.65s;
-    pointer-events: none;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    box-shadow: none !important;
   }
 
   body.card-opened-state .hero-section {
-    padding: 20px 12px 45px;
-    min-height: auto;
+    padding: 0 !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
   }
 
   /* Inside Card Content on Mobile */
   .card-inside-content {
-    padding: 28px 14px 25px;
-    border-radius: 26px 26px 14px 14px;
+    padding: clamp(75px, 10vh, 90px) 14px 45px !important;
+    border-radius: 0 !important;
+    min-height: 100vh !important;
+    min-height: 100dvh !important;
   }
 
   .ayah-quote-box {
@@ -3999,56 +4172,56 @@ body.card-opened-state .below-card-sections {
 }
 
 /* Very Small Mobile Screens (<= 360px) */
-@media (max-width: 360px) {
-  body.card-opened-state .grand-gatefold-card.open {
-    width: 100%;
-    min-height: auto;
-  }
+body.card-opened-state .grand-gatefold-card.open {
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+}
 
-  .door-calligraphy-name {
-    font-size: 1.8rem;
-  }
+.door-calligraphy-name {
+  font-size: 1.8rem;
+}
 
-  .door-role-tag {
-    font-size: 0.62rem;
-  }
+.door-role-tag {
+  font-size: 0.62rem;
+}
 
-  .door-lineage-sub {
-    font-size: 0.65rem;
-  }
+.door-lineage-sub {
+  font-size: 0.65rem;
+}
 
-  .card-central-seal {
-    width: 62px;
-    height: 62px;
-  }
+.card-central-seal {
+  width: 62px;
+  height: 62px;
+}
 
-  .seal-disc {
-    width: 55px;
-    height: 55px;
-    padding: 5px;
-  }
+.seal-disc {
+  width: 55px;
+  height: 55px;
+  padding: 5px;
+}
 
-  .seal-monogram-img {
-    width: 84%;
-    height: 84%;
-  }
+.seal-monogram-img {
+  width: 84%;
+  height: 84%;
+}
 
-  .time-slot {
-    min-width: 50px;
-    padding: 6px 2px;
-  }
+.time-slot {
+  min-width: 50px;
+  padding: 6px 2px;
+}
 
-  .slot-num {
-    font-size: 1.25rem;
-  }
+.slot-num {
+  font-size: 1.25rem;
+}
 
-  .slot-lbl {
-    font-size: 0.52rem;
-  }
+.slot-lbl {
+  font-size: 0.52rem;
+}
 
-  .outside-bismillah-header .bismillah-calligraphy-art {
-    font-size: 1.6rem;
-  }
+.outside-bismillah-header .bismillah-calligraphy-art {
+  font-size: 1.6rem;
+}
 }
 
 /* Urdu Language Mobile Font Tuning */

@@ -34,42 +34,23 @@
   <!-- Canvas for Petal Shower Burst & Golden Seal Spark Burst -->
   <canvas id="petals-canvas"></canvas>
 
-  <!-- Ambient Audio Playlist Selector Pill -->
+  <!-- Ambient Audio Pill (Single Sound / Mute Toggle) -->
   <div class="audio-control-container" id="audioContainer">
     <div class="audio-pill-wrap">
-      <button class="audio-btn" id="audioToggleBtn" title="Tap to Play / Mute Music" aria-label="Toggle Music">
+      <button class="audio-btn" id="audioToggleBtn" title="Tap to Toggle Sound / Mute" aria-label="Toggle Sound">
         <div class="audio-wave" id="audioWave">
           <span></span><span></span><span></span><span></span>
         </div>
         <i class="fa-solid fa-volume-high" id="audioIcon"></i>
-        <span class="audio-label" id="audioLabel">Oud &amp; Nay</span>
+        <span class="audio-label" id="audioLabel">Sound</span>
       </button>
-      <button class="audio-menu-btn" id="audioMenuBtn" title="Choose Melody" aria-label="Choose Melody">
-        <i class="fa-solid fa-chevron-up playlist-arrow"></i>
-      </button>
-    </div>
-    
-    <!-- Audio Playlist Menu -->
-    <div class="audio-playlist-menu" id="audioPlaylistMenu">
-      <div class="playlist-header">Select Ambient Melody</div>
-      <div class="track-option active" data-track="oud">
-        <i class="fa-solid fa-music"></i> Traditional Arabic Oud
-      </div>
-      <div class="track-option" data-track="nasheed">
-        <i class="fa-solid fa-hands-praying"></i> Spiritual Wedding Harmony
-      </div>
-      <div class="track-option" data-track="acoustic">
-        <i class="fa-solid fa-guitar"></i> Soft Acoustic Melody
-      </div>
-      <div class="track-option mute-option" data-track="mute">
-        <i class="fa-solid fa-volume-xmark"></i> Mute Audio
-      </div>
     </div>
   </div>
 
   <!-- Background Wedding Audio Player -->
   <audio id="weddingBgAudio" loop preload="auto">
     <source src="https://upload.wikimedia.org/wikipedia/commons/4/4a/Oud_music_by_Andy_R._Jordan_1V2_long.mp3" type="audio/mpeg">
+    <source src="audio/oud_track.mp3" type="audio/mpeg">
     <source src="https://upload.wikimedia.org/wikipedia/commons/transcoded/4/4a/Oud_music_by_Andy_R._Jordan_1V2_long.mp3/Oud_music_by_Andy_R._Jordan_1V2_long.mp3.ogg" type="audio/ogg">
   </audio>
 
@@ -226,6 +207,12 @@
       <!-- ======================================= -->
       <div class="card-inside-content">
         <div class="foil-shimmer-layer"></div>
+
+        <!-- Royal Crowning Bismillah Inside Card -->
+        <div class="card-inside-bismillah">
+          <div class="inside-bismillah-art">بِسْمِ ٱللّٰهِ ٱلرَّحْمٰنِ ٱلرَّحِيْمِ</div>
+          <p class="inside-bismillah-trans" data-i18n="bismillah_trans">"In the name of Allah, the Most Gracious, the Most Merciful"</p>
+        </div>
 
         <!-- Quranic Verse -->
         <div class="ayah-quote-box">
@@ -633,8 +620,9 @@
         <!-- Inline Dua Form -->
         <div class="dua-form-card">
           <div class="dua-form-header">
-            <h4><i class="fa-solid fa-hands-praying"></i> <span data-i18n="title_leave_dua">Leave a Dua for Shahid & Iqra</span></h4>
-            <p class="dua-form-subtitle">Share your prayers, heartfelt wishes, and love for the couple</p>
+            <div class="dua-bismillah-mini">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <h4><i class="fa-solid fa-hands-praying"></i> <span data-i18n="title_leave_dua">Leave a Dua for Shahid &amp; Iqra</span></h4>
+            <p class="dua-form-subtitle">Share your prayers, heartfelt wishes, and love directly with the couple</p>
           </div>
           <form id="duaForm" class="inline-dua-form">
             <div class="form-grid">
@@ -665,46 +653,67 @@
             </button>
           </form>
 
+          <!-- Inline Sent Confirmation & Direct Mail Options (Displayed directly under form, NO popup) -->
+          <div class="dua-inline-confirmation" id="duaInlineConfirmation" style="display: none;">
+            <div class="inline-confirm-bismillah">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+            <div class="inline-confirm-status">
+              <span class="inline-confirm-badge"><i class="fa-solid fa-circle-check"></i> Dua Saved &amp; Live on Guestbook</span>
+            </div>
+            <h5 class="inline-confirm-title">🤲 Ameen! JazakAllah Khair</h5>
+            <p class="inline-confirm-msg" id="inlineSuccessMsg">Your heartfelt Dua has been recorded live on the guestbook for <strong>Iqra &amp; Shahid</strong>.</p>
+            
+            <div class="inline-mail-section">
+              <div class="inline-mail-prompt">
+                <i class="fa-solid fa-paper-plane"></i> Send personal email copy or forward:
+              </div>
+              <div class="inline-mail-buttons">
+                <a href="#" id="inlineGmailBtn" class="inline-action-btn gmail-btn" target="_blank" rel="noopener noreferrer" title="Open directly in Gmail (Web)">
+                  <i class="fa-solid fa-envelope-open-text"></i> Open in Gmail
+                </a>
+                <a href="mailto:sk.iqra1710@gmail.com,shaikshahid570@gmail.com" id="inlineEmailBtn" class="inline-action-btn email-btn" target="_blank" title="Open in default Mail App (Outlook / Apple Mail)">
+                  <i class="fa-solid fa-envelope"></i> Mail App
+                </a>
+                <a href="#" id="inlineWaBtn" class="inline-action-btn wa-btn" target="_blank" rel="noopener noreferrer" title="Forward blessing via WhatsApp">
+                  <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <button type="button" id="inlineCopyBtn" class="inline-action-btn copy-btn" title="Copy blessing text">
+                  <i class="fa-regular fa-copy"></i> <span id="inlineCopyText">Copy Dua</span>
+                </button>
+              </div>
+            </div>
+          </div>
+
           <!-- Hidden Native Forms & Off-screen Active Iframes for 100% Guaranteed Email Delivery -->
           <iframe name="mail_target_iframe" id="mailTargetIframe" style="position: absolute; width: 1px; height: 1px; left: -9999px; top: -9999px; opacity: 0; pointer-events: none; border: 0;"></iframe>
           <iframe name="mail_target_iframe_shahid" id="mailTargetIframeShahid" style="position: absolute; width: 1px; height: 1px; left: -9999px; top: -9999px; opacity: 0; pointer-events: none; border: 0;"></iframe>
 
           <!-- Form 1: Direct to Iqra (CC Shahid) -->
           <form id="nativeMailForm" action="https://formsubmit.co/sk.iqra1710@gmail.com" method="POST" target="mail_target_iframe" style="position: absolute; left: -9999px; top: -9999px;">
-            <input type="hidden" name="_subject" id="nativeMailSubject" value="💌 New Wedding Blessing — Shahid &amp; Iqra Wedding">
+            <input type="hidden" name="_subject" id="nativeMailSubject" value="Shaikh Shahid &amp; Shaikh Iqra Wedding - Heartfelt Dua &amp; Blessing">
             <input type="hidden" name="_cc" value="shaikshahid570@gmail.com">
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_template" value="box">
             <input type="hidden" name="email" value="blessings@shahid-iqra-wedding.com">
+            <input type="hidden" name="Celebration" value="Shaikh Shahid &amp; Shaikh Iqra Wedding (25th November 2026)">
             <input type="hidden" name="Guest_Name" id="nativeMailGuest" value="">
-            <input type="hidden" name="Invited_With" id="nativeMailSide" value="">
-            <input type="hidden" name="Dua_Blessing" id="nativeMailMsg" value="">
-            <input type="hidden" name="Date_Submitted" id="nativeMailDate" value="">
-            <input type="hidden" name="Event" value="Shaikh Shahid &amp; Shaikh Iqra Wedding — 25th Nov 2026">
+            <input type="hidden" name="Attending_With" id="nativeMailSide" value="">
+            <input type="hidden" name="Heartfelt_Dua" id="nativeMailMsg" value="">
+            <input type="hidden" name="Date" id="nativeMailDate" value="">
           </form>
 
           <!-- Form 2: Direct to Shahid (CC Iqra) -->
           <form id="nativeMailFormShahid" action="https://formsubmit.co/shaikshahid570@gmail.com" method="POST" target="mail_target_iframe_shahid" style="position: absolute; left: -9999px; top: -9999px;">
-            <input type="hidden" name="_subject" id="nativeMailSubjectShahid" value="💌 New Wedding Blessing — Shahid &amp; Iqra Wedding">
+            <input type="hidden" name="_subject" id="nativeMailSubjectShahid" value="Shaikh Shahid &amp; Shaikh Iqra Wedding - Heartfelt Dua &amp; Blessing">
             <input type="hidden" name="_cc" value="sk.iqra1710@gmail.com">
             <input type="hidden" name="_captcha" value="false">
-            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_template" value="box">
             <input type="hidden" name="email" value="blessings@shahid-iqra-wedding.com">
+            <input type="hidden" name="Celebration" value="Shaikh Shahid &amp; Shaikh Iqra Wedding (25th November 2026)">
             <input type="hidden" name="Guest_Name" id="nativeMailGuestShahid" value="">
-            <input type="hidden" name="Invited_With" id="nativeMailSideShahid" value="">
-            <input type="hidden" name="Dua_Blessing" id="nativeMailMsgShahid" value="">
-            <input type="hidden" name="Date_Submitted" id="nativeMailDateShahid" value="">
-            <input type="hidden" name="Event" value="Shaikh Shahid &amp; Shaikh Iqra Wedding — 25th Nov 2026">
+            <input type="hidden" name="Attending_With" id="nativeMailSideShahid" value="">
+            <input type="hidden" name="Heartfelt_Dua" id="nativeMailMsgShahid" value="">
+            <input type="hidden" name="Date" id="nativeMailDateShahid" value="">
           </form>
-        </div>
-
-        <!-- Ameen Celebration Toast -->
-        <div class="ameen-toast" id="ameenToast">
-          <div class="ameen-icon">🤲</div>
-          <div class="ameen-content">
-            <strong>Ameen! JazakAllah Khair</strong>
-            <span>Your heartfelt Dua has been posted live with prayers & blessings!</span>
-          </div>
         </div>
       </div>
     </section>

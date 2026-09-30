@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initVIPGuest();
   initGatefoldOpening();
   initMobileNav();
-  init3DTilt();
+  // Screen 3D tilt removed per user request for a completely calm, stable screen
   initPetalShower();
   initAudioPlaylist();
   initLanguageSwitcher();
@@ -469,7 +469,7 @@ function initGatefoldOpening() {
         }, 300);
       }
 
-      // Step 2: Smoothly swing open the doors, hide tap prompt, unlock scroll
+      // Step 2: Smoothly swing open the doors with majestic, unhurried pacing
       setTimeout(() => {
         gatefoldCard.classList.remove('closed');
         gatefoldCard.classList.add('open');
@@ -479,7 +479,7 @@ function initGatefoldOpening() {
         window.scrollTo(0, 0);
         
         playAmbientTrack('oud');
-      }, 320);
+      }, 500);
     };
 
     if (cardSeal) cardSeal.addEventListener('click', handleOpen);
@@ -557,47 +557,12 @@ function initMobileNav() {
 }
 
 /* ==========================================================================
-   2. 3D GYROSCOPE & MOUSE TILT PHYSICS WITH GOLD FOIL REFLECTION
+   2. SCREEN STABILITY (3D Screen Tilt & Gyroscope Removed)
    ========================================================================== */
 function init3DTilt() {
   const card = document.getElementById('gatefoldCard');
-  const shimmer = card?.querySelector('.foil-shimmer-layer');
-
-  if (!card) return;
-
-  // Mouse tilt on Desktop
-  card.addEventListener('mousemove', (e) => {
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-
-    const rotateX = ((y - centerY) / centerY) * -7;
-    const rotateY = ((x - centerX) / centerX) * 7;
-
-    card.style.transform = `perspective(1200px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.01, 1.01, 1.01)`;
-
-    if (shimmer) {
-      const shimmerX = (x / rect.width) * 150 - 50;
-      shimmer.style.transform = `translateX(${shimmerX}%)`;
-    }
-  });
-
-  card.addEventListener('mouseleave', () => {
-    card.style.transform = 'perspective(1200px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
-    if (shimmer) shimmer.style.transform = 'translateX(0%)';
-  });
-
-  // Mobile Gyroscope Tilt
-  if (window.DeviceOrientationEvent) {
-    window.addEventListener('deviceorientation', (e) => {
-      if (e.gamma !== null && e.beta !== null) {
-        const tiltX = Math.min(Math.max(e.gamma, -20), 20) * 0.35;
-        const tiltY = Math.min(Math.max(e.beta - 45, -20), 20) * 0.35;
-        card.style.transform = `perspective(1200px) rotateX(${-tiltY}deg) rotateY(${tiltX}deg)`;
-      }
-    });
+  if (card) {
+    card.style.transform = 'none';
   }
 }
 
@@ -848,46 +813,31 @@ function animatePetals() {
    4. AMBIENT AUDIO PLAYLIST SYNTHESIZER
    ========================================================================== */
 let isMusicPlaying = false;
-let currentTrackName = 'oud';
 
 function initAudioPlaylist() {
   const toggleBtn = document.getElementById('audioToggleBtn');
-  const menuBtn = document.getElementById('audioMenuBtn');
-  const playlistMenu = document.getElementById('audioPlaylistMenu');
-  const trackOptions = document.querySelectorAll('.track-option');
   const bgAudio = document.getElementById('weddingBgAudio');
-
-  const TRACKS = {
-    oud: 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Oud_music_by_Andy_R._Jordan_1V2_long.mp3',
-    nasheed: 'https://upload.wikimedia.org/wikipedia/commons/4/4e/Oud_music_by_Andy_R._Jordan_2v2.mp3',
-    acoustic: 'https://upload.wikimedia.org/wikipedia/commons/2/27/Oud_music_by_Andy_R._Jordan_1V2_short.mp3'
-  };
-
-  function playMusic(track) {
-    if (track) currentTrackName = track;
-    const selectedTrack = track || currentTrackName || 'oud';
+  function playMusic() {
+    stopSynthTrack();
 
     if (bgAudio) {
-      if (TRACKS[selectedTrack] && bgAudio.src !== TRACKS[selectedTrack]) {
-        bgAudio.src = TRACKS[selectedTrack];
-      }
       bgAudio.volume = 0.55;
       const promise = bgAudio.play();
       if (promise !== undefined) {
         promise.then(() => {
           isMusicPlaying = true;
-          updateAudioPill(true, selectedTrack);
-        }).catch(() => {
-          // If browser blocks HTML5 audio or CORS/offline, fallback to melodic synthesizer
-          playSynthTrack(selectedTrack);
+          updateAudioPill(true);
+        }).catch((err) => {
+          console.warn("HTML5 audio playback error/blocked, using melodic synth fallback:", err);
+          playSynthTrack('oud');
           isMusicPlaying = true;
-          updateAudioPill(true, selectedTrack);
+          updateAudioPill(true);
         });
       }
     } else {
-      playSynthTrack(selectedTrack);
+      playSynthTrack('oud');
       isMusicPlaying = true;
-      updateAudioPill(true, selectedTrack);
+      updateAudioPill(true);
     }
   }
 
@@ -897,57 +847,24 @@ function initAudioPlaylist() {
     }
     stopSynthTrack();
     isMusicPlaying = false;
-    updateAudioPill(false, 'mute');
+    updateAudioPill(false);
   }
 
   function toggleMusic() {
     if (isMusicPlaying) {
       pauseMusic();
     } else {
-      playMusic(currentTrackName);
+      playMusic();
     }
   }
 
-  // 1. Direct 1-Tap on the Pill toggles Play / Pause directly!
+  // 1-Tap on the Pill toggles Play / Mute directly!
   if (toggleBtn) {
     toggleBtn.addEventListener('click', (e) => {
       e.stopPropagation();
       toggleMusic();
     });
   }
-
-  // 2. Click on the Arrow button opens the melody menu
-  if (menuBtn) {
-    menuBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      if (playlistMenu) playlistMenu.classList.toggle('active');
-    });
-  }
-
-  // Close menu when clicking outside
-  document.addEventListener('click', (e) => {
-    if (playlistMenu && !playlistMenu.contains(e.target) && e.target !== menuBtn) {
-      playlistMenu.classList.remove('active');
-    }
-  });
-
-  // 3. Track selection in menu
-  trackOptions.forEach(opt => {
-    opt.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const track = opt.dataset.track;
-      trackOptions.forEach(o => o.classList.remove('active'));
-      opt.classList.add('active');
-      if (playlistMenu) playlistMenu.classList.remove('active');
-
-      if (track === 'mute') {
-        pauseMusic();
-      } else {
-        stopSynthTrack();
-        playMusic(track);
-      }
-    });
-  });
 
   // Make globally available
   window.playAmbientTrack = playMusic;
@@ -1015,7 +932,7 @@ function stopSynthTrack() {
   }
 }
 
-function updateAudioPill(isPlaying, track) {
+function updateAudioPill(isPlaying) {
   const toggleBtn = document.getElementById('audioToggleBtn');
   const label = document.getElementById('audioLabel');
   const icon = document.getElementById('audioIcon');
@@ -1026,11 +943,7 @@ function updateAudioPill(isPlaying, track) {
     toggleBtn?.classList.add('playing');
     if (wave) wave.classList.add('active');
     if (icon) icon.className = 'fa-solid fa-volume-high';
-    if (label) {
-      if (track === 'nasheed') label.innerText = "Nasheed";
-      else if (track === 'acoustic') label.innerText = "Acoustic";
-      else label.innerText = "Oud & Nay";
-    }
+    if (label) label.innerText = "Sound";
   } else {
     toggleBtn?.classList.add('muted');
     toggleBtn?.classList.remove('playing');
@@ -1246,7 +1159,6 @@ function initGuestbook() {
   const duaForm = document.getElementById('duaForm');
   const relationInput = document.getElementById('duaRelationSide');
   const msgInput = document.getElementById('duaTextMsg');
-  const toast = document.getElementById('ameenToast');
   const searchInput = document.getElementById('guestbookSearchInput');
   const searchClearBtn = document.getElementById('searchClearBtn');
   const filterTabs = document.querySelectorAll('#guestbookFilterTabs .feed-filter-chip');
@@ -1300,7 +1212,7 @@ function initGuestbook() {
       const origText = testMailBtn.innerHTML;
       testMailBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending Test Notice...';
       
-      const testSubject = "💌 Test Activation Notice — Shahid & Iqra Wedding Invitation";
+      const testSubject = "Shaikh Shahid & Shaikh Iqra Wedding - Email Notification Test";
       
       // Dispatch Form 1 (Iqra)
       const nf1 = document.getElementById('nativeMailForm');
@@ -1343,7 +1255,7 @@ function initGuestbook() {
             _subject: testSubject,
             _cc: 'shaikshahid570@gmail.com',
             email: 'blessings@shahid-iqra-wedding.com',
-            _template: 'table',
+            _template: 'box',
             Status: 'Test Activation Verification',
             Notice: 'Please activate FormSubmit by clicking Activate Form in your email.'
           })
@@ -1356,7 +1268,7 @@ function initGuestbook() {
             _subject: testSubject,
             _cc: 'sk.iqra1710@gmail.com',
             email: 'blessings@shahid-iqra-wedding.com',
-            _template: 'table',
+            _template: 'box',
             Status: 'Test Activation Verification',
             Notice: 'Please activate FormSubmit by clicking Activate Form in your email.'
           })
@@ -1397,11 +1309,104 @@ function initGuestbook() {
           date: currentDate
         });
 
-        // Send instant notification email to sk.iqra1710@gmail.com & shaikshahid570@gmail.com
+        // 1. Submit to local server relay & persistent storage
+        try {
+          fetch('/api/submit-dua', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              sender: sender,
+              side: side,
+              msg: msg,
+              date: currentDate
+            })
+          }).then(res => res.json()).then(data => {
+            console.log('Dua persisted to server backend:', data);
+          }).catch(err => {
+            console.log('Server endpoint note:', err);
+          });
+        } catch(e) {}
+
+        // 2. Prepare clean, noble pre-formatted Email to BOTH Iqra & Shahid
         const sideTitle = side === 'groom' ? "Groom's Family / Friends (Shaikh Shahid)" : (side === 'bride' ? "Bride's Family / Friends (Shaikh Iqra)" : "Mutual Friends & Both Families");
-        const mailSubject = `💌 New Wedding Blessing from ${sender} (${side === 'groom' ? "Groom's Side" : side === 'bride' ? "Bride's Side" : "Mutual Friends"}) — Shahid & Iqra Wedding`;
+        const mailRecipients = 'sk.iqra1710@gmail.com,shaikshahid570@gmail.com';
         
-        // 1. Submit native hidden form to Iqra (CC Shahid)
+        // Clean, noble subject line without special characters that break email parsers or trigger fallback templates
+        const cleanMailSubject = `Shaikh Shahid & Shaikh Iqra Wedding - Heartfelt Blessing from ${sender} (${side === 'groom' ? "Groom's Side" : side === 'bride' ? "Bride's Side" : "Mutual Friends"})`;
+        
+        const mailBody = `بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+
+Assalamu Alaikum wa Rahmatullahi wa Barakatuh,
+
+═════════════════════════════════════════════════════════
+🕊️ ROYAL WEDDING DUA & BLESSING FOR SHAHID & IQRA
+═════════════════════════════════════════════════════════
+
+👤 Guest Name: ${sender}
+🤝 Attending With: ${sideTitle}
+📅 Date: ${currentDate}
+
+✨ Dua & Blessing:
+"${msg}"
+
+🤲 "Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fee khair."
+(May Allah bless you both, shower His blessings upon you, and unite you both in goodness. Ameen!)
+
+═════════════════════════════════════════════════════════
+Wedding Celebration: Shaikh Shahid & Shaikh Iqra
+Date: Wednesday, 25th November 2026 | Hyderabad
+Digital Invitation: http://localhost:8080
+═════════════════════════════════════════════════════════`;
+
+        const mailtoUrl = `mailto:${mailRecipients}?subject=${encodeURIComponent(cleanMailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
+        // Direct 1-Click Gmail Web Compose URL (opens Gmail tab with everything ready to send)
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(mailRecipients)}&su=${encodeURIComponent(cleanMailSubject)}&body=${encodeURIComponent(mailBody)}`;
+
+        // 3. Prepare pre-formatted WhatsApp share link
+        const waText = `🌙 *Wedding Blessing for Shahid & Iqra*%0A%0A*From:* ${encodeURIComponent(sender)} (${encodeURIComponent(sideTitle)})%0A*Date:* ${encodeURIComponent(currentDate)}%0A%0A*Dua:*%0A"${encodeURIComponent(msg)}"%0A%0A🤲 _Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fee khair. Ameen!_`;
+        const waUrl = `https://api.whatsapp.com/send?text=${waText}`;
+
+        // 4. Update the inline confirmation displayed directly UNDER the form
+        const inlineConfirm = document.getElementById('duaInlineConfirmation');
+        const gmailActionBtn = document.getElementById('inlineGmailBtn');
+        const emailActionBtn = document.getElementById('inlineEmailBtn');
+        const waActionBtn = document.getElementById('inlineWaBtn');
+        const copyActionBtn = document.getElementById('inlineCopyBtn');
+        const successMsg = document.getElementById('inlineSuccessMsg');
+
+        if (gmailActionBtn) gmailActionBtn.href = gmailUrl;
+        if (emailActionBtn) emailActionBtn.href = mailtoUrl;
+        if (waActionBtn) waActionBtn.href = waUrl;
+        if (successMsg) {
+          successMsg.innerHTML = `Your heartfelt Dua has been recorded live for <strong>Iqra &amp; Shahid</strong>.`;
+        }
+
+        if (copyActionBtn) {
+          copyActionBtn.onclick = function(e) {
+            e.preventDefault();
+            navigator.clipboard.writeText(mailBody).then(() => {
+              const copySpan = document.getElementById('inlineCopyText');
+              if (copySpan) copySpan.innerText = 'Copied! ✨';
+              copyActionBtn.style.borderColor = '#4caf50';
+              copyActionBtn.style.color = '#2e7d32';
+              setTimeout(() => {
+                if (copySpan) copySpan.innerText = 'Copy Dua';
+                copyActionBtn.style.borderColor = '';
+                copyActionBtn.style.color = '';
+              }, 2500);
+            }).catch(() => {});
+          };
+        }
+
+        if (inlineConfirm) {
+          inlineConfirm.style.display = 'block';
+          setTimeout(() => {
+            inlineConfirm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 150);
+        }
+
+        // 6. Submit fallback native forms to FormSubmit with clean, professional subject
         const nativeForm = document.getElementById('nativeMailForm');
         if (nativeForm) {
           const subEl = document.getElementById('nativeMailSubject');
@@ -1409,17 +1414,14 @@ function initGuestbook() {
           const sideEl = document.getElementById('nativeMailSide');
           const msgEl = document.getElementById('nativeMailMsg');
           const dateEl = document.getElementById('nativeMailDate');
-          if (subEl) subEl.value = mailSubject;
+          if (subEl) subEl.value = cleanMailSubject;
           if (guestEl) guestEl.value = sender;
           if (sideEl) sideEl.value = sideTitle;
           if (msgEl) msgEl.value = msg;
           if (dateEl) dateEl.value = currentDate;
-          try {
-            nativeForm.submit();
-          } catch (e) {}
+          try { nativeForm.submit(); } catch (e) {}
         }
 
-        // 2. Submit native hidden form to Shahid (CC Iqra)
         const nativeFormShahid = document.getElementById('nativeMailFormShahid');
         if (nativeFormShahid) {
           const subElS = document.getElementById('nativeMailSubjectShahid');
@@ -1427,70 +1429,17 @@ function initGuestbook() {
           const sideElS = document.getElementById('nativeMailSideShahid');
           const msgElS = document.getElementById('nativeMailMsgShahid');
           const dateElS = document.getElementById('nativeMailDateShahid');
-          if (subElS) subElS.value = mailSubject;
+          if (subElS) subElS.value = cleanMailSubject;
           if (guestElS) guestElS.value = sender;
           if (sideElS) sideElS.value = sideTitle;
           if (msgElS) msgElS.value = msg;
           if (dateElS) dateElS.value = currentDate;
-          try {
-            setTimeout(() => {
-              nativeFormShahid.submit();
-            }, 300);
-          } catch (e) {}
+          try { setTimeout(() => { nativeFormShahid.submit(); }, 300); } catch (e) {}
         }
-
-        // 3. Complementary background fetch
-        try {
-          fetch('https://formsubmit.co/ajax/sk.iqra1710@gmail.com', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-              _subject: mailSubject,
-              _cc: 'shaikshahid570@gmail.com',
-              email: 'blessings@shahid-iqra-wedding.com',
-              _template: 'table',
-              Guest_Name: sender,
-              Invited_With: sideTitle,
-              Dua_and_Blessing: msg,
-              Submission_Date: currentDate,
-              Wedding: 'Shaikh Shahid & Shaikh Iqra — 25th November 2026'
-            })
-          }).catch(() => {});
-
-          fetch('https://formsubmit.co/ajax/shaikshahid570@gmail.com', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-              _subject: mailSubject,
-              _cc: 'sk.iqra1710@gmail.com',
-              email: 'blessings@shahid-iqra-wedding.com',
-              _template: 'table',
-              Guest_Name: sender,
-              Invited_With: sideTitle,
-              Dua_and_Blessing: msg,
-              Submission_Date: currentDate,
-              Wedding: 'Shaikh Shahid & Shaikh Iqra — 25th November 2026'
-            })
-          }).catch(() => {});
-        } catch (err) {}
 
         // Trigger celebratory rose petal shower and chime audio!
         if (typeof triggerMabrookShower === 'function') {
           triggerMabrookShower();
-        }
-
-        // Show Ameen Celebration Toast
-        if (toast) {
-          toast.classList.add('show');
-          setTimeout(() => {
-            toast.classList.remove('show');
-          }, 4500);
         }
 
         duaForm.reset();
@@ -1524,26 +1473,10 @@ function renderGuestbook() {
 
   let storedDuas = JSON.parse(localStorage.getItem('wedding_duas') || '[]');
 
-  // Purge test/gibberish submissions (including "Iq", "bfn", "iqra", "gbu", "test", etc.)
+  // Only remove empty or 1-letter test messages
   storedDuas = storedDuas.filter(item => {
-    const m = (item.message || '').trim().toLowerCase();
-    const n = (item.name || '').trim().toLowerCase();
-    const cleanM = m.replace(/[^a-z0-9]/g, '');
-    const cleanN = n.replace(/[^a-z0-9]/g, '');
-
-    if (cleanM === 'bfn' || cleanM === 'gbu' || cleanM === 'test' || cleanM === 'testing' || cleanM === 'asdf' || cleanM === 'xyz') {
-      return false;
-    }
-    if (cleanM.includes('bfn') || cleanM.includes('gbu')) {
-      return false;
-    }
-    if ((cleanN === 'iq' || cleanN === 'iqra') && (cleanM.length <= 6 || cleanM.includes('bfn') || cleanM.includes('gbu'))) {
-      return false;
-    }
-    if (cleanM.length < 3) {
-      return false;
-    }
-    return true;
+    const m = (item.message || '').trim();
+    return m.length >= 2;
   });
 
   // Assign persistent IDs to any legacy items lacking one
