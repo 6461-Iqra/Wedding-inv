@@ -16,7 +16,7 @@
 const WEDDING_EVENTS = [
   { id: 'mehndi', name: 'Mayun & Mehndi Ceremony', date: '2026-11-23T19:00:00+05:30', titleKey: 'title_mehndi', title: 'MAYUN & MEHNDI (23rd NOV)' },
   { id: 'haldi', name: 'Haldi & Ubtan Ceremony', date: '2026-11-24T16:00:00+05:30', titleKey: 'title_haldi', title: 'HALDI CEREMONY (24th NOV)' },
-  { id: 'nikkah', name: 'Sacred Nikkah & Barat', date: '2026-11-25T17:30:00+05:30', titleKey: 'title_shaadi', title: 'SACRED NIKKAH (25th NOV)' },
+  { id: 'nikkah', name: 'Sacred Nikkah & Barat', date: '2026-11-25T19:00:00+05:30', titleKey: 'title_shaadi', title: 'SACRED NIKKAH (25th NOV)' },
   { id: 'walima', name: 'Grand Wedding Reception (Walima)', date: '2026-11-27T20:00:00+05:30', titleKey: 'title_walima', title: 'GRAND WEDDING (27th NOV)' }
 ];
 
@@ -92,10 +92,10 @@ const TRANSLATIONS = {
     title_shaadi: "Wedding Ceremony & Barat",
     sub_shaadi: "The Sacred Nikkah Covenant & Grand Barat Banquet",
     date_shaadi: "Wednesday, 25th November 2026",
-    time_shaadi: "Nikkah: 05:30 PM (Maghrib)",
-    dinner_shaadi: "Barat Reception & Dinner at 07:30 PM",
+    time_shaadi: "Nikkah: 07:00 PM (After Maghrib)",
+    dinner_shaadi: "Barat Reception & Dinner at 08:00 PM",
     itin_shaadi_title: "Grand Shaadi, Nikkah & Barat",
-    itin_shaadi_desc: "Solemn Nikkah covenant at Maghrib followed by Barat reception at Kinjal Wedding Lawn, Mumbra.",
+    itin_shaadi_desc: "Solemn Nikkah covenant after Maghrib (07:00 PM) followed by Barat reception at Kinjal Wedding Lawn, Mumbra.",
 
     // Ceremony 4: Walima
     badge_walima: "Grand Wedding (27th Nov)",
@@ -129,8 +129,8 @@ const TRANSLATIONS = {
     etiq_gift_desc: "Your pious Duas and gracious presence are the greatest gifts we could ever ask for. (Salam & Duas appreciated).",
     heading_queries: "For Queries & Directions Assistance",
     badge_barakah: "Words of Barakah",
-    heading_duas: "Digital Dua & Guestbook",
-    desc_duas: "Blessings, prayers, and heartfelt words sent by loved ones",
+    heading_duas: "Send Your Dua & Blessings",
+    desc_duas: "Share your prayers, heartfelt wishes, and love directly with Shahid & Iqra",
     title_leave_dua: "Leave a Dua for Shahid & Iqra",
     lbl_your_name: "Your Name *",
     lbl_your_dua: "Your Dua / Blessing *",
@@ -211,10 +211,10 @@ const TRANSLATIONS = {
     title_shaadi: "مبارک تقریبِ عقد و بارات",
     sub_shaadi: "مقدس نکاح اور پروقار دعوتِ طعام",
     date_shaadi: "بدھ، 25 نومبر 2026",
-    time_shaadi: "نکاح: بعد نمازِ مغرب 05:30 بجے",
-    dinner_shaadi: "استقبالیہ و طعام: 07:30 بجے شام",
+    time_shaadi: "نکاح: بعد نمازِ مغرب، شام 07:00 بجے",
+    dinner_shaadi: "استقبالیہ و طعام: رات 08:00 بجے",
     itin_shaadi_title: "شادی، نکاح و بارات استقبالیہ",
-    itin_shaadi_desc: "کنجل ویڈنگ لان، ممبرا (تھانے) میں پروقار تقریب اور ضیافت۔",
+    itin_shaadi_desc: "کنجل ویڈنگ لان، ممبرا (تھانے) میں بعد نمازِ مغرب (شام 07:00 بجے) پروقار تقریب اور ضیافت۔",
 
     badge_walima: "سنتِ ولیمہ (27 نومبر)",
     title_walima: "دعوتِ ولیمہ",
@@ -247,8 +247,8 @@ const TRANSLATIONS = {
     etiq_gift_desc: "آپ کی مخلصانہ دعائیں اور تشریف آوری ہمارے لیے سب سے بڑا تحفہ ہے۔",
     heading_queries: "رہنمائی اور رابطے کے لیے",
     badge_barakah: "دعاؤں کا گلدستہ",
-    heading_duas: "ڈیجیٹل دعائیہ کالم",
-    desc_duas: "عزیز و اقارب کی جانب سے نیک تمنائیں اور پرخلوص دعائیں",
+    heading_duas: "دعائیہ پیغامات و برکات",
+    desc_duas: "شاہد اور اقراء کے لیے اپنے دلی دعائیہ پیغامات ارسال کریں",
     title_leave_dua: "شاہد اور اقراء کے لیے اپنی دعا لکھیں",
     lbl_your_name: "آپ کا نام *",
     lbl_your_dua: "آپ کی مبارکباد و دعا *",
@@ -329,10 +329,10 @@ const TRANSLATIONS = {
     title_shaadi: "निकाह व बारात समारोह",
     sub_shaadi: "पवित्र निकाह एवं भव्य दावत",
     date_shaadi: "बुधवार, 25 नवंबर 2026",
-    time_shaadi: "निकाह: शाम 05:30 बजे",
-    dinner_shaadi: "स्वागत एवं शाही भोज: शाम 07:30 बजे",
+    time_shaadi: "निकाह: मगरिब बाद, शाम 07:00 बजे",
+    dinner_shaadi: "स्वागत एवं शाही भोज: रात 08:00 बजे",
     itin_shaadi_title: "शादी, निकाह एवं बारात स्वागत",
-    itin_shaadi_desc: "किंजल वेडिंग लॉन, मुंब्रा (ठाणे) में भव्य निकाह व दावत।",
+    itin_shaadi_desc: "किंजल वेडिंग लॉन, मुंब्रा (ठाणे) में मगरिब बाद (शाम 07:00 बजे) भव्य निकाह व दावत।",
 
     badge_walima: "भव्य विवाह प्रीतिभोज (27 नवंबर)",
     title_walima: "दावत-ए-वलीमा",
@@ -365,8 +365,8 @@ const TRANSLATIONS = {
     etiq_gift_desc: "आपकी नेक दुआएं और उपस्थिति ही हमारे लिए सबसे बड़ा उपहार है।",
     heading_queries: "मार्गदर्शन व संपर्क के लिए",
     badge_barakah: "दुआओं का संगम",
-    heading_duas: "डिजिटल दुआ व गेستबुक",
-    desc_duas: "प्रियजनों की ओर से भेजी गई शुभकामनाएं व आशीर्वाद",
+    heading_duas: "दुआ एवं शुभकामनाएँ भेजें",
+    desc_duas: "शाहिद और इक़रा के लिए अपनी दिली दुआएँ व शुभकामनाएँ सीधे भेजें",
     title_leave_dua: "शाहिद व इक़रा के लिए अपनी दुआ भेजें",
     lbl_your_name: "आपका नाम *",
     lbl_your_dua: "आपकी दुआ / संदेश *",
@@ -392,6 +392,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initPetalShower();
   initAudioPlaylist();
   initLanguageSwitcher();
+  initViewEventsButton();
+  initCalendarModal();
   initPrintCard();
   initCountdown();
   initGuestbook();
@@ -462,6 +464,11 @@ function initGatefoldOpening() {
         playCelebrationChime();
       }
 
+      // Immediately initiate ambient audio in user gesture context for strict browser autoplay policies
+      if (typeof playAmbientTrack === 'function') {
+        playAmbientTrack('oud', { fadeIn: true });
+      }
+
       if (tapPrompt) {
         tapPrompt.style.opacity = '0';
         setTimeout(() => {
@@ -477,8 +484,6 @@ function initGatefoldOpening() {
         document.body.classList.remove('card-closed-state');
         document.body.classList.add('card-opened-state');
         window.scrollTo(0, 0);
-        
-        playAmbientTrack('oud');
       }, 500);
     };
 
@@ -810,28 +815,141 @@ function animatePetals() {
 }
 
 /* ==========================================================================
-   4. AMBIENT AUDIO PLAYLIST SYNTHESIZER
+   4. AMBIENT AUDIO PLAYLIST & OUD MUSIC CONTROLLER
    ========================================================================== */
 let isMusicPlaying = false;
+let audioCtx = null;
+let masterGain = null;
+let activeOscillators = [];
+let audioFadeInterval = null;
 
 function initAudioPlaylist() {
   const toggleBtn = document.getElementById('audioToggleBtn');
   const bgAudio = document.getElementById('weddingBgAudio');
-  function playMusic() {
+
+  // Wire up audio element events for synchronization & fallback
+  if (bgAudio) {
+    // Ensure element starts configured
+    bgAudio.loop = true;
+    bgAudio.volume = 0.55;
+
+    // If initial source fails to load, gracefully fallback to CDN / Wikimedia mirror
+    bgAudio.addEventListener('error', () => {
+      console.warn("Primary oud audio encountered an error, switching to backup stream...");
+      if (!bgAudio.src.includes('wikimedia.org')) {
+        bgAudio.src = 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Oud_music_by_Andy_R._Jordan_1V2_long.mp3';
+        bgAudio.load();
+        if (isMusicPlaying) {
+          bgAudio.play().catch(e => console.warn("Fallback playback error:", e));
+        }
+      }
+    });
+
+    // Synchronize UI state when audio naturally plays or pauses
+    bgAudio.addEventListener('play', () => {
+      isMusicPlaying = true;
+      updateAudioPill(true);
+    });
+
+    bgAudio.addEventListener('pause', () => {
+      if (!masterGain) {
+        isMusicPlaying = false;
+        updateAudioPill(false);
+      }
+    });
+  }
+
+  // Smooth fade-in helper for an elegant musical entrance
+  function fadeInAudio(targetVolume = 0.55, durationMs = 1200) {
+    if (!bgAudio) return;
+    if (audioFadeInterval) clearInterval(audioFadeInterval);
+    bgAudio.volume = 0.05;
+    const stepTime = 50;
+    const steps = durationMs / stepTime;
+    const volIncrement = (targetVolume - 0.05) / steps;
+    audioFadeInterval = setInterval(() => {
+      if (!bgAudio || !isMusicPlaying) {
+        clearInterval(audioFadeInterval);
+        audioFadeInterval = null;
+        return;
+      }
+      if (bgAudio.volume + volIncrement >= targetVolume) {
+        bgAudio.volume = targetVolume;
+        clearInterval(audioFadeInterval);
+        audioFadeInterval = null;
+      } else {
+        bgAudio.volume += volIncrement;
+      }
+    }, stepTime);
+  }
+
+  // Fallback unlock listener in case mobile browser delayed user gesture token
+  let tapUnlockBound = false;
+  function armTapToPlay() {
+    if (tapUnlockBound) return;
+    tapUnlockBound = true;
+    const unlockOnGesture = () => {
+      const gatefoldCard = document.getElementById('gatefoldCard');
+      if (!isMusicPlaying && gatefoldCard && gatefoldCard.classList.contains('open')) {
+        playMusic();
+      }
+      document.removeEventListener('click', unlockOnGesture);
+      document.removeEventListener('touchstart', unlockOnGesture);
+      tapUnlockBound = false;
+    };
+    document.addEventListener('click', unlockOnGesture, { once: true });
+    document.addEventListener('touchstart', unlockOnGesture, { once: true });
+  }
+
+  function playMusic(trackType = 'oud', options = {}) {
     stopSynthTrack();
 
     if (bgAudio) {
-      bgAudio.volume = 0.55;
+      if (options.fadeIn) {
+        bgAudio.volume = 0.05;
+      } else {
+        bgAudio.volume = 0.55;
+      }
+
+      // Ensure audio source points to local oud track first
+      if (!bgAudio.src || bgAudio.src === '' || bgAudio.src === window.location.href) {
+        bgAudio.src = 'audio/oud_track.mp3';
+      }
+
       const promise = bgAudio.play();
       if (promise !== undefined) {
         promise.then(() => {
           isMusicPlaying = true;
           updateAudioPill(true);
+          if (options.fadeIn) {
+            fadeInAudio(0.55, 1200);
+          }
         }).catch((err) => {
-          console.warn("HTML5 audio playback error/blocked, using melodic synth fallback:", err);
-          playSynthTrack('oud');
-          isMusicPlaying = true;
-          updateAudioPill(true);
+          console.warn("HTML5 audio playback blocked or waiting for user gesture:", err);
+          if (err.name === 'NotAllowedError') {
+            // Autoplay blocked by browser policy: arm gesture listener to resume seamlessly on next tap
+            isMusicPlaying = false;
+            updateAudioPill(false);
+            armTapToPlay();
+          } else {
+            // Decoding or network issue: try remote mirror
+            if (!bgAudio.src.includes('wikimedia.org')) {
+              bgAudio.src = 'https://upload.wikimedia.org/wikipedia/commons/4/4a/Oud_music_by_Andy_R._Jordan_1V2_long.mp3';
+              bgAudio.load();
+              bgAudio.play().then(() => {
+                isMusicPlaying = true;
+                updateAudioPill(true);
+              }).catch(() => {
+                playSynthTrack('oud');
+                isMusicPlaying = true;
+                updateAudioPill(true);
+              });
+            } else {
+              playSynthTrack('oud');
+              isMusicPlaying = true;
+              updateAudioPill(true);
+            }
+          }
         });
       }
     } else {
@@ -842,6 +960,10 @@ function initAudioPlaylist() {
   }
 
   function pauseMusic() {
+    if (audioFadeInterval) {
+      clearInterval(audioFadeInterval);
+      audioFadeInterval = null;
+    }
     if (bgAudio) {
       try { bgAudio.pause(); } catch(e){}
     }
@@ -1047,15 +1169,257 @@ function setLanguage(lang) {
 }
 
 /* ==========================================================================
-   6. 1-CLICK PRINT / DOWNLOAD INVITATION CARD
+   5.1 SMOOTH SCROLL TO CEREMONIES & VENUES
+   ========================================================================== */
+function initViewEventsButton() {
+  const viewBtn = document.getElementById('viewEventsBtn');
+  if (viewBtn) {
+    viewBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const eventsSection = document.getElementById('events');
+      if (eventsSection) {
+        const navHeight = document.querySelector('.luxury-navbar')?.offsetHeight || 70;
+        const targetY = eventsSection.getBoundingClientRect().top + window.pageYOffset - navHeight - 15;
+        window.scrollTo({ top: targetY, behavior: 'smooth' });
+      }
+    });
+  }
+}
+
+/* ==========================================================================
+   6. 1-CLICK PRINT / DOWNLOAD INVITATION CARD & MODAL
    ========================================================================== */
 function initPrintCard() {
   const downloadBtn = document.getElementById('downloadCardBtn');
+  const modalBackdrop = document.getElementById('downloadModalBackdrop');
+  const closeBtn = document.getElementById('closeDownloadModalBtn');
+  const pngBtn = document.getElementById('btnDownloadCardPng');
+  const printPdfBtn = document.getElementById('btnPrintCardPdf');
+
+  if (!modalBackdrop) return;
+
+  const openModal = () => {
+    modalBackdrop.classList.add('active');
+    modalBackdrop.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    modalBackdrop.classList.remove('active');
+    modalBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
   if (downloadBtn) {
-    downloadBtn.addEventListener('click', () => {
-      window.print();
+    downloadBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openModal();
     });
   }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) closeModal();
+  });
+
+  if (pngBtn) {
+    pngBtn.addEventListener('click', () => {
+      generateAndDownloadCardImage();
+      closeModal();
+    });
+  }
+
+  if (printPdfBtn) {
+    printPdfBtn.addEventListener('click', () => {
+      closeModal();
+      setTimeout(() => {
+        window.print();
+      }, 350);
+    });
+  }
+}
+
+function generateAndDownloadCardImage() {
+  const canvas = document.createElement('canvas');
+  const width = 1200;
+  const height = 1750;
+  canvas.width = width;
+  canvas.height = height;
+  const ctx = canvas.getContext('2d');
+
+  // Parchment Background
+  const bgGrad = ctx.createLinearGradient(0, 0, 0, height);
+  bgGrad.addColorStop(0, '#fdfbf7');
+  bgGrad.addColorStop(0.3, '#faf5ec');
+  bgGrad.addColorStop(0.7, '#f7efe1');
+  bgGrad.addColorStop(1, '#f3e5d0');
+  ctx.fillStyle = bgGrad;
+  ctx.fillRect(0, 0, width, height);
+
+  // Outer Gold Border
+  ctx.strokeStyle = '#c59b3f';
+  ctx.lineWidth = 6;
+  ctx.strokeRect(36, 36, width - 72, height - 72);
+
+  // Inner Thin Border
+  ctx.strokeStyle = 'rgba(197, 155, 63, 0.45)';
+  ctx.lineWidth = 1.5;
+  ctx.strokeRect(48, 48, width - 96, height - 96);
+
+  // Corner Dots
+  const corners = [
+    [48, 48],
+    [width - 48, 48],
+    [48, height - 48],
+    [width - 48, height - 48]
+  ];
+  ctx.fillStyle = '#c59b3f';
+  corners.forEach(([cx, cy]) => {
+    ctx.beginPath();
+    ctx.arc(cx, cy, 6, 0, Math.PI * 2);
+    ctx.fill();
+  });
+
+  // Arabic Bismillah
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#c59b3f';
+  ctx.font = 'bold 38px "Amiri", "Traditional Arabic", serif';
+  ctx.fillText('بِسْمِ ٱللّٰهِ ٱلرَّحْمٰنِ ٱلرَّحِيْمِ', width / 2, 130);
+
+  // Translation
+  ctx.fillStyle = '#7a6a58';
+  ctx.font = 'italic 20px "Cinzel", "Georgia", serif';
+  ctx.fillText('"In the name of Allah, the Most Gracious, the Most Merciful"', width / 2, 170);
+
+  // Quran Ayah Box
+  ctx.strokeStyle = 'rgba(197, 155, 63, 0.3)';
+  ctx.lineWidth = 1;
+  ctx.strokeRect(100, 210, width - 200, 160);
+
+  ctx.fillStyle = '#6b1b29';
+  ctx.font = 'bold 24px "Amiri", serif';
+  ctx.fillText('وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً', width / 2, 260);
+
+  ctx.fillStyle = '#554a40';
+  ctx.font = 'italic 18px "Georgia", serif';
+  ctx.fillText('"And among His signs is that He created for you mates that you may dwell in tranquility..."', width / 2, 305);
+  ctx.fillStyle = '#c59b3f';
+  ctx.font = '16px "Cinzel", serif';
+  ctx.fillText('— Surah Ar-Rum (30:21) —', width / 2, 340);
+
+  // Invitation Header
+  ctx.fillStyle = '#8b263e';
+  ctx.font = 'bold 22px "Cinzel", serif';
+  ctx.fillText('TOGETHER WITH THEIR FAMILIES', width / 2, 420);
+
+  ctx.fillStyle = '#5c5247';
+  ctx.font = '19px "Cinzel", serif';
+  ctx.fillText('CORDIALLY INVITE YOU TO CELEBRATE THE SACRED WEDDING OF', width / 2, 455);
+
+  // Monogram Crest
+  ctx.beginPath();
+  ctx.arc(width / 2, 530, 48, 0, Math.PI * 2);
+  ctx.fillStyle = '#6b1b29';
+  ctx.fill();
+  ctx.strokeStyle = '#d4af37';
+  ctx.lineWidth = 3;
+  ctx.stroke();
+
+  ctx.fillStyle = '#ffd700';
+  ctx.font = 'bold 36px "Cinzel", serif';
+  ctx.fillText('S & I', width / 2, 542);
+
+  // Groom Name
+  ctx.fillStyle = '#6b1b29';
+  ctx.font = 'bold 54px "Cinzel", "Playfair Display", serif';
+  ctx.fillText('Shaikh Shahid', width / 2, 640);
+  ctx.fillStyle = '#c59b3f';
+  ctx.font = 'bold 30px "Amiri", serif';
+  ctx.fillText('شیخ شاہد', width / 2, 680);
+  ctx.fillStyle = '#7a6a58';
+  ctx.font = 'italic 20px "Cinzel", serif';
+  ctx.fillText('Son of Mr. Amiruddin Shaikh & Mrs. Shaikh', width / 2, 715);
+
+  // Ampersand
+  ctx.fillStyle = '#c59b3f';
+  ctx.font = 'bold 44px "Cinzel", serif';
+  ctx.fillText('&', width / 2, 775);
+
+  // Bride Name
+  ctx.fillStyle = '#6b1b29';
+  ctx.font = 'bold 54px "Cinzel", "Playfair Display", serif';
+  ctx.fillText('Shaikh Iqra', width / 2, 845);
+  ctx.fillStyle = '#c59b3f';
+  ctx.font = 'bold 30px "Amiri", serif';
+  ctx.fillText('شیخ اقراء', width / 2, 885);
+  ctx.fillStyle = '#7a6a58';
+  ctx.font = 'italic 20px "Cinzel", serif';
+  ctx.fillText('Daughter of Mr. Mustafa Shaikh & Mrs. Shaikh', width / 2, 920);
+
+  // Covenant Subtitle
+  ctx.fillStyle = '#8b263e';
+  ctx.font = 'italic 22px "Cinzel", serif';
+  ctx.fillText('✦ In a sacred covenant of love, faith & barakah ✦', width / 2, 980);
+
+  // Ceremonies Section Container
+  const drawEventBox = (y, badge, title, dateTime, venue) => {
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.75)';
+    ctx.fillRect(120, y, width - 240, 195);
+    ctx.strokeStyle = '#c59b3f';
+    ctx.lineWidth = 1.5;
+    ctx.strokeRect(120, y, width - 240, 195);
+
+    // Badge
+    ctx.fillStyle = '#6b1b29';
+    ctx.fillRect(width / 2 - 140, y - 16, 280, 32);
+    ctx.fillStyle = '#ffffff';
+    ctx.font = 'bold 15px "Cinzel", serif';
+    ctx.fillText(badge, width / 2, y + 6);
+
+    // Title
+    ctx.fillStyle = '#6b1b29';
+    ctx.font = 'bold 28px "Cinzel", serif';
+    ctx.fillText(title, width / 2, y + 62);
+
+    // DateTime
+    ctx.fillStyle = '#c59b3f';
+    ctx.font = 'bold 21px "Cinzel", serif';
+    ctx.fillText(dateTime, width / 2, y + 105);
+
+    // Venue
+    ctx.fillStyle = '#443c34';
+    ctx.font = '19px "Cinzel", serif';
+    ctx.fillText(venue, width / 2, y + 145);
+  };
+
+  // Event 1: Sacred Nikkah & Wedding
+  drawEventBox(1030, 'MAIN WEDDING CEREMONY', 'Sacred Nikkah & Barat Reception', 'Wednesday, 25th November 2026 • 07:00 PM (After Maghrib)', 'Kinjal Wedding Lawn, Sanjay Nagar, Mumbra (Thane)');
+
+  // Event 2: Dawat-e-Walima
+  drawEventBox(1265, 'SUNNAH BANQUET', 'Dawat-e-Walima Banquet', 'Friday, 27th November 2026 • 08:00 PM (IST)', 'Gazebo Marriage Hall, Goawala Compound, Kurla West (Mumbai)');
+
+  // Blessing Footer
+  ctx.fillStyle = '#c59b3f';
+  ctx.font = 'bold 32px "Amiri", serif';
+  ctx.fillText('جَزَاكُمُ اللَّهُ خَيْرًا', width / 2, 1540);
+
+  ctx.fillStyle = '#5c5247';
+  ctx.font = 'italic 18px "Cinzel", serif';
+  ctx.fillText('Your gracious presence and pious Duas are warmly requested', width / 2, 1585);
+
+  ctx.fillStyle = '#8b263e';
+  ctx.font = 'bold 22px "Cinzel", serif';
+  ctx.fillText('Shahid & Iqra', width / 2, 1630);
+
+  // Trigger Download
+  const link = document.createElement('a');
+  link.download = 'Shahid_and_Iqra_Royal_Wedding_Invitation.png';
+  link.href = canvas.toDataURL('image/png');
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
 }
 
 /* ==========================================================================
@@ -1068,8 +1432,8 @@ function initCountdown() {
   const secsEl = document.getElementById('seconds');
   const targetTitleEl = document.getElementById('countdownTargetEvent');
 
-  // Indian Standard Time (IST): Sacred Nikkah & Wedding on 25 November 2026, 17:30 IST (+05:30)
-  const targetDateIST = new Date("2026-11-25T17:30:00+05:30").getTime();
+  // Indian Standard Time (IST): Sacred Nikkah & Wedding on 25 November 2026, 19:00 IST (+05:30)
+  const targetDateIST = new Date("2026-11-25T19:00:00+05:30").getTime();
 
   function updateTimer() {
     const now = new Date().getTime();
@@ -1100,7 +1464,7 @@ function initCountdown() {
 }
 
 /* ==========================================================================
-   8. CALENDAR INTEGRATION (All 4 Events: 23, 24, 25 & 27 Nov 2026)
+   8. CALENDAR INTEGRATION & MODAL (Apple, Google, Outlook .ics)
    ========================================================================== */
 window.addToCalendar = function(eventType) {
   const events = {
@@ -1120,9 +1484,9 @@ window.addToCalendar = function(eventType) {
     },
     nikkah: {
       title: "Wedding Ceremony & Nikkah: Shahid & Iqra (25th Nov)",
-      description: "Sacred Nikkah covenant at Maghrib & Barat banquet of Shahid Shaikh & Iqra Shaikh.",
+      description: "Sacred Nikkah covenant after Maghrib (07:00 PM) & Barat banquet of Shahid Shaikh & Iqra Shaikh.",
       location: "Kinjal Wedding Lawn, Babaji Patil Wadi, Opp. MEK Company, Sanjay Nagar, Mumbra, Thane, Maharashtra 400612",
-      start: "20261125T173000",
+      start: "20261125T190000",
       end: "20261125T233000"
     },
     walima: {
@@ -1137,16 +1501,99 @@ window.addToCalendar = function(eventType) {
   const ev = events[eventType] || events.nikkah;
   const gCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.title)}&dates=${ev.start}/${ev.end}&details=${encodeURIComponent(ev.description)}&location=${encodeURIComponent(ev.location)}`;
   
-  window.open(gCalUrl, '_blank');
+  try {
+    const win = window.open(gCalUrl, '_blank');
+    if (!win || win.closed || typeof win.closed === 'undefined') {
+      window.location.href = gCalUrl;
+    }
+  } catch(e) {
+    window.location.href = gCalUrl;
+  }
 };
 
-const globalCalBtn = document.getElementById('addToCalGlobalBtn');
-if (globalCalBtn) {
-  globalCalBtn.addEventListener('click', () => {
-    const now = new Date().getTime();
-    const nextEv = WEDDING_EVENTS.find(ev => new Date(ev.date).getTime() > now) || WEDDING_EVENTS[0];
-    window.addToCalendar(nextEv.id);
+function initCalendarModal() {
+  const globalCalBtn = document.getElementById('addToCalGlobalBtn');
+  const modalBackdrop = document.getElementById('calendarModalBackdrop');
+  const closeBtn = document.getElementById('closeCalModalBtn');
+  const downloadIcsBtn = document.getElementById('calDownloadIcsBtn');
+
+  if (!modalBackdrop) return;
+
+  const openModal = () => {
+    modalBackdrop.classList.add('active');
+    modalBackdrop.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModal = () => {
+    modalBackdrop.classList.remove('active');
+    modalBackdrop.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  if (globalCalBtn) {
+    globalCalBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      openModal();
+    });
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+  modalBackdrop.addEventListener('click', (e) => {
+    if (e.target === modalBackdrop) closeModal();
   });
+
+  if (downloadIcsBtn) {
+    downloadIcsBtn.addEventListener('click', () => {
+      downloadWeddingIcs();
+      closeModal();
+    });
+  }
+}
+
+function downloadWeddingIcs() {
+  const icsData = [
+    'BEGIN:VCALENDAR',
+    'VERSION:2.0',
+    'PRODID:-//Shahid & Iqra Royal Wedding//EN',
+    'CALSCALE:GREGORIAN',
+    'METHOD:PUBLISH',
+    // Sacred Nikkah & Wedding (25 Nov 2026)
+    'BEGIN:VEVENT',
+    'UID:nikkah-20261125-shahid-iqra@wedding.inv',
+    'DTSTAMP:20261101T000000Z',
+    'DTSTART:20261125T133000Z', // 19:00 IST is 13:30 UTC
+    'DTEND:20261125T180000Z',
+    'SUMMARY:Sacred Nikkah & Wedding Banquet: Shahid & Iqra',
+    'DESCRIPTION:Sacred Nikkah covenant after Maghrib (07:00 PM) & Barat banquet of Shahid Shaikh & Iqra Shaikh. Your presence and pious Duas are warmly requested.',
+    'LOCATION:Kinjal Wedding Lawn, Babaji Patil Wadi, Sanjay Nagar, Mumbra, Thane, Maharashtra 400612',
+    'STATUS:CONFIRMED',
+    'END:VEVENT',
+    // Dawat-e-Walima Banquet (27 Nov 2026)
+    'BEGIN:VEVENT',
+    'UID:walima-20261127-shahid-iqra@wedding.inv',
+    'DTSTAMP:20261101T000000Z',
+    'DTSTART:20261127T143000Z',
+    'DTEND:20261127T183000Z',
+    'SUMMARY:Dawat-e-Walima Banquet: Shahid & Iqra',
+    'DESCRIPTION:Sunnah Walima banquet hosted by Mr. Amiruddin Shaikh & Family at Gazebo Marriage Hall.',
+    'LOCATION:Gazebo Marriage Hall, Goawala Compound, LBS Marg, Friends Colony, Kurla West, Mumbai 400070',
+    'STATUS:CONFIRMED',
+    'END:VEVENT',
+    'END:VCALENDAR'
+  ].join('\r\n');
+
+  const blob = new Blob([icsData], { type: 'text/calendar;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'Shahid_and_Iqra_Wedding_Events.ics';
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(url), 2000);
 }
 
 /* ==========================================================================
@@ -1367,46 +1814,10 @@ Digital Invitation: http://localhost:8080
         const waText = `🌙 *Wedding Blessing for Shahid & Iqra*%0A%0A*From:* ${encodeURIComponent(sender)} (${encodeURIComponent(sideTitle)})%0A*Date:* ${encodeURIComponent(currentDate)}%0A%0A*Dua:*%0A"${encodeURIComponent(msg)}"%0A%0A🤲 _Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fee khair. Ameen!_`;
         const waUrl = `https://api.whatsapp.com/send?text=${waText}`;
 
-        // 4. Update the inline confirmation displayed directly UNDER the form
-        const inlineConfirm = document.getElementById('duaInlineConfirmation');
-        const gmailActionBtn = document.getElementById('inlineGmailBtn');
-        const emailActionBtn = document.getElementById('inlineEmailBtn');
-        const waActionBtn = document.getElementById('inlineWaBtn');
-        const copyActionBtn = document.getElementById('inlineCopyBtn');
-        const successMsg = document.getElementById('inlineSuccessMsg');
+        // 4. Show elegant royal toast notification (Clean UI/UX - No box)
+        showRoyalToast("Ameen! JazakAllah Khair", `Dua from ${sender} sent to Shahid & Iqra's mail! 🤲✨`);
 
-        if (gmailActionBtn) gmailActionBtn.href = gmailUrl;
-        if (emailActionBtn) emailActionBtn.href = mailtoUrl;
-        if (waActionBtn) waActionBtn.href = waUrl;
-        if (successMsg) {
-          successMsg.innerHTML = `Your heartfelt Dua has been recorded live for <strong>Iqra &amp; Shahid</strong>.`;
-        }
-
-        if (copyActionBtn) {
-          copyActionBtn.onclick = function(e) {
-            e.preventDefault();
-            navigator.clipboard.writeText(mailBody).then(() => {
-              const copySpan = document.getElementById('inlineCopyText');
-              if (copySpan) copySpan.innerText = 'Copied! ✨';
-              copyActionBtn.style.borderColor = '#4caf50';
-              copyActionBtn.style.color = '#2e7d32';
-              setTimeout(() => {
-                if (copySpan) copySpan.innerText = 'Copy Dua';
-                copyActionBtn.style.borderColor = '';
-                copyActionBtn.style.color = '';
-              }, 2500);
-            }).catch(() => {});
-          };
-        }
-
-        if (inlineConfirm) {
-          inlineConfirm.style.display = 'block';
-          setTimeout(() => {
-            inlineConfirm.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 150);
-        }
-
-        // 6. Submit fallback native forms to FormSubmit with clean, professional subject
+        // 5. Submit fallback native forms to FormSubmit with clean, professional subject
         const nativeForm = document.getElementById('nativeMailForm');
         if (nativeForm) {
           const subEl = document.getElementById('nativeMailSubject');
@@ -1449,18 +1860,37 @@ Digital Invitation: http://localhost:8080
         const submitBtn = duaForm.querySelector('button[type="submit"]');
         if (submitBtn) {
           const origHTML = submitBtn.innerHTML;
-          submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Ameen! Dua Posted Live 🤲';
+          submitBtn.innerHTML = '<i class="fa-solid fa-circle-check"></i> Sent to Couple\'s Mail! ✓';
           submitBtn.style.background = 'linear-gradient(135deg, #1b5e20, #2e7d32)';
           submitBtn.style.borderColor = '#4caf50';
+          submitBtn.disabled = true;
           setTimeout(() => {
             submitBtn.innerHTML = origHTML;
             submitBtn.style.background = '';
             submitBtn.style.borderColor = '';
-          }, 4000);
+            submitBtn.disabled = false;
+          }, 3500);
         }
       }
     });
   }
+}
+
+function showRoyalToast(title = "Ameen! JazakAllah Khair", desc = "Your heartfelt Dua has been sent to Shahid & Iqra's mail!") {
+  const toast = document.getElementById('royalToast');
+  if (!toast) return;
+
+  const titleEl = document.getElementById('royalToastTitle');
+  const descEl = document.getElementById('royalToastDesc');
+  if (titleEl) titleEl.innerText = title;
+  if (descEl) descEl.innerText = desc;
+
+  toast.classList.add('show');
+
+  if (window._royalToastTimer) clearTimeout(window._royalToastTimer);
+  window._royalToastTimer = setTimeout(() => {
+    toast.classList.remove('show');
+  }, 4500);
 }
 
 function renderGuestbook() {
@@ -1669,69 +2099,33 @@ function escapeHtml(str) {
    ========================================================================== */
 function initShareTools() {
   const cornerShareBtn = document.getElementById('cornerShareBtn');
-  const cornerSharePopover = document.getElementById('cornerSharePopover');
-  const popoverWhatsAppBtn = document.getElementById('popoverWhatsAppBtn');
-  const popoverCopyBtn = document.getElementById('popoverCopyBtn');
-  const popoverCopyText = document.getElementById('popoverCopyText');
   const navShareBtn = document.getElementById('navShareBtn');
   const mobileDrawerShareBtn = document.getElementById('mobileDrawerShareBtn');
 
   const shareUrl = window.location.href;
-  const shareTitle = "Shahid & Iqra's Wedding Celebration Invitation";
-  const whatsappMsg = `🌙 *Bismillahir Rahmanir Raheem*%0A%0AWe cordially invite you to celebrate the wedding festivities of *Shahid Shaikh* (S/o Amiruddin Shaikh) & *Iqra Shaikh* (D/o Mustafa Shaikh):%0A%0A🌿 *Mayun & Mehndi:* Mon, 23 Nov 2026 (07:00 PM)%0A🌼 *Haldi Ceremony:* Tue, 24 Nov 2026 (04:00 PM)%0A💍 *Sacred Nikkah:* Wed, 25 Nov 2026 (05:30 PM) • Kinjal Wedding Lawn, Mumbra%0A👑 *Grand Wedding Reception (Walima):* Fri, 27 Nov 2026 (08:00 PM) • Gazebo Marriage Hall, Kurla West%0A%0A📍 View Digital Invitation Card & RSVP:%0A${encodeURIComponent(shareUrl)}`;
+  const whatsappMsg = `🌙 *Bismillahir Rahmanir Raheem*%0A%0AWe cordially invite you to celebrate the wedding festivities of *Shahid Shaikh* (S/o Amiruddin Shaikh) & *Iqra Shaikh* (D/o Mustafa Shaikh):%0A%0A🌿 *Mayun & Mehndi:* Mon, 23 Nov 2026 (07:00 PM)%0A🌼 *Haldi Ceremony:* Tue, 24 Nov 2026 (04:00 PM)%0A💍 *Sacred Nikkah:* Wed, 25 Nov 2026 (07:00 PM - After Maghrib) • Kinjal Wedding Lawn, Mumbra%0A👑 *Grand Wedding Reception (Walima):* Fri, 27 Nov 2026 (08:00 PM) • Gazebo Marriage Hall, Kurla West%0A%0A📍 View Digital Invitation Card & RSVP:%0A${encodeURIComponent(shareUrl)}`;
 
   function openWhatsApp() {
     window.open(`https://api.whatsapp.com/send?text=${whatsappMsg}`, '_blank');
-    if (cornerSharePopover) cornerSharePopover.classList.remove('active');
   }
 
-  function copyInviteLink() {
-    navigator.clipboard.writeText(shareUrl).then(() => {
-      if (popoverCopyText) {
-        const orig = popoverCopyText.innerText;
-        popoverCopyText.innerText = "Link Copied! ✓";
-        setTimeout(() => {
-          popoverCopyText.innerText = orig;
-          if (cornerSharePopover) cornerSharePopover.classList.remove('active');
-        }, 2200);
-      }
+  // Floating Corner WhatsApp Button (Direct 1-tap WhatsApp Share)
+  if (cornerShareBtn) {
+    cornerShareBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openWhatsApp();
     });
   }
 
-  function handleShareClick(e) {
-    if (e) e.stopPropagation();
-    if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
-      navigator.share({
-        title: shareTitle,
-        text: `🌙 Bismillahir Rahmanir Raheem — Shahid & Iqra's Wedding Celebration (Nov 2026)`,
-        url: shareUrl
-      }).catch(() => {
-        if (cornerSharePopover) cornerSharePopover.classList.toggle('active');
-      });
-    } else {
-      if (cornerSharePopover) cornerSharePopover.classList.toggle('active');
-    }
-  }
-
-  if (cornerShareBtn) {
-    cornerShareBtn.addEventListener('click', handleShareClick);
-  }
-
+  // Top Navbar Share Button (Direct 1-tap WhatsApp Share)
   if (navShareBtn) {
     navShareBtn.addEventListener('click', (e) => {
       e.stopPropagation();
-      if (navigator.share && /mobile|android|iphone|ipad/i.test(navigator.userAgent)) {
-        navigator.share({
-          title: shareTitle,
-          text: `🌙 Bismillahir Rahmanir Raheem — Shahid & Iqra's Wedding Celebration`,
-          url: shareUrl
-        }).catch(() => openWhatsApp());
-      } else {
-        openWhatsApp();
-      }
+      openWhatsApp();
     });
   }
 
+  // Mobile Drawer Share Link (Direct 1-tap WhatsApp Share)
   if (mobileDrawerShareBtn) {
     mobileDrawerShareBtn.addEventListener('click', () => {
       const drawer = document.getElementById('mobileNavDrawer');
@@ -1739,25 +2133,4 @@ function initShareTools() {
       openWhatsApp();
     });
   }
-
-  if (popoverWhatsAppBtn) {
-    popoverWhatsAppBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      openWhatsApp();
-    });
-  }
-
-  if (popoverCopyBtn) {
-    popoverCopyBtn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      copyInviteLink();
-    });
-  }
-
-  // Dismiss popover when clicking anywhere outside
-  document.addEventListener('click', (e) => {
-    if (cornerSharePopover && !cornerSharePopover.contains(e.target) && e.target !== cornerShareBtn && !cornerShareBtn.contains(e.target)) {
-      cornerSharePopover.classList.remove('active');
-    }
-  });
 }

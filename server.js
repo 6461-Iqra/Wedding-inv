@@ -141,7 +141,38 @@ const server = http.createServer((req, res) => {
       res.setHeader('Cache-Control', 'no-cache');
     }
 
-    res.writeHead(200, { 'Content-Type': contentType });
+    // Support HTTP Range requests (essential for iOS Safari, Chrome, and audio seeking)
+    const range = req.headers.range;
+    if (range) {
+      const parts = range.replace(/bytes=/, '').split('-');
+      const start = parseInt(parts[0], 10);
+      const end = parts[1] ? parseInt(parts[1], 10) : stats.size - 1;
+
+      if (isNaN(start) || start >= stats.size || end >= stats.size || start > end) {
+        res.writeHead(416, {
+          'Content-Range': `bytes */${stats.size}`,
+          'Content-Type': 'text/plain'
+        });
+        res.end('Requested range not satisfiable');
+        return;
+      }
+
+      const chunkSize = (end - start) + 1;
+      res.writeHead(206, {
+        'Content-Range': `bytes ${start}-${end}/${stats.size}`,
+        'Accept-Ranges': 'bytes',
+        'Content-Length': chunkSize,
+        'Content-Type': contentType
+      });
+      fs.createReadStream(filePath, { start, end }).pipe(res);
+      return;
+    }
+
+    res.writeHead(200, {
+      'Content-Length': stats.size,
+      'Accept-Ranges': 'bytes',
+      'Content-Type': contentType
+    });
     fs.createReadStream(filePath).pipe(res);
   });
 });
