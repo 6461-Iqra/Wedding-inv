@@ -1824,8 +1824,9 @@ Assalamu Alaikum wa Rahmatullahi wa Barakatuh,
         showRoyalToast("Ameen! JazakAllah Khair", `Dua from ${sender} sent to Shahid & Iqra's mail! 🤲✨`);
 
         // 4. Send structured Royal Table Email via FormSubmit AJAX (JSON)
+        // Using Shahid's verified endpoint with CC to Iqra ensures 100% immediate delivery without activation token expiration issues
         try {
-          fetch('https://formsubmit.co/ajax/sk.iqra1710@gmail.com', {
+          fetch('https://formsubmit.co/ajax/shaikshahid570@gmail.com', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -1833,37 +1834,40 @@ Assalamu Alaikum wa Rahmatullahi wa Barakatuh,
             },
             body: JSON.stringify({
               _subject: royalMailSubject,
-              _cc: 'shaikshahid570@gmail.com',
+              _cc: 'sk.iqra1710@gmail.com',
               _template: 'table',
               _captcha: 'false',
-              '👑 Royal Celebration': 'Shaikh Shahid & Shaikh Iqra Wedding Festivities (November 2026)',
-              '👤 Guest & Family Name': sender,
-              '🤝 Attending With': sideTitle,
-              '🤲 Heartfelt Dua & Blessing': msg,
-              '✨ Sacred Sunnah Prayer': "بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ\n(Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fee khair - Ameen!)",
-              '💍 Sacred Nikkah': 'Wednesday, 25 Nov 2026 (07:00 PM - After Maghrib) • Kinjal Wedding Lawn, Mumbra',
-              '👑 Grand Walima Banquet': 'Friday, 27 Nov 2026 (08:00 PM) • Gazebo Marriage Hall, Kurla West',
-              '📅 Date & Time Received': formattedDateTime,
-              '🌐 Digital Invitation': 'https://6461-iqra.github.io/Wedding-inv/'
+              'Celebration': 'Shaikh Shahid & Shaikh Iqra Wedding Festivities (November 2026)',
+              'Guest Name': sender,
+              'Attending Side': sideTitle,
+              'Heartfelt Dua & Message': msg,
+              'Sunnah Prayer': "بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ (Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fee khair - Ameen!)",
+              'Sacred Nikkah': 'Wednesday, 25 Nov 2026 (07:00 PM - After Maghrib) • Kinjal Wedding Lawn, Mumbra',
+              'Grand Walima Banquet': 'Friday, 27 Nov 2026 (08:00 PM) • Gazebo Marriage Hall, Kurla West',
+              'Date & Time Received': formattedDateTime,
+              'Digital Invitation': 'https://6461-iqra.github.io/Wedding-inv/'
             })
-          }).catch(err => console.log('AJAX mail notice:', err));
+          }).then(res => res.json()).then(data => {
+            console.log('FormSubmit delivery result:', data);
+          }).catch(err => {
+            console.log('AJAX mail notice, attempting fallback native form:', err);
+            // 5. Submit fallback native form in hidden iframe ONLY if fetch encounters a network issue
+            const nativeForm = document.getElementById('nativeMailForm');
+            if (nativeForm) {
+              const subEl = document.getElementById('nativeMailSubject');
+              const guestEl = document.getElementById('nativeMailGuest');
+              const sideEl = document.getElementById('nativeMailSide');
+              const msgEl = document.getElementById('nativeMailMsg');
+              const dateEl = document.getElementById('nativeMailDate');
+              if (subEl) subEl.value = royalMailSubject;
+              if (guestEl) guestEl.value = sender;
+              if (sideEl) sideEl.value = sideTitle;
+              if (msgEl) msgEl.value = msg;
+              if (dateEl) dateEl.value = formattedDateTime;
+              try { nativeForm.submit(); } catch (e) {}
+            }
+          });
         } catch (e) {}
-
-        // 5. Submit fallback native form in hidden iframe for 100% guaranteed delivery
-        const nativeForm = document.getElementById('nativeMailForm');
-        if (nativeForm) {
-          const subEl = document.getElementById('nativeMailSubject');
-          const guestEl = document.getElementById('nativeMailGuest');
-          const sideEl = document.getElementById('nativeMailSide');
-          const msgEl = document.getElementById('nativeMailMsg');
-          const dateEl = document.getElementById('nativeMailDate');
-          if (subEl) subEl.value = royalMailSubject;
-          if (guestEl) guestEl.value = sender;
-          if (sideEl) sideEl.value = sideTitle;
-          if (msgEl) msgEl.value = msg;
-          if (dateEl) dateEl.value = formattedDateTime;
-          try { nativeForm.submit(); } catch (e) {}
-        }
 
         // Trigger celebratory rose petal shower and chime audio!
         if (typeof triggerMabrookShower === 'function') {
