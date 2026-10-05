@@ -1775,11 +1775,25 @@ function initGuestbook() {
         } catch(e) {}
 
         // 2. Prepare clean, noble pre-formatted Email to BOTH Iqra & Shahid
-        const sideTitle = side === 'groom' ? "Groom's Family / Friends (Shaikh Shahid)" : (side === 'bride' ? "Bride's Family / Friends (Shaikh Iqra)" : "Mutual Friends & Both Families");
-        const mailRecipients = 'sk.iqra1710@gmail.com,shaikshahid570@gmail.com';
-        
-        // Clean, noble subject line without special characters that break email parsers or trigger fallback templates
-        const cleanMailSubject = `Shaikh Shahid & Shaikh Iqra Wedding - Heartfelt Blessing from ${sender} (${side === 'groom' ? "Groom's Side" : side === 'bride' ? "Bride's Side" : "Mutual Friends"})`;
+        const sideTitle = side === 'groom' 
+          ? "👑 Groom's Family & Friends (Shaikh Shahid)" 
+          : (side === 'bride' 
+              ? "🌸 Bride's Family & Friends (Shaikh Iqra)" 
+              : "🤝 Mutual Friends & Well-Wishers");
+
+        const formattedDateTime = new Date().toLocaleDateString('en-US', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        }) + ' at ' + new Date().toLocaleTimeString('en-US', {
+          hour: '2-digit',
+          minute: '2-digit',
+          hour12: true
+        });
+
+        // Elegant subject line for Gmail inbox
+        const royalMailSubject = `🕊️ Wedding Dua from ${sender} (${side === 'groom' ? "Groom's Side" : side === 'bride' ? "Bride's Side" : "Mutual Friends"}) • Shahid & Iqra`;
         
         const mailBody = `بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
 
@@ -1789,35 +1803,53 @@ Assalamu Alaikum wa Rahmatullahi wa Barakatuh,
 🕊️ ROYAL WEDDING DUA & BLESSING FOR SHAHID & IQRA
 ═════════════════════════════════════════════════════════
 
-👤 Guest Name: ${sender}
+👤 Guest / Family: ${sender}
 🤝 Attending With: ${sideTitle}
-📅 Date: ${currentDate}
+📅 Date & Time: ${formattedDateTime}
 
-✨ Dua & Blessing:
+✨ Heartfelt Dua & Blessing:
 "${msg}"
 
-🤲 "Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fee khair."
+🤲 Sunnah Prayer:
+"بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ"
 (May Allah bless you both, shower His blessings upon you, and unite you both in goodness. Ameen!)
 
 ═════════════════════════════════════════════════════════
-Wedding Celebration: Shaikh Shahid & Shaikh Iqra
-Date: Wednesday, 25th November 2026 | Hyderabad
-Digital Invitation: http://localhost:8080
+💍 Sacred Nikkah: Wednesday, 25 Nov 2026 (07:00 PM - After Maghrib) • Kinjal Lawn, Mumbra
+👑 Grand Walima: Friday, 27 Nov 2026 (08:00 PM) • Gazebo Marriage Hall, Kurla West
+🌐 Digital Invitation: https://6461-iqra.github.io/Wedding-inv/
 ═════════════════════════════════════════════════════════`;
 
-        const mailtoUrl = `mailto:${mailRecipients}?subject=${encodeURIComponent(cleanMailSubject)}&body=${encodeURIComponent(mailBody)}`;
-
-        // Direct 1-Click Gmail Web Compose URL (opens Gmail tab with everything ready to send)
-        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(mailRecipients)}&su=${encodeURIComponent(cleanMailSubject)}&body=${encodeURIComponent(mailBody)}`;
-
-        // 3. Prepare pre-formatted WhatsApp share link
-        const waText = `🌙 *Wedding Blessing for Shahid & Iqra*%0A%0A*From:* ${encodeURIComponent(sender)} (${encodeURIComponent(sideTitle)})%0A*Date:* ${encodeURIComponent(currentDate)}%0A%0A*Dua:*%0A"${encodeURIComponent(msg)}"%0A%0A🤲 _Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fee khair. Ameen!_`;
-        const waUrl = `https://api.whatsapp.com/send?text=${waText}`;
-
-        // 4. Show elegant royal toast notification (Clean UI/UX - No box)
+        // 3. Show elegant royal toast notification (Clean UI/UX - No intrusive box)
         showRoyalToast("Ameen! JazakAllah Khair", `Dua from ${sender} sent to Shahid & Iqra's mail! 🤲✨`);
 
-        // 5. Submit fallback native forms to FormSubmit with clean, professional subject
+        // 4. Send structured Royal Table Email via FormSubmit AJAX (JSON)
+        try {
+          fetch('https://formsubmit.co/ajax/sk.iqra1710@gmail.com', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+            body: JSON.stringify({
+              _subject: royalMailSubject,
+              _cc: 'shaikshahid570@gmail.com',
+              _template: 'table',
+              _captcha: 'false',
+              '👑 Royal Celebration': 'Shaikh Shahid & Shaikh Iqra Wedding Festivities (November 2026)',
+              '👤 Guest & Family Name': sender,
+              '🤝 Attending With': sideTitle,
+              '🤲 Heartfelt Dua & Blessing': msg,
+              '✨ Sacred Sunnah Prayer': "بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ\n(Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fee khair - Ameen!)",
+              '💍 Sacred Nikkah': 'Wednesday, 25 Nov 2026 (07:00 PM - After Maghrib) • Kinjal Wedding Lawn, Mumbra',
+              '👑 Grand Walima Banquet': 'Friday, 27 Nov 2026 (08:00 PM) • Gazebo Marriage Hall, Kurla West',
+              '📅 Date & Time Received': formattedDateTime,
+              '🌐 Digital Invitation': 'https://6461-iqra.github.io/Wedding-inv/'
+            })
+          }).catch(err => console.log('AJAX mail notice:', err));
+        } catch (e) {}
+
+        // 5. Submit fallback native form in hidden iframe for 100% guaranteed delivery
         const nativeForm = document.getElementById('nativeMailForm');
         if (nativeForm) {
           const subEl = document.getElementById('nativeMailSubject');
@@ -1825,27 +1857,12 @@ Digital Invitation: http://localhost:8080
           const sideEl = document.getElementById('nativeMailSide');
           const msgEl = document.getElementById('nativeMailMsg');
           const dateEl = document.getElementById('nativeMailDate');
-          if (subEl) subEl.value = cleanMailSubject;
+          if (subEl) subEl.value = royalMailSubject;
           if (guestEl) guestEl.value = sender;
           if (sideEl) sideEl.value = sideTitle;
           if (msgEl) msgEl.value = msg;
-          if (dateEl) dateEl.value = currentDate;
+          if (dateEl) dateEl.value = formattedDateTime;
           try { nativeForm.submit(); } catch (e) {}
-        }
-
-        const nativeFormShahid = document.getElementById('nativeMailFormShahid');
-        if (nativeFormShahid) {
-          const subElS = document.getElementById('nativeMailSubjectShahid');
-          const guestElS = document.getElementById('nativeMailGuestShahid');
-          const sideElS = document.getElementById('nativeMailSideShahid');
-          const msgElS = document.getElementById('nativeMailMsgShahid');
-          const dateElS = document.getElementById('nativeMailDateShahid');
-          if (subElS) subElS.value = cleanMailSubject;
-          if (guestElS) guestElS.value = sender;
-          if (sideElS) sideElS.value = sideTitle;
-          if (msgElS) msgElS.value = msg;
-          if (dateElS) dateElS.value = currentDate;
-          try { setTimeout(() => { nativeFormShahid.submit(); }, 300); } catch (e) {}
         }
 
         // Trigger celebratory rose petal shower and chime audio!
