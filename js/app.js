@@ -1841,9 +1841,6 @@ Assalamu Alaikum wa Rahmatullahi wa Barakatuh,
               'Guest Name': sender,
               'Attending Side': sideTitle,
               'Heartfelt Dua & Message': msg,
-              'Sunnah Prayer': "بَارَكَ اللَّهُ لَكَ وَبَارَكَ عَلَيْكَ وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ (Barakallahu lakuma wa baraka alaikuma wa jama'a bainakuma fee khair - Ameen!)",
-              'Sacred Nikkah': 'Wednesday, 25 Nov 2026 (07:00 PM - After Maghrib) • Kinjal Wedding Lawn, Mumbra',
-              'Grand Walima Banquet': 'Friday, 27 Nov 2026 (08:00 PM) • Gazebo Marriage Hall, Kurla West',
               'Date & Time Received': formattedDateTime,
               'Digital Invitation': 'https://6461-iqra.github.io/Wedding-inv/'
             })
